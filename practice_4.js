@@ -1,5 +1,5 @@
 /**
- * Generative Art exercise (shown at 5:14 in Tim Holman's Speedrun talk, CSSConf Australia 2018).
+ * Generative Art exercise (shown at 5:44 in Tim Holman's Speedrun talk, CSSConf Australia 2018).
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
  * Code by Jace Yang.
  *
