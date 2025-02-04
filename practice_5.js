@@ -1,9 +1,10 @@
 /**
- * Generative Art exercise (shown at 6:11 in Tim Holman's Speedrun talk, CSSConf Australia 2018).
+ * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Code by Jace Yang.
+ * Reference Timer: 6:11
  *
- * Practice 5: Tiling - Horizontal and Vertical Lines
+ * Practice 5: Tiling - Horizontal and Vertical
+ * Code by Jace Yang
  */
 
 let tileStep = 10; // Adjust this value to change pattern density (controls X/Y length)

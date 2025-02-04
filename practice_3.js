@@ -1,9 +1,10 @@
 /**
- * Generative Art exercise (shown at 5:11 in Tim Holman's Speedrun talk, CSSConf Australia 2018).
+ * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Code by Jace Yang.
+ * Reference Timer: 5:11
  *
- * Practice 3: Random Diagonal Line Upon Click
+ * Practice 3: Line - Random Diagonal
+ * Code by Jace Yang
  */
 
 // Note that we now encapsulate the square drawing in separate function.

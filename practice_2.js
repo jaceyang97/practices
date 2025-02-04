@@ -1,9 +1,10 @@
 /**
- * Generative Art exercise (shown at 4:50 in Tim Holman's Speedrun talk, CSSConf Australia 2018).
+ * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Code by Jace Yang.
- * 
- * Practice 2: Diagonal Line
+ * Reference Timer: 4:50
+ *
+ * Practice 2: Line - Diagonal
+ * Code by Jace Yang
  */
 
 function setup() {
