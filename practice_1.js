@@ -2,6 +2,8 @@
  * Generative Art exercise (shown at 4:47 in Tim Holman's Speedrun talk, CSSConf Australia 2018).
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
  * Code by Jace Yang.
+ *
+ * Practice 1: Horizontal Line
  */
 
 function setup() {
