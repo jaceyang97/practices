@@ -3,7 +3,7 @@
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
  * Code by Jace Yang.
  *
- * Practice 4: Tiling
+ * Practice 4: Tiling - Diagonal Lines
  */
 
 let tileStep = 10; // Adjust this value to change pattern density (controls X/Y length)
