@@ -1,7 +1,7 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 6:58
+ * Reference Timer: 6:58 - 7:19
  *
  * Practice 6: Displacement - Part 3
  * Code by Jace Yang
@@ -11,7 +11,7 @@ function setup() {
     createCanvas(400, 400);
     drawSquare();
     drawThinSquare();
-    drawHorizontalLines(19, 10, { exponentX: 0.9, exponentY: 1 });
+    drawHorizontalLines(40, 10, { exponentX: 0.9, exponentY: 1 });
 }
 
 function drawSquare() {
