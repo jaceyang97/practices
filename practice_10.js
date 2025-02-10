@@ -7,14 +7,14 @@
  * Code by Jace Yang
  */
 
-// Global configuration parameter
+// Core configuration
 const canvasSize = 400;
 const outerSquare = { x: 50, y: 50, size: 300 };
 const innerSquare = { x: 80, y: 80, size: 240 };
-const numLines = 17; // Number of curves (lines) to draw.
-const noiseAmplitude = 80; // Maximum vertical displacement via noise.
+const numLines = 19; // Number of curves (lines) to draw.
+const noiseAmplitude = 50; // Maximum vertical displacement via noise.
 
-// Simplified adjustment config
+// Curve control parameters
 const curveAdjustmentConfig = {
     centerExponent: 2.5  // Higher values = narrower/more intense center peaks
 };
@@ -32,80 +32,88 @@ function setup() {
 function drawSquare() {
     background(255);
 
-    // Left vertical shadowed line
+    // Shadowed vertical element
     push();
     drawingContext.shadowOffsetX = -5;
-    drawingContext.shadowOffsetY = 0;
     drawingContext.shadowBlur = 10;
     drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    stroke(0);
     strokeWeight(5);
     line(outerSquare.x, outerSquare.y, outerSquare.x, outerSquare.y + outerSquare.size);
     pop();
 
-    // Bottom horizontal shadowed line
+    // Shadowed horizontal element
     push();
-    drawingContext.shadowOffsetX = 0;
     drawingContext.shadowOffsetY = 5;
-    drawingContext.shadowBlur = 10;
-    drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    stroke(0);
     strokeWeight(5);
-    line(outerSquare.x, outerSquare.y + outerSquare.size, outerSquare.x + outerSquare.size, outerSquare.y + outerSquare.size);
+    line(outerSquare.x, outerSquare.y + outerSquare.size, 
+         outerSquare.x + outerSquare.size, outerSquare.y + outerSquare.size);
     pop();
 
-    // Outer square border
-    stroke(0);
+    // Main border structure
     strokeWeight(10);
-    noFill();
     rect(outerSquare.x, outerSquare.y, outerSquare.size, outerSquare.size);
 }
 
 function drawThinSquare() {
     push();
-    // Fill the inner square with black.
-    noStroke();
     fill(0);
     rect(innerSquare.x, innerSquare.y, innerSquare.size, innerSquare.size);
     pop();
 }
 
-// Draws smooth curves using Perlin noise for vertical displacement.
-// Each curve's displacement is adjusted so that the middle section is more pronounced.
-// We achieve this by computing an amplitude factor using a raised sine function.
 function drawSmoothCurves() {
-    const xStart = innerSquare.x;
-    const yStart = innerSquare.y;
-    const size = innerSquare.size;
+    const {x, y, size} = innerSquare;
     const spacing = size / (numLines + 1);
     
-    // Set stroke to white for the curves.
-    stroke(255);
-    strokeWeight(1);
-    noFill();
+    // Clip drawing operations to inner square bounds
+    drawingContext.save();
+    drawingContext.rect(x, y, size, size);
+    drawingContext.clip();
 
-    // Draw each curve with noise-based displacement.
+    noStroke();
+    fill(0);
+
     for (let i = 1; i <= numLines; i++) {
-        const y = yStart + spacing * i;
-        const lineNoiseOffset = i;
+        if (i <= 2) continue; // Skip first 2 lines to create top margin
+        const currentY = y + spacing * i;
+        let pathPoints = []; // Stores curve points for white overlay
+        
         beginShape();
-        for (let x = xStart; x <= xStart + size; x += xStep) {
-            // Calculate normalized x position
-            const normX = (x - xStart) / size;
+        for (let px = x; px <= x + size; px += xStep) {
+            // Normalized horizontal position (0-1 across inner square)
+            const t = (px - x) / size;
             
-            // Create a bell-curve shaped amplitude factor
-            const amplitudeFactor = pow(sin(PI * normX), curveAdjustmentConfig.centerExponent);
+            // Amplitude envelope - creates center-biased displacement
+            // sine^N creates narrower peaks with higher exponents
+            const amplitude = pow(sin(PI * t), curveAdjustmentConfig.centerExponent);
             
-            const noiseVal = noise(x * noiseScale, y * noiseScale + lineNoiseOffset);
-            const noiseMapped = map(noiseVal, 0, 1, -1, 1);
-            let verticalOffset = noiseMapped * noiseAmplitude * amplitudeFactor;
+            // 2D noise sampling (position + line index offset)
+            const noiseVal = noise(px * noiseScale, currentY * noiseScale + i);
             
-            // Ensure that the displacement is only upward.
-            // If verticalOffset is positive it would displace downward, so set it to 0.
-            if (verticalOffset > 0) verticalOffset = 0;
+            // Map noise to displacement range and apply amplitude envelope
+            // Negative offset only (upward curves)
+            let offset = map(noiseVal, 0, 1, -1, 1) * noiseAmplitude * amplitude;
+            offset = offset > 0 ? 0 : offset; // Unidirectional displacement
             
-            curveVertex(x, y + verticalOffset);
+            // Clamp Y position to inner square top boundary
+            const curveY = Math.max(currentY + offset, y);
+            
+            pathPoints.push({x: px, y: curveY});
+            curveVertex(px, curveY);
         }
+        // Close shape to bottom of inner square
+        vertex(x + size, y + size); // Lower-right
+        vertex(x, y + size);       // Lower-left
+        endShape(CLOSE);
+
+        // Draw anti-aliased white highlight on curve ridge
+        push();
+        stroke(255);
+        strokeWeight(1);
+        beginShape();
+        pathPoints.forEach(pt => curveVertex(pt.x, pt.y));
         endShape();
+        pop();
     }
+    drawingContext.restore(); // Remove clipping mask
 }
