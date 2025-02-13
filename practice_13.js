@@ -3,7 +3,7 @@
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
  * Reference Timer: 9:33
  *
- * Practice 11: Repetition - Curved Lines - Part 1
+ * Practice 13: Repetition - Curved Lines - Part 1
  * Code by Jace Yang
  */
 

@@ -1,119 +1,106 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 8:48
+ * Reference Timer: 8:28
  *
- * Practice 10: Displacement - Joy Division Logo
+ * Practice 10: Tiling - Curves
  * Code by Jace Yang
  */
 
-// Core configuration
-const canvasSize = 400;
-const outerSquare = { x: 50, y: 50, size: 300 };
-const innerSquare = { x: 80, y: 80, size: 240 };
-const numLines = 19; // Number of curves (lines) to draw.
-const noiseAmplitude = 50; // Maximum vertical displacement via noise.
+let tileStep = 15; // Adjust this value to change pattern density (controls X/Y length)
 
-// Curve control parameters
-const curveAdjustmentConfig = {
-    centerExponent: 2.5  // Higher values = narrower/more intense center peaks
-};
-
-const noiseScale = 0.1; // Perlin noise smoothness (lower values yield smoother noise).
-const xStep = 10; // Distance between sampled points along each curve.
 
 function setup() {
-    createCanvas(canvasSize, canvasSize);
+    createCanvas(400, 400);
     drawSquare();
     drawThinSquare();
-    drawSmoothCurves();
+    drawTilingLines(); // Now draws two arcs per cell
 }
 
 function drawSquare() {
     background(255);
 
-    // Shadowed vertical element
     push();
     drawingContext.shadowOffsetX = -5;
+    drawingContext.shadowOffsetY = 0;
     drawingContext.shadowBlur = 10;
     drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    stroke(0);
     strokeWeight(5);
-    line(outerSquare.x, outerSquare.y, outerSquare.x, outerSquare.y + outerSquare.size);
+    line(50, 50, 50, 350);
     pop();
 
-    // Shadowed horizontal element
     push();
+    drawingContext.shadowOffsetX = 0;
     drawingContext.shadowOffsetY = 5;
+    drawingContext.shadowBlur = 10;
+    drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    stroke(0);
     strokeWeight(5);
-    line(outerSquare.x, outerSquare.y + outerSquare.size, 
-         outerSquare.x + outerSquare.size, outerSquare.y + outerSquare.size);
+    line(50, 350, 350, 350);
     pop();
 
-    // Main border structure
+    stroke(0);
     strokeWeight(10);
-    rect(outerSquare.x, outerSquare.y, outerSquare.size, outerSquare.size);
+    noFill();
+    rect(50, 50, 300, 300);
 }
 
 function drawThinSquare() {
     push();
-    fill(0);
-    rect(innerSquare.x, innerSquare.y, innerSquare.size, innerSquare.size);
+    stroke(0);
+    strokeWeight(0.02);
+    noFill();
+    rect(80, 80, 240, 240);
     pop();
 }
 
-function drawSmoothCurves() {
-    const {x, y, size} = innerSquare;
-    const spacing = size / (numLines + 1);
+function drawTilingLines() {
+    push();
+    stroke(0);
+    strokeWeight(0.5);
+    noFill();
     
-    // Clip drawing operations to inner square bounds
-    drawingContext.save();
-    drawingContext.rect(x, y, size, size);
-    drawingContext.clip();
-
-    noStroke();
-    fill(0);
-
-    for (let i = 1; i <= numLines; i++) {
-        if (i <= 2) continue; // Skip first 2 lines to create top margin
-        const currentY = y + spacing * i;
-        let pathPoints = []; // Stores curve points for white overlay
-        
-        beginShape();
-        for (let px = x; px <= x + size; px += xStep) {
-            // Normalized horizontal position (0-1 across inner square)
-            const t = (px - x) / size;
+    const gridSize = 320 - 80;
+    const tileCount = gridSize / tileStep;
+    
+    // If true, draw arcs in the top-left & bottom-right corners.
+    // Otherwise, draw arcs in the top-right & bottom-left corners.
+    const directions = Array.from({ length: tileCount }, () =>
+        Array.from({ length: tileCount }, () => Math.random() >= 0.5)
+    );
+    
+    const startX = 80;
+    const startY = 80;
+    
+    // For each tile, we draw two quarter arcs.
+    // The arc's full circle would have a diameter equal to tileStep (radius = tileStep/2).
+    for (let i = 0; i < tileCount; i++) {
+        for (let j = 0; j < tileCount; j++) {
+            const tileX = startX + i * tileStep;
+            const tileY = startY + j * tileStep;
             
-            // Amplitude envelope - creates center-biased displacement
-            // sine^N creates narrower peaks with higher exponents
-            const amplitude = pow(sin(PI * t), curveAdjustmentConfig.centerExponent);
-            
-            // 2D noise sampling (position + line index offset)
-            const noiseVal = noise(px * noiseScale, currentY * noiseScale + i);
-            
-            // Map noise to displacement range and apply amplitude envelope
-            // Negative offset only (upward curves)
-            let offset = map(noiseVal, 0, 1, -1, 1) * noiseAmplitude * amplitude;
-            offset = offset > 0 ? 0 : offset; // Unidirectional displacement
-            
-            // Clamp Y position to inner square top boundary
-            const curveY = Math.max(currentY + offset, y);
-            
-            pathPoints.push({x: px, y: curveY});
-            curveVertex(px, curveY);
+            if (directions[i][j]) {
+                // Option 1: draw arcs in the top-left and bottom-right corners.
+                // Top-left arc: center at the tile's top-left (tileX, tileY).
+                //   Draw the quarter that goes toward the cell's interior (to the right and down).
+                arc(tileX, tileY, tileStep, tileStep, 0, HALF_PI);
+                
+                // Bottom-right arc: center at (tileX+tileStep, tileY+tileStep).
+                //   Draw the quarter that goes toward the cell's interior (to the left and up).
+                arc(tileX + tileStep, tileY + tileStep, tileStep, tileStep, PI, PI + HALF_PI);
+            } else {
+                // Option 2: draw arcs in the top-right and bottom-left corners.
+                // Top-right arc: center at (tileX+tileStep, tileY).
+                //   Draw the quarter that goes toward the cell's interior (down and left).
+                arc(tileX + tileStep, tileY, tileStep, tileStep, HALF_PI, PI);
+                
+                // Bottom-left arc: center at (tileX, tileY+tileStep).
+                //   Draw the quarter that goes toward the cell's interior (up and right).
+                arc(tileX, tileY + tileStep, tileStep, tileStep, 3 * HALF_PI, TWO_PI);
+            }
         }
-        // Close shape to bottom of inner square
-        vertex(x + size, y + size); // Lower-right
-        vertex(x, y + size);       // Lower-left
-        endShape(CLOSE);
-
-        // Draw anti-aliased white highlight on curve ridge
-        push();
-        stroke(255);
-        strokeWeight(1);
-        beginShape();
-        pathPoints.forEach(pt => curveVertex(pt.x, pt.y));
-        endShape();
-        pop();
     }
-    drawingContext.restore(); // Remove clipping mask
+    pop();
 }
+

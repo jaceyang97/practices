@@ -1,20 +1,17 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
  * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 8:28
+ * Reference Timer: 6:58 - 7:19
  *
- * Practice 8: Tiling - Curves
+ * Practice 8: Displacement - Part 3
  * Code by Jace Yang
  */
-
-let tileStep = 15; // Adjust this value to change pattern density (controls X/Y length)
-
 
 function setup() {
     createCanvas(400, 400);
     drawSquare();
     drawThinSquare();
-    drawTilingLines(); // Now draws two arcs per cell
+    drawHorizontalLines(40, 10, { exponentX: 0.9, exponentY: 1 });
 }
 
 function drawSquare() {
@@ -55,52 +52,58 @@ function drawThinSquare() {
     pop();
 }
 
-function drawTilingLines() {
+// Remove the dots by simply commenting out the code that draws them.
+function drawHorizontalLines(numLines, dotFluctuation, config = {}) {
+    const { exponentX = 1, exponentY = 1 } = config;
+
+    // Setup constants for the square.
+    const xStart = 80;
+    const yStart = 80;
+    const size = 240;
+    const spacing = size / (numLines + 1);
+    const xMargin = size / numLines;
+    const lineStart = xStart + xMargin;
+    const lineEnd = xStart + size - xMargin;
+    const dotsCount = numLines - 1;
+    // Pre-compute the horizontal step between dots.
+    const dotStep = (lineEnd - lineStart) / (dotsCount - 1);
+
     push();
+    // Set drawing styles once.
     stroke(0);
-    strokeWeight(0.5);
+    strokeWeight(1);
     noFill();
-    
-    const gridSize = 320 - 80;
-    const tileCount = gridSize / tileStep;
-    
-    // If true, draw arcs in the top-left & bottom-right corners.
-    // Otherwise, draw arcs in the top-right & bottom-left corners.
-    const directions = Array.from({ length: tileCount }, () =>
-        Array.from({ length: tileCount }, () => Math.random() >= 0.5)
-    );
-    
-    const startX = 80;
-    const startY = 80;
-    
-    // For each tile, we draw two quarter arcs.
-    // The arc's full circle would have a diameter equal to tileStep (radius = tileStep/2).
-    for (let i = 0; i < tileCount; i++) {
-        for (let j = 0; j < tileCount; j++) {
-            const tileX = startX + i * tileStep;
-            const tileY = startY + j * tileStep;
+
+    // For each horizontal row:
+    for (let i = 1; i <= numLines; i++) {
+        let y = yStart + spacing * i;
+        let prevDot = null; // Used to store the previous dot's coordinates.
+        
+        // For each dot in this row:
+        for (let d = 0; d < dotsCount; d++) {
+            let dotX = lineStart + d * dotStep;
             
-            if (directions[i][j]) {
-                // Option 1: draw arcs in the top-left and bottom-right corners.
-                // Top-left arc: center at the tile's top-left (tileX, tileY).
-                //   Draw the quarter that goes toward the cell's interior (to the right and down).
-                arc(tileX, tileY, tileStep, tileStep, 0, HALF_PI);
-                
-                // Bottom-right arc: center at (tileX+tileStep, tileY+tileStep).
-                //   Draw the quarter that goes toward the cell's interior (to the left and up).
-                arc(tileX + tileStep, tileY + tileStep, tileStep, tileStep, PI, PI + HALF_PI);
-            } else {
-                // Option 2: draw arcs in the top-right and bottom-left corners.
-                // Top-right arc: center at (tileX+tileStep, tileY).
-                //   Draw the quarter that goes toward the cell's interior (down and left).
-                arc(tileX + tileStep, tileY, tileStep, tileStep, HALF_PI, PI);
-                
-                // Bottom-left arc: center at (tileX, tileY+tileStep).
-                //   Draw the quarter that goes toward the cell's interior (up and right).
-                arc(tileX, tileY + tileStep, tileStep, tileStep, 3 * HALF_PI, TWO_PI);
+            // Normalize x and y positions (0 to 1).
+            let normX = (dotX - xStart) / size;
+            let normY = (y - yStart) / size;
+            
+            // Compute the randomness factor using independent non-linear curves.
+            // Alternative: averaging the factors, reducing the randomness.
+            // let factor = (Math.pow(normX, exponentX) + Math.pow(normY, exponentY)) / 2;
+            let factor = Math.pow(normX, exponentX) * Math.pow(normY, exponentY);
+            
+            // Calculate the vertical offset for the dot.
+            let dotOffset = random(-dotFluctuation * factor, dotFluctuation * factor);
+            let dotY = y + dotOffset;
+            
+            // If a previous dot exists, draw a line from it to the current dot.
+            if (prevDot) {
+                line(prevDot.x, prevDot.y, dotX, dotY);
             }
+            
+            // Update the previous dot.
+            prevDot = { x: dotX, y: dotY };
         }
     }
     pop();
 }
-
