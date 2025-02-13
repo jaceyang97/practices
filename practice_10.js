@@ -1,7 +1,7 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
- * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 8:28
+ * Reference: https://www.youtube.com/watch?v=4Se0_w0ISYk
+ * Timer: 8:28
  *
  * Practice 10: Tiling - Curves
  * Code by Jace Yang

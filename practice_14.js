@@ -1,7 +1,7 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
- * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 9:38
+ * Reference: https://www.youtube.com/watch?v=4Se0_w0ISYk
+ * Timer: 9:38
  *
  * Practice 14: Repetition - Curved Lines - Part 2 - Continuation of Practice 11
  * Code by Jace Yang

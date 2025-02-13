@@ -1,7 +1,7 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
- * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 8:48
+ * Reference: https://www.youtube.com/watch?v=4Se0_w0ISYk
+ * Timer: 8:48
  *
  * Practice 12: Displacement - Joy Division Logo
  * Code by Jace Yang

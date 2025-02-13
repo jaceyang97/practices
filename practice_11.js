@@ -1,7 +1,7 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
- * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 8:38
+ * Reference: https://www.youtube.com/watch?v=4Se0_w0ISYk
+ * Timer: 8:38
  *
  * Practice 11: Curves - Displacement (Update to Practice 6: Displacement - Part 1)
  * Code by Jace Yang

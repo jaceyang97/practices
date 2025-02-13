@@ -1,7 +1,7 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
- * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 6:11
+ * Reference: https://www.youtube.com/watch?v=4Se0_w0ISYk
+ * Timer: 6:11
  *
  * Practice 5: Tiling - Horizontal and Vertical
  * Code by Jace Yang

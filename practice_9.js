@@ -1,35 +1,10 @@
 /**
- * Generative Art exercise inspired by Tim Holman's Speedrun talk,
- * CSSConf Australia 2018.
- * Source: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference Timer: 7:43
+ * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018.
+ * Reference: https://www.youtube.com/watch?v=4Se0_w0ISYk
+ * Timer: 7:43
  * 
  * Practice 9: Curve - Bezier
  * Code by Jace Yang, Assisted by o3-mini
- * 
- * This sketch demonstrates interactive Bézier curve construction using
- * the de Casteljau algorithm. The algorithm recursively performs linear
- * interpolation between control points until a single point is computed.
- *
- * When the "GO" button is pressed, the de Casteljau visualization animates,
- * adding one computed point to the final Bézier curve per frame.
- *
- * Detailed technical explanation:
- * - The de Casteljau algorithm works with any number of control points.
- * - For a given parameter t (ranging from 0 to 1), the algorithm computes
- *   interpolated points between the control points.
- * - At each "layer", pairs of points are interpolated using the formula:
- *       interpolated_x = (1 - t) * point1.x + t * point2.x
- *       interpolated_y = (1 - t) * point1.y + t * point2.y
- *   which is implemented via the p5.js function lerp().
- * - This process is repeated until a single point is obtained from the
- *   last layer. That point lies on the *Bézier curve* for the given t.
- * - The computed point is stored and connected with previous points to
- *   form the complete Bézier curve.
- *
- * Mouse interactions:
- * - Click and drag a control dot to reposition it.
- * - Click within the working area (the thin square) to add a new control dot.
  */
 
 // Global constants for drawing and interaction.
