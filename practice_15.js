@@ -6,7 +6,7 @@
  * Practice 15: Shapes - Tiling
  * Code by Jace Yang
  */
-let tileStep = 20;
+let tileStep = 20; // Decrease to have a "noise" effect
 
 function setup() {
     createCanvas(400, 400);
