@@ -6,7 +6,6 @@
  * Practice 15: Shapes - Tiling
  * Code by Jace Yang
  */
-
 let tileStep = 20;
 
 function setup() {
@@ -54,11 +53,8 @@ function drawThinSquare() {
     pop();
 }
 
-/**
- * drawTilingShapes() iterates over a grid (defined by tileStep and starting coordinates)
- * and randomly picks a shape (circle, square, or triangle) for each tile.
- * The actual drawing for each shape is handled by separate functions:
- * drawCircleShape, drawSquareShape, and drawTriangleShape.
+/*
+ * Iterates over a grid to randomly draw a circle, a square (diagonal pattern), or a triangle.
  */
 function drawTilingShapes() {
     push();
@@ -66,39 +62,32 @@ function drawTilingShapes() {
     stroke(0);
     strokeWeight(0.5);
     
-    // Pre-calculate grid dimensions
-    const gridSize = 320 - 80;
+    const gridSize = 320 - 80; // Inner square dimensions
     const tileCount = gridSize / tileStep;
-    
     const startX = 80;
     const startY = 80;
-    const stepPlus = tileStep;
     
     for (let i = 0; i < tileCount; i++) {
         for (let j = 0; j < tileCount; j++) {
-            // Calculate the top left corner of the current tile
-            const x = startX + i * stepPlus;
-            const y = startY + j * stepPlus;
-            
-            // Find the center of the tile
-            const cx = x + stepPlus / 2;
-            const cy = y + stepPlus / 2;
-            
-            // Randomly choose a shape type and call the corresponding function
+            const x = startX + i * tileStep;
+            const y = startY + j * tileStep;
+            const cx = x + tileStep / 2;
+            const cy = y + tileStep / 2;
             const r = Math.random();
-            if (r < 1 / 3) {
-                drawCircleShape(cx, cy, stepPlus * 0.70);
-            } else if (r < 2 / 3) {
-                drawSquareShape(cx, cy);
-            } else {
-                drawTriangleShape(cx, cy);
-            }
+            const shapeFuncs = [
+                () => drawCircleShape(cx, cy, tileStep * 0.70),
+                () => drawSquareShape(cx, cy),
+                () => drawTriangleShape(cx, cy)
+            ];
+            shapeFuncs[Math.floor(Math.random() * shapeFuncs.length)](); // Generates a random index to call the function
         }
     }
     pop();
 }
 
-
+/*
+ * Draws a circle shape.
+ */
 function drawCircleShape(cx, cy, shapeSize) {
     push();
     fill(0);
@@ -106,57 +95,44 @@ function drawCircleShape(cx, cy, shapeSize) {
     pop();
 }
 
+/*
+ * Divide the tile into 4 squares and randomly fill a diagonal pair.
+ */
 function drawSquareShape(cx, cy) {
     push();
-    // Use CORNER mode so that rect() starts drawing at the top left corner of each small square.
     rectMode(CORNER);
     noStroke();
     fill(0);
-
-    // Each tile has a side length of tileStep.
-    // The tile's top-left corner is computed using the tile's center (cx, cy):
+    
     const halfTile = tileStep / 2;
     const tileLeft = cx - halfTile;
     const tileTop = cy - halfTile;
-
-    // The tile can be divided into 4 squares of size (tileStep/2) each.
-    // There are two diagonal pairs:
-    // Diagonal 1: Top-left and Bottom-right squares.
-    // Diagonal 2: Top-right and Bottom-left squares.
+    
     if (Math.random() < 0.5) {
-        // Fill Diagonal pair 1: Top-left & Bottom-right.
-        rect(tileLeft, tileTop, halfTile, halfTile); // Top-left square.
-        rect(cx, cy, halfTile, halfTile);            // Bottom-right square.
+        rect(tileLeft, tileTop, halfTile, halfTile); // Top-left
+        rect(cx, cy, halfTile, halfTile);            // Bottom-right
     } else {
-        // Fill Diagonal pair 2: Top-right & Bottom-left.
-        rect(cx, tileTop, halfTile, halfTile);       // Top-right square.
-        rect(tileLeft, cy, halfTile, halfTile);        // Bottom-left square.
+        rect(cx, tileTop, halfTile, halfTile);       // Top-right
+        rect(tileLeft, cy, halfTile, halfTile);        // Bottom-left
     }
     pop();
 }
 
+/*
+ * Use full tile corners and randomly pick three to form a triangle.
+ */
 function drawTriangleShape(cx, cy) {
-    // Use full tile (grid cell) corners based on the global tileStep.
-    // Since cx,cy is the center of the tile, the tile corners are:
-    // Top-left: (cx - tileStep/2, cy - tileStep/2)
-    // Top-right: (cx + tileStep/2, cy - tileStep/2)
-    // Bottom-right: (cx + tileStep/2, cy + tileStep/2)
-    // Bottom-left: (cx - tileStep/2, cy + tileStep/2)
     const half = tileStep / 2;
     const corners = [
-        { x: cx - half, y: cy - half },  // Top-left
-        { x: cx + half, y: cy - half },  // Top-right
-        { x: cx + half, y: cy + half },  // Bottom-right
-        { x: cx - half, y: cy + half }   // Bottom-left
+        { x: cx - half, y: cy - half },
+        { x: cx + half, y: cy - half },
+        { x: cx + half, y: cy + half },
+        { x: cx - half, y: cy + half }
     ];
     
-    // Shuffle the corners array to get a random order
+    // Shuffle and select three corners
     corners.sort(() => Math.random() - 0.5);
-    
-    // Select three corners for the triangle
-    const p1 = corners[0];
-    const p2 = corners[1];
-    const p3 = corners[2];
+    const [p1, p2, p3] = corners;
     
     push();
     noStroke();
