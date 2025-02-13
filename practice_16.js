@@ -6,19 +6,29 @@
  * Practice 16: Shapes - Rotated & Displaced
  * Code by Jace Yang
  */
-let tileStep = 20;
+
+// Config parameters
+const config = {
+    tileStep: 15,
+    rotationCurve: 1.2, // 1 is linear
+    displacementCurve: 1.2, // 1 is linear
+    // Maximum rotation angle (in radians) a square can reach at the bottom of the grid.
+    // Using Math.PI here to ensure the value is available before p5 constants.
+    maxRotationAngle: Math.PI / 12
+};
 
 function setup() {
     createCanvas(400, 400);
     drawSquare();
     drawThinSquare();
-    drawTilingShapes();
+    drawGrid();
 }
 
 function drawSquare() {
     background(255);
 
     push();
+    // Left shadow line
     drawingContext.shadowOffsetX = -5;
     drawingContext.shadowOffsetY = 0;
     drawingContext.shadowBlur = 10;
@@ -29,6 +39,7 @@ function drawSquare() {
     pop();
 
     push();
+    // Bottom shadow line
     drawingContext.shadowOffsetX = 0;
     drawingContext.shadowOffsetY = 5;
     drawingContext.shadowBlur = 10;
@@ -54,90 +65,47 @@ function drawThinSquare() {
 }
 
 /*
- * Iterates over a grid to randomly draw a circle, a square (diagonal pattern), or a triangle.
+ * Draws the grid inside the inner thin square using individual squares.
+ * Applies random rotation and horizontal displacement (which appear more toward the bottom)
+ * with the maximum rotation controlled via config.maxRotationAngle.
  */
-function drawTilingShapes() {
+function drawGrid() {
     push();
     noFill();
     stroke(0);
     strokeWeight(0.5);
     
-    const gridSize = 320 - 80; // Inner square dimensions
-    const tileCount = gridSize / tileStep;
+    const gridSize = 240; // Dimensions of the inner thin square
+    const tileCount = gridSize / config.tileStep;
     const startX = 80;
     const startY = 80;
     
-    for (let i = 0; i < tileCount; i++) {
-        for (let j = 0; j < tileCount; j++) {
-            const x = startX + i * tileStep;
-            const y = startY + j * tileStep;
-            const cx = x + tileStep / 2;
-            const cy = y + tileStep / 2;
-            const r = Math.random();
-            const shapeFuncs = [
-                () => drawCircleShape(cx, cy, tileStep * 0.70),
-                () => drawSquareShape(cx, cy),
-                () => drawTriangleShape(cx, cy)
-            ];
-            shapeFuncs[Math.floor(Math.random() * shapeFuncs.length)](); // Generates a random index to call the function
+    // Loop from 1 to tileCount - 2 to skip the outer border squares.
+    for (let i = 1; i < tileCount - 1; i++) {
+        for (let j = 1; j < tileCount - 1; j++) {
+            // Normalize the vertical position (t) from 0 (top) to 1 (bottom)
+            let t = map(j, 1, tileCount - 2, 0, 1);
+            
+            // Apply configurable curves (exponents) to control how the effects increase
+            let tRot = pow(t, config.rotationCurve);
+            let tDisp = pow(t, config.displacementCurve);
+            
+            // Compute maximum rotation using the configurable maxRotationAngle
+            let maxRot = tRot * config.maxRotationAngle;
+            let angle = random(-maxRot, maxRot);
+            
+            // Compute maximum horizontal displacement
+            let maxHorizOffset = tDisp * (config.tileStep / 2);
+            let xOffset = random(-maxHorizOffset, maxHorizOffset);
+            
+            push();
+            // Translate to the tile's center with additional horizontal offset
+            translate(startX + i * config.tileStep + config.tileStep / 2 + xOffset, startY + j * config.tileStep + config.tileStep / 2);
+            rotate(angle);
+            // Draw the tile so that its center is at (0, 0)
+            rect(-config.tileStep / 2, -config.tileStep / 2, config.tileStep, config.tileStep);
+            pop();
         }
     }
     pop();
 }
-
-/*
- * Draws a circle shape.
- */
-function drawCircleShape(cx, cy, shapeSize) {
-    push();
-    fill(0);
-    ellipse(cx, cy, shapeSize, shapeSize);
-    pop();
-}
-
-/*
- * Divide the tile into 4 squares and randomly fill a diagonal pair.
- */
-function drawSquareShape(cx, cy) {
-    push();
-    rectMode(CORNER);
-    noStroke();
-    fill(0);
-    
-    const halfTile = tileStep / 2;
-    const tileLeft = cx - halfTile;
-    const tileTop = cy - halfTile;
-    
-    if (Math.random() < 0.5) {
-        rect(tileLeft, tileTop, halfTile, halfTile); // Top-left
-        rect(cx, cy, halfTile, halfTile);            // Bottom-right
-    } else {
-        rect(cx, tileTop, halfTile, halfTile);       // Top-right
-        rect(tileLeft, cy, halfTile, halfTile);        // Bottom-left
-    }
-    pop();
-}
-
-/*
- * Use full tile corners and randomly pick three to form a triangle.
- */
-function drawTriangleShape(cx, cy) {
-    const half = tileStep / 2;
-    const corners = [
-        { x: cx - half, y: cy - half },
-        { x: cx + half, y: cy - half },
-        { x: cx + half, y: cy + half },
-        { x: cx - half, y: cy + half }
-    ];
-    
-    // Shuffle and select three corners
-    corners.sort(() => Math.random() - 0.5);
-    const [p1, p2, p3] = corners;
-    
-    push();
-    noStroke();
-    fill(0);
-    triangle(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
-    pop();
-}
-
