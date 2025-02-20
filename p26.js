@@ -1,8 +1,9 @@
 /**
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
  * Reference: https://www.youtube.com/watch?v=4Se0_w0ISYk
- * Reference: https://codepen.io/AlisonGalindo/pen/QWVPBjB
  * Timer: 16:16
+ * Reference: https://codepen.io/AlisonGalindo/pen/QWVPBjB
+ * Reference: https://en.wikipedia.org/wiki/Perlin_noise
  *
  * Practice 26: Algorithms - Perlin Noise
  * Code by Jace Yang
