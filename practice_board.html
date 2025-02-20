@@ -5,8 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Practice Board</title>
     <script src="node_modules/p5/lib/p5.js"></script>
+    <style>
+      #controls {
+        position: fixed;
+        top: 5px;
+        left: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        z-index: 100;
+      }
+      #saveBtn {
+        padding: 10px 20px;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #saveBtn:hover {
+        background: #45a049;
+      }
+      #artworkName {
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 5px 10px;
+        border-radius: 4px;
+      }
+    </style>
   </head>
   <body>
-    <script src="p24.js"></script>
+    <div id="controls">
+      <button id="saveBtn">Save Image</button>
+      <span id="artworkName"></span>
+    </div>
+    <script>
+      const scriptName = 'p19.js'; // Change this to switch between p4.js, p5.js, etc.
+      const artworkName = scriptName.replace('.js', '');
+      
+      document.getElementById('artworkName').textContent = artworkName;
+      document.getElementById('saveBtn').onclick = () => saveCanvas(artworkName, 'png');
+      
+      // Dynamically load the script
+      const script = document.createElement('script');
+      script.src = scriptName;
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>
