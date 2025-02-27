@@ -7,32 +7,45 @@
  */
 
 function setup() {
-    createCanvas(400, 400);
-    background(255);
-  
-    push();
-    drawingContext.shadowOffsetX = -5;
-    drawingContext.shadowOffsetY = 0;
-    drawingContext.shadowBlur = 10;
-    drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    stroke(0);
-    strokeWeight(5);
-    line(50, 50, 50, 350);
-    pop();
-  
-    push();
-    drawingContext.shadowOffsetX = 0;
-    drawingContext.shadowOffsetY = 5;
-    drawingContext.shadowBlur = 10;
-    drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    stroke(0);
-    strokeWeight(5);
-    line(50, 350, 350, 350);
-    pop();
-  
-    stroke(0);
-    strokeWeight(10);
-    noFill();
-    rect(50, 50, 300, 300);
-  
-  }
+  createCanvas(400, 400);
+  drawSquare();
+  drawThinSquare();
+}
+
+function drawSquare() {
+  background(255);
+
+  push();
+  drawingContext.shadowOffsetX = -5;
+  drawingContext.shadowOffsetY = 0;
+  drawingContext.shadowBlur = 10;
+  drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  stroke(0);
+  strokeWeight(5);
+  line(50, 50, 50, 350);
+  pop();
+
+  push();
+  drawingContext.shadowOffsetX = 0;
+  drawingContext.shadowOffsetY = 5;
+  drawingContext.shadowBlur = 10;
+  drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  stroke(0);
+  strokeWeight(5);
+  line(50, 350, 350, 350);
+  pop();
+
+  stroke(0);
+  strokeWeight(10);
+  noFill();
+  rect(50, 50, 300, 300);
+}
+
+function drawThinSquare() {
+  push();
+  stroke(0);
+  strokeWeight(0.02);
+  noFill();
+  rect(80, 80, 240, 240);
+  pop();
+}
