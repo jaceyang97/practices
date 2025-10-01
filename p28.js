@@ -105,12 +105,6 @@ function displayImageAsRecursiveCircles() {
   const contentWidth = frameWidth - (config.borderWidth * 2);
   const contentHeight = frameHeight - (config.borderWidth * 2);
   
-  // Set up clipping region to keep circles inside the content area
-  push();
-  beginClip();
-  rect(contentX, contentY, contentWidth, contentHeight);
-  endClip();
-  
   const cellWidth = contentWidth / config.grid.cols;
   const cellHeight = contentHeight / config.grid.rows;
   const circleSize = min(cellWidth, cellHeight) * 1.5;
@@ -167,6 +161,13 @@ function displayImageAsRecursiveCircles() {
   
   // Draw all circles in random order
   for (const pos of positions) {
+    // Check if position is within content bounds before drawing
+    const maxRadius = circleSize / 2;
+    if (pos.x - maxRadius < contentX || pos.x + maxRadius > contentX + contentWidth ||
+        pos.y - maxRadius < contentY || pos.y + maxRadius > contentY + contentHeight) {
+      continue; // Skip circles that would extend outside content area
+    }
+    
     // Get base color (using cache for performance)
     const baseColor = getCachedColor(pos.sampleX, pos.sampleY);
     
@@ -188,8 +189,6 @@ function displayImageAsRecursiveCircles() {
       ellipse(pos.x, pos.y, layerSizes[layer]);
     }
   }
-  
-  pop(); // End clipping
 }
 
 function getCachedColor(x, y) {

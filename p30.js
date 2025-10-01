@@ -17,6 +17,11 @@ const historyLength = 8; // Number of previous frames to keep
 function setup() {
   createCanvas(400, 400);
   
+  // Initialize wave history with empty arrays
+  for (let i = 0; i < historyLength; i++) {
+    waveHistory.push([]);
+  }
+  
   // Initialize audio input
   if (typeof p5.AudioIn !== 'undefined') {
     mic = new p5.AudioIn();
@@ -29,95 +34,32 @@ function setup() {
     isAudioReady = true;
   } else {
     console.warn('Audio library not available. Make sure p5.sound.js is loaded.');
-  }
-  
-  // Initialize wave history with empty arrays
-  for (let i = 0; i < historyLength; i++) {
-    waveHistory.push([]);
+    // Create mock audio data for visualization as fallback
+    createMockAudioData();
   }
   
   drawSquare();
 }
 
-function draw() {
-  // Only redraw the thin square with audio waves
-  if (isAudioReady) {
-    // Clear the area for the thin square without clearing the whole canvas
-    fill(255);
-    noStroke();
-    rect(79, 79, 242, 242);
-    
-    drawThinSquare();
-    drawAudioWaves();
-  }
-}
-
-function drawSquare() {
-  background(255);
-
-  push();
-  drawingContext.shadowOffsetX = -5;
-  drawingContext.shadowOffsetY = 0;
-  drawingContext.shadowBlur = 10;
-  drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
-  stroke(0);
-  strokeWeight(5);
-  line(50, 50, 50, 350);
-  pop();
-
-  push();
-  drawingContext.shadowOffsetX = 0;
-  drawingContext.shadowOffsetY = 5;
-  drawingContext.shadowBlur = 10;
-  drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
-  stroke(0);
-  strokeWeight(5);
-  line(50, 350, 350, 350);
-  pop();
-
-  stroke(0);
-  strokeWeight(10);
-  noFill();
-  rect(50, 50, 300, 300);
-}
-
-function drawThinSquare() {
-  push();
-  stroke(0);
-  strokeWeight(0.25);
-  noFill();
-  rect(80, 80, 240, 240);
-  pop();
-}
-
-function drawAudioWaves() {
+function createRealAudioData() {
   if (!isAudioReady) return;
   
   // Analyze the audio
   fft.analyze();
   
-  push();
-  // Create a clipping region for the thin square
-  beginClip();
-  rect(80, 80, 240, 240);
-  endClip();
-  
   // Display frequency spectrum
   const spectrum = fft.analyze();
-  
-  // Calculate center y position
-  const centerY = 200;
-  
-  // Better distribute the spectrum across the width
-  // Skip the very lowest frequencies which tend to dominate
-  const startIndex = Math.floor(spectrum.length * 0.1); // Skip first 10% (lowest frequencies)
-  const endIndex = Math.floor(spectrum.length * 0.8);   // Use up to 80% (avoid highest frequencies)
   
   // Calculate how many points to sample from the spectrum
   const numPoints = 240; // One point per pixel width
   
   // Create current wave data
   let currentWave = [];
+  
+  // Better distribute the spectrum across the width
+  // Skip the very lowest frequencies which tend to dominate
+  const startIndex = Math.floor(spectrum.length * 0.1); // Skip first 10% (lowest frequencies)
+  const endIndex = Math.floor(spectrum.length * 0.8);   // Use up to 80% (avoid highest frequencies)
   
   // Use logarithmic mapping to give more space to mid and high frequencies
   for (let i = 0; i < numPoints; i++) {
@@ -164,6 +106,103 @@ function drawAudioWaves() {
   if (waveHistory.length > historyLength) {
     waveHistory.pop();
   }
+}
+
+function createMockAudioData() {
+  // Create simulated audio wave data for visualization
+  const numPoints = 240;
+  let currentWave = [];
+  
+  for (let i = 0; i < numPoints; i++) {
+    const t = i / (numPoints - 1);
+    const x = map(i, 0, numPoints - 1, 80, 320);
+    
+    // Create interesting wave patterns
+    const wave1 = sin(t * TWO_PI * 3) * 30;
+    const wave2 = sin(t * TWO_PI * 7) * 15;
+    const wave3 = sin(t * TWO_PI * 12) * 8;
+    const noise = random(-5, 5);
+    
+    const amplitude = wave1 + wave2 + wave3 + noise;
+    
+    currentWave.push({
+      x: x,
+      amplitude: abs(amplitude),
+      value: map(abs(amplitude), 0, 50, 0, 255),
+      frequency: t
+    });
+  }
+  
+  // Add current wave to history
+  waveHistory.unshift(currentWave);
+  if (waveHistory.length > historyLength) {
+    waveHistory.pop();
+  }
+}
+
+function draw() {
+  // Clear the area for the thin square without clearing the whole canvas
+  fill(255);
+  noStroke();
+  rect(79, 79, 242, 242);
+  
+  drawThinSquare();
+  
+  if (isAudioReady) {
+    // Use real audio data
+    createRealAudioData();
+  } else {
+    // Create new mock audio data periodically
+    if (frameCount % 3 === 0) { // Update every 3 frames for smooth animation
+      createMockAudioData();
+    }
+  }
+  
+  drawAudioWaves();
+}
+
+function drawSquare() {
+  background(255);
+
+  push();
+  drawingContext.shadowOffsetX = -5;
+  drawingContext.shadowOffsetY = 0;
+  drawingContext.shadowBlur = 10;
+  drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  stroke(0);
+  strokeWeight(5);
+  line(50, 50, 50, 350);
+  pop();
+
+  push();
+  drawingContext.shadowOffsetX = 0;
+  drawingContext.shadowOffsetY = 5;
+  drawingContext.shadowBlur = 10;
+  drawingContext.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  stroke(0);
+  strokeWeight(5);
+  line(50, 350, 350, 350);
+  pop();
+
+  stroke(0);
+  strokeWeight(10);
+  noFill();
+  rect(50, 50, 300, 300);
+}
+
+function drawThinSquare() {
+  push();
+  stroke(0);
+  strokeWeight(0.25);
+  noFill();
+  rect(80, 80, 240, 240);
+  pop();
+}
+
+function drawAudioWaves() {
+  push();
+  // Calculate center y position
+  const centerY = 200;
   
   // Draw all waves in history with fading effect
   for (let h = 0; h < waveHistory.length; h++) {
@@ -182,6 +221,9 @@ function drawAudioWaves() {
     for (let i = 0; i < wave.length; i++) {
       const point = wave[i];
       
+      // Check if point is within the square bounds
+      if (point.x < 80 || point.x > 320) continue;
+      
       // Create grayscale color based on multiple factors
       // 1. Frequency (x position) - higher frequencies are lighter
       // 2. Amplitude - higher amplitudes are darker
@@ -199,8 +241,12 @@ function drawAudioWaves() {
       // Apply the grayscale color with appropriate opacity
       stroke(grayscale, opacity);
       
+      // Constrain amplitude to stay within square bounds
+      const topY = constrain(centerY - point.amplitude, 80, 320);
+      const bottomY = constrain(centerY + point.amplitude, 80, 320);
+      
       // Draw vertical lines for each frequency band centered at centerY
-      line(point.x, centerY - point.amplitude, point.x, centerY + point.amplitude);
+      line(point.x, topY, point.x, bottomY);
       
       // Add some artistic elements - small dots at the ends of lines for newest wave
       if (h === 0 && point.amplitude > 10) {
@@ -209,8 +255,8 @@ function drawAudioWaves() {
         
         // Use inverted grayscale for dots to create contrast
         fill(255 - grayscale, opacity);
-        ellipse(point.x, centerY - point.amplitude, dotSize);
-        ellipse(point.x, centerY + point.amplitude, dotSize);
+        ellipse(point.x, topY, dotSize);
+        ellipse(point.x, bottomY, dotSize);
       }
     }
     
@@ -226,7 +272,10 @@ function drawAudioWaves() {
       beginShape();
       for (let i = 0; i < wave.length; i++) {
         const point = wave[i];
-        vertex(point.x, centerY - point.amplitude);
+        if (point.x >= 80 && point.x <= 320) {
+          const topY = constrain(centerY - point.amplitude, 80, 320);
+          vertex(point.x, topY);
+        }
       }
       endShape();
       
@@ -234,7 +283,10 @@ function drawAudioWaves() {
       beginShape();
       for (let i = 0; i < wave.length; i++) {
         const point = wave[i];
-        vertex(point.x, centerY + point.amplitude);
+        if (point.x >= 80 && point.x <= 320) {
+          const bottomY = constrain(centerY + point.amplitude, 80, 320);
+          vertex(point.x, bottomY);
+        }
       }
       endShape();
     }
@@ -255,7 +307,7 @@ function drawAudioWaves() {
   pop();
 }
 
-// Add a function to start audio when user interacts with the page
+// Mouse interaction for audio initialization
 function mousePressed() {
   // p5.sound workaround for browsers that require user interaction
   if (typeof p5.AudioIn !== 'undefined' && !isAudioReady) {

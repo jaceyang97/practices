@@ -39,35 +39,16 @@ let bezierPoints = [];
 
 /**
  * p5.js setup function.
- * Initializes the canvas and creates the "GO" button.
+ * Initializes the canvas.
  */
 function setup() {
   createCanvas(400, 400);
-  createGoButton(); // Setup the GO button to trigger the animation.
 }
 
-/**
- * Creates and styles the "GO" button.
- * Clicking the button triggers the animation of the curve construction.
- */
-function createGoButton() {
-  const goButton = createButton("GO");
-  // Style the button to be a circular black button with centered white text.
-  goButton.style('background-color', 'black');
-  goButton.style('color', 'white');
-  goButton.style('border', 'none');
-  goButton.style('border-radius', '50%');
-  goButton.style('width', '30px');
-  goButton.style('height', '30px');
-  goButton.style('font-size', '10px');
-  goButton.style('display', 'flex');
-  goButton.style('justify-content', 'center');
-  goButton.style('align-items', 'center');
-
-  // Position the button near the right edge of the canvas.
-  goButton.position(370, 185);
-  goButton.mousePressed(startAnimation);
-}
+// Button properties
+const BUTTON_X = 370;
+const BUTTON_Y = 185;
+const BUTTON_SIZE = 30;
 
 /**
  * Called when the GO button is pressed.
@@ -88,6 +69,7 @@ function startAnimation() {
  * - The control polygon (dots and connecting lines).
  * - The de Casteljau algorithm animation (if active).
  * - The final accumulated Bézier curve.
+ * - The GO button.
  */
 function draw() {
   background(255);
@@ -102,6 +84,9 @@ function draw() {
 
   // Draw the accumulated Bézier curve in red.
   drawBezierCurve();
+  
+  // Draw the GO button
+  drawGoButton();
 }
 
 /**
@@ -275,15 +260,39 @@ function drawBezierCurve() {
 }
 
 /**
+ * Draws the GO button on the canvas.
+ * Creates a circular black button with white "GO" text.
+ */
+function drawGoButton() {
+  // Draw button background
+  fill(0);
+  noStroke();
+  ellipse(BUTTON_X, BUTTON_Y, BUTTON_SIZE);
+  
+  // Draw button text
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(10);
+  text("GO", BUTTON_X, BUTTON_Y);
+}
+
+/**
  * p5.js mousePressed event handler.
- * Enables mouse interaction within the thin square.
+ * Enables mouse interaction within the thin square and GO button.
+ * - Checks if the click is on the GO button; if so, starts animation.
  * - Checks if the click is near an existing control dot; if so,
  *   sets that point for dragging.
  * - If the click is in the interaction area but not near a dot,
  *   a new control point is added.
  */
 function mousePressed() {
-  // Only interact if within the designated thin square.
+  // Check if GO button was clicked
+  if (dist(mouseX, mouseY, BUTTON_X, BUTTON_Y) < BUTTON_SIZE / 2) {
+    startAnimation();
+    return;
+  }
+  
+  // Only interact with control points if within the designated thin square.
   if (
     mouseX < THIN_SQUARE_X ||
     mouseX > THIN_SQUARE_RIGHT ||

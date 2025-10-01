@@ -69,9 +69,10 @@ let heightText, curve1Text, curve2Text;
 let bumpText, bumpNumText, colorText, layerText;
 
 // Control panel dimensions
-const CONTROL_WIDTH = 400;
+const CONTROL_WIDTH = 320;
 const CONTROL_PADDING = 20;
 const CONTROL_TOP_MARGIN = 50;
+const CONTROL_HEIGHT = 600;
 
 // Cache for slider values
 let sliderCache = {
@@ -108,98 +109,101 @@ function setup() {
   angleMode(DEGREES);
   noStroke();
   
+  // Create control panel background
+  createControlPanel(x, y);
+  
   // Create sliders and their labels
-  let sliderX = x - CONTROL_WIDTH - CONTROL_PADDING;
+  let sliderX = x + width + CONTROL_PADDING; // Move to right side
   let startY = y + CONTROL_TOP_MARGIN;
-  let ySpacing = 30;
+  let ySpacing = 35; // Increased spacing for better visual hierarchy
   let currentY = startY;
   
   // Petal number
-  createText("Number of Petals: ", sliderX, currentY - 5);
-  pNumSlider = createSlider(3, 12, 6, 1);
-  pNumSlider.position(sliderX + 150, currentY);
-  pNumText = createSpan('6');
-  pNumText.position(sliderX + 300, currentY);
+  createStyledText("Number of Petals", sliderX + 20, currentY - 5);
+  pNumSlider = createStyledSlider(3, 12, 6, 1);
+  pNumSlider.position(sliderX + 20, currentY + 15);
+  pNumText = createStyledValue('6');
+  pNumText.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Diameter
-  createText("Flower Diameter: ", sliderX, currentY - 5);
-  diameterSlider = createSlider(50, 300, 180, 10);
-  diameterSlider.position(sliderX + 150, currentY);
-  diameterText = createSpan('180');
-  diameterText.position(sliderX + 300, currentY);
+  createStyledText("Flower Diameter", sliderX + 20, currentY - 5);
+  diameterSlider = createStyledSlider(50, 300, 180, 10);
+  diameterSlider.position(sliderX + 20, currentY + 15);
+  diameterText = createStyledValue('180');
+  diameterText.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Petal length
-  createText("Petal Length: ", sliderX, currentY - 5);
-  pLenSlider = createSlider(50, 300, 70, 10);  // Changed to 70
-  pLenSlider.position(sliderX + 150, currentY);
-  pLenText = createSpan('70');
-  pLenText.position(sliderX + 300, currentY);
+  createStyledText("Petal Length", sliderX + 20, currentY - 5);
+  pLenSlider = createStyledSlider(50, 300, 70, 10);
+  pLenSlider.position(sliderX + 20, currentY + 15);
+  pLenText = createStyledValue('70');
+  pLenText.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Petal sharpness
-  createText("Petal Sharpness: ", sliderX, currentY - 5);
-  pSharpSlider = createSlider(0.1, 2.0, 2.0, 0.1);  // Changed to 2.0
-  pSharpSlider.position(sliderX + 150, currentY);
-  pSharpText = createSpan('2.0');
-  pSharpText.position(sliderX + 300, currentY);
+  createStyledText("Petal Sharpness", sliderX + 20, currentY - 5);
+  pSharpSlider = createStyledSlider(0.1, 2.0, 2.0, 0.1);
+  pSharpSlider.position(sliderX + 20, currentY + 15);
+  pSharpText = createStyledValue('2.0');
+  pSharpText.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Height
-  createText("Flower Height: ", sliderX, currentY - 5);
-  heightSlider = createSlider(100, 500, 300, 10);
-  heightSlider.position(sliderX + 150, currentY);
-  heightText = createSpan('300');
-  heightText.position(sliderX + 300, currentY);
+  createStyledText("Flower Height", sliderX + 20, currentY - 5);
+  heightSlider = createStyledSlider(100, 500, 300, 10);
+  heightSlider.position(sliderX + 20, currentY + 15);
+  heightText = createStyledValue('300');
+  heightText.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Curvature 1
-  createText("Curvature 1: ", sliderX, currentY - 5);
-  curvatureSlider1 = createSlider(0.1, 2.0, 0.90, 0.05);  // Changed to 0.90
-  curvatureSlider1.position(sliderX + 150, currentY);
-  curve1Text = createSpan('0.90');
-  curve1Text.position(sliderX + 300, currentY);
+  createStyledText("Curvature 1", sliderX + 20, currentY - 5);
+  curvatureSlider1 = createStyledSlider(0.1, 2.0, 0.90, 0.05);
+  curvatureSlider1.position(sliderX + 20, currentY + 15);
+  curve1Text = createStyledValue('0.90');
+  curve1Text.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Curvature 2
-  createText("Curvature 2: ", sliderX, currentY - 5);
-  curvatureSlider2 = createSlider(0.1, 1.0, 0.20, 0.05);
-  curvatureSlider2.position(sliderX + 150, currentY);
-  curve2Text = createSpan('0.20');
-  curve2Text.position(sliderX + 300, currentY);
+  createStyledText("Curvature 2", sliderX + 20, currentY - 5);
+  curvatureSlider2 = createStyledSlider(0.1, 1.0, 0.20, 0.05);
+  curvatureSlider2.position(sliderX + 20, currentY + 15);
+  curve2Text = createStyledValue('0.20');
+  curve2Text.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Bumpiness
-  createText("Bumpiness: ", sliderX, currentY - 5);
-  bumpSlider = createSlider(0, 5, 0.5, 0.5);
-  bumpSlider.position(sliderX + 150, currentY);
-  bumpText = createSpan('0.5');
-  bumpText.position(sliderX + 300, currentY);
+  createStyledText("Bumpiness", sliderX + 20, currentY - 5);
+  bumpSlider = createStyledSlider(0, 5, 0.5, 0.5);
+  bumpSlider.position(sliderX + 20, currentY + 15);
+  bumpText = createStyledValue('0.5');
+  bumpText.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Bump frequency
-  createText("Bump Frequency: ", sliderX, currentY - 5);
-  bumpNumSlider = createSlider(0, 20, 20, 1);  // Changed to 20
-  bumpNumSlider.position(sliderX + 150, currentY);
-  bumpNumText = createSpan('20');
-  bumpNumText.position(sliderX + 300, currentY);
+  createStyledText("Bump Frequency", sliderX + 20, currentY - 5);
+  bumpNumSlider = createStyledSlider(0, 20, 20, 1);
+  bumpNumSlider.position(sliderX + 20, currentY + 15);
+  bumpNumText = createStyledValue('20');
+  bumpNumText.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Color
-  createText("Color Hue: ", sliderX, currentY - 5);
-  colorSlider = createSlider(0, 360, 60, 10);
-  colorSlider.position(sliderX + 150, currentY);
-  colorText = createSpan('60');
-  colorText.position(sliderX + 300, currentY);
+  createStyledText("Color Hue", sliderX + 20, currentY - 5);
+  colorSlider = createStyledSlider(0, 360, 60, 10);
+  colorSlider.position(sliderX + 20, currentY + 15);
+  colorText = createStyledValue('60');
+  colorText.position(sliderX + 250, currentY + 15);
   currentY += ySpacing;
   
   // Layers
-  createText("Number of Layers: ", sliderX, currentY - 5);
-  layerSlider = createSlider(1, 5, 1, 1);
-  layerSlider.position(sliderX + 150, currentY);
-  layerText = createSpan('1');
-  layerText.position(sliderX + 300, currentY);
+  createStyledText("Number of Layers", sliderX + 20, currentY - 5);
+  layerSlider = createStyledSlider(1, 5, 1, 1);
+  layerSlider.position(sliderX + 20, currentY + 15);
+  layerText = createStyledValue('1');
+  layerText.position(sliderX + 250, currentY + 15);
 }
 
 // Add windowResized function to handle window resizing
@@ -209,7 +213,7 @@ function windowResized() {
   canvas.position(x, y);
   
   // Update all control positions
-  let sliderX = x - CONTROL_WIDTH - CONTROL_PADDING;  // Position controls to the left of canvas
+  let sliderX = x + width + CONTROL_PADDING;  // Position controls to the right of canvas
   let startY = y + CONTROL_TOP_MARGIN;   // Added top margin
   let ySpacing = 30;
   let currentY = startY;
@@ -374,6 +378,78 @@ function draw() {
   drawCenter();
 }
 
+function createControlPanel(canvasX, canvasY) {
+  let panelX = canvasX + width + CONTROL_PADDING; // Position to the right
+  let panelY = canvasY;
+  
+  // Create main panel background
+  let panel = createDiv();
+  panel.style('position', 'absolute');
+  panel.style('left', panelX + 'px');
+  panel.style('top', panelY + 'px');
+  panel.style('width', CONTROL_WIDTH + 'px');
+  panel.style('height', CONTROL_HEIGHT + 'px');
+  panel.style('background', 'rgba(255, 255, 255, 0.9)');
+  panel.style('backdrop-filter', 'blur(10px)');
+  panel.style('border', '1px solid rgba(0, 0, 0, 0.1)');
+  panel.style('border-radius', '12px');
+  panel.style('box-shadow', '0 4px 16px rgba(0, 0, 0, 0.1)');
+  panel.style('overflow', 'hidden');
+  
+  return panel;
+}
+
+function createStyledText(txt, x, y) {
+  let p = createP(txt);
+  p.style('color', '#333');
+  p.style('font-family', "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
+  p.style('font-size', '13px');
+  p.style('font-weight', '500');
+  p.style('margin', '0');
+  p.position(x, y);
+  return p;
+}
+
+function createStyledSlider(min, max, value, step) {
+  let slider = createSlider(min, max, value, step);
+  slider.style('width', '180px');
+  slider.style('height', '6px');
+  slider.style('background', '#e0e0e0');
+  slider.style('border-radius', '3px');
+  slider.style('outline', 'none');
+  slider.style('appearance', 'none');
+  slider.style('cursor', 'pointer');
+  slider.style('border', '1px solid #ccc');
+  
+  // Custom slider styling - more visible
+  slider.style('background', `
+    linear-gradient(to right, 
+      #4CAF50 0%, 
+      #4CAF50 ${(value - min) / (max - min) * 100}%, 
+      #e0e0e0 ${(value - min) / (max - min) * 100}%, 
+      #e0e0e0 100%
+    )
+  `);
+  
+  return slider;
+}
+
+function createStyledValue(value) {
+  let span = createSpan(value);
+  span.style('color', '#333');
+  span.style('font-family', "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
+  span.style('font-size', '12px');
+  span.style('font-weight', '500');
+  span.style('background', '#f5f5f5');
+  span.style('padding', '3px 8px');
+  span.style('border-radius', '4px');
+  span.style('border', '1px solid #ddd');
+  span.style('min-width', '35px');
+  span.style('text-align', 'center');
+  span.style('display', 'inline-block');
+  return span;
+}
+
 function createText(txt, x, y) {
   let p = createP(txt);
   p.style('color', '#000');
@@ -381,4 +457,21 @@ function createText(txt, x, y) {
   p.style('font-size', '14px');
   p.position(x, y);
   return p;
-} 
+}
+
+// Add CSS animations
+function addFloatingAnimation() {
+  let style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(90deg); }
+      50% { transform: translateY(-5px) rotate(180deg); }
+      75% { transform: translateY(-15px) rotate(270deg); }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// Call the animation setup
+addFloatingAnimation(); 

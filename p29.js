@@ -97,11 +97,6 @@ function displayImageAsRecursiveSquares() {
   const contentWidth = frameWidth - (config.borderWidth * 2);
   const contentHeight = frameHeight - (config.borderWidth * 2);
   
-  push();
-  beginClip();
-  rect(contentX, contentY, contentWidth, contentHeight);
-  endClip();
-  
   const cellWidth = contentWidth / config.grid.cols;
   const cellHeight = contentHeight / config.grid.rows;
   
@@ -112,6 +107,12 @@ function displayImageAsRecursiveSquares() {
     for (let col = 0; col < config.grid.cols; col++) {
       const x = contentX + (col * cellWidth);
       const y = contentY + (row * cellHeight);
+      
+      // Check if square is within content bounds
+      if (x < contentX || x + cellWidth > contentX + contentWidth ||
+          y < contentY || y + cellHeight > contentY + contentHeight) {
+        continue; // Skip squares that would extend outside content area
+      }
       
       const sampleX = Math.floor(map(col, 0, config.grid.cols - 1, 0, config.image.width - 1));
       const sampleY = Math.floor(map(row, 0, config.grid.rows - 1, 0, config.image.height - 1));
@@ -126,8 +127,6 @@ function displayImageAsRecursiveSquares() {
                          color(strokeR, strokeG, strokeB), 0);
     }
   }
-  
-  pop();
 }
 
 function drawRecursiveSquare(x, y, width, height, fillColor, strokeColor, layer) {

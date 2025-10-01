@@ -40,6 +40,15 @@ function drawSquare() {
   strokeWeight(10);
   noFill();
   rect(50, 50, 300, 300);
+  
+  // Add instruction text at the bottom
+  push();
+  noStroke();
+  fill(100);
+  textAlign(CENTER, CENTER);
+  textSize(12);
+  text('Click to alternate diagonals', 200, 375);
+  pop();
 }
 
 // This function runs automatically when the canvas is clicked.
