@@ -13,6 +13,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #f0f0f0;
+  --zoom-level: 1;
 }
 
 #root {
@@ -51,6 +52,8 @@ canvas {
   z-index: 100;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-origin: bottom left;
+  transform: scale(calc(1 / var(--zoom-level, 1)));
 }
 
 .script-buttons {
@@ -139,6 +142,8 @@ canvas {
   display: flex;
   align-items: center;
   gap: 16px;
+  transform-origin: top left;
+  transform: scale(calc(1 / var(--zoom-level, 1)));
 }
 
 .artwork-name {
