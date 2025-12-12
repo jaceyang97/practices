@@ -1,0 +1,65 @@
+/**
+ * Artwork Manifest
+ * Central registry for all artworks
+ * 
+ * To add a new artwork:
+ * 1. Create your p{n}.js file in the /artworks folder
+ * 2. Add an entry here with the same number
+ * 3. The app will auto-detect it!
+ */
+
+export const artworks = [
+  { id: 0, file: 'p0.js' },
+  { id: 1, file: 'p1.js' },
+  { id: 2, file: 'p2.js' },
+  { id: 3, file: 'p3.js' },
+  { id: 4, file: 'p4.js' },
+  { id: 5, file: 'p5.js' },
+  { id: 6, file: 'p6.js' },
+  { id: 7, file: 'p7.js' },
+  { id: 8, file: 'p8.js' },
+  { id: 9, file: 'p9.js' },
+  { id: 10, file: 'p10.js' },
+  { id: 11, file: 'p11.js' },
+  { id: 12, file: 'p12.js' },
+  { id: 13, file: 'p13.js' },
+  { id: 14, file: 'p14.js' },
+  { id: 15, file: 'p15.js' },
+  { id: 16, file: 'p16.js' },
+  { id: 17, file: 'p17.js' },
+  { id: 18, file: 'p18.js' },
+  { id: 19, file: 'p19.js' },
+  { id: 20, file: 'p20.js' },
+  { id: 21, file: 'p21.js' },
+  { id: 22, file: 'p22.js' },
+  { id: 23, file: 'p23.js' },
+  { id: 24, file: 'p24.js' },
+  { id: 25, file: 'p25.js' },
+  { id: 26, file: 'p26.js' },
+  { id: 27, file: 'p27.js' },
+  { id: 28, file: 'p28.js' },
+  { id: 29, file: 'p29.js' },
+  { id: 30, file: 'p30.js' },
+  { id: 31, file: 'p31.js' },
+  { id: 32, file: 'p32.js' },
+  { id: 33, file: 'p33.js' },
+  { id: 34, file: 'p34.js', tags: ['slow'] },
+  { id: 35, file: 'p35.js' },
+  { id: 36, file: 'p36.js' }
+];
+
+// Helper function to get artwork by id
+export const getArtworkById = (id) => {
+  return artworks.find(art => art.id === id);
+};
+
+// Helper function to get all artwork IDs
+export const getAllArtworkIds = () => {
+  return artworks.map(art => art.id);
+};
+
+// Helper function to get total count
+export const getArtworkCount = () => {
+  return artworks.length;
+};
+

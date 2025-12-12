@@ -1,61 +1,130 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import ArtworkRenderer from './ArtworkRenderer'
+import { artworks, getArtworkById, getAllArtworkIds } from './artworks-manifest'
+
+// Block access to artwork 34
+const BLOCKED_IDS = [34]
 
 function App() {
-  const [currentScript, setCurrentScript] = useState('p36.js')
-  const [activeButton, setActiveButton] = useState(36)
+  const allIds = useMemo(() => {
+    return getAllArtworkIds().filter(id => !BLOCKED_IDS.includes(id))
+  }, [])
+  
+  const latestId = useMemo(() => Math.max(...allIds), [allIds])
+  
+  const [currentId, setCurrentId] = useState(latestId)
+  const currentArtwork = getArtworkById(currentId)
 
-  // Generate list of available scripts (p0.js through p36.js)
-  const availableScripts = Array.from({ length: 37 }, (_, i) => `p${i}.js`)
+  // Navigate to specific artwork
+  const navigateToArtwork = useCallback((id) => {
+    if (allIds.includes(id)) {
+      setCurrentId(id)
+    }
+  }, [allIds])
 
-  // Handle button click
-  const handleScriptClick = (index) => {
-    setActiveButton(index)
-    setCurrentScript(`p${index}.js`)
-  }
+  // Navigate to next artwork
+  const navigateNext = useCallback(() => {
+    const currentIndex = allIds.indexOf(currentId)
+    if (currentIndex === -1) {
+      // If current ID is not in the list (shouldn't happen), go to first
+      setCurrentId(allIds[0])
+      return
+    }
+    const nextIndex = (currentIndex + 1) % allIds.length
+    setCurrentId(allIds[nextIndex])
+  }, [currentId, allIds])
 
-  // Handle save canvas - this will need to be implemented differently
-  const handleSave = () => {
-    // For now, we'll implement a simple download of the iframe content
+  // Navigate to previous artwork
+  const navigatePrev = useCallback(() => {
+    const currentIndex = allIds.indexOf(currentId)
+    if (currentIndex === -1) {
+      // If current ID is not in the list (shouldn't happen), go to last
+      setCurrentId(allIds[allIds.length - 1])
+      return
+    }
+    const prevIndex = (currentIndex - 1 + allIds.length) % allIds.length
+    setCurrentId(allIds[prevIndex])
+  }, [currentId, allIds])
+
+  // Handle save canvas
+  const handleSave = useCallback(() => {
     const iframe = document.querySelector('iframe')
     if (iframe) {
       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
       const canvas = iframeDoc.querySelector('canvas')
       if (canvas) {
         const link = document.createElement('a')
-        link.download = `${currentScript.replace('.js', '')}.png`
+        const filename = `${currentArtwork.file.replace('.js', '')}.png`
+        link.download = filename
         link.href = canvas.toDataURL()
         link.click()
       }
     }
-  }
+  }, [currentArtwork])
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Arrow keys for navigation
+      if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        navigateNext()
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        navigatePrev()
+      }
+      // Number keys for direct access (0-9)
+      else if (e.key >= '0' && e.key <= '9' && !e.ctrlKey && !e.metaKey) {
+        const num = parseInt(e.key)
+        if (allIds.includes(num)) {
+          e.preventDefault()
+          navigateToArtwork(num)
+        }
+      }
+      // S key to save
+      else if (e.key === 's' || e.key === 'S') {
+        if (!e.ctrlKey && !e.metaKey) {
+          e.preventDefault()
+          handleSave()
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [navigateNext, navigatePrev, navigateToArtwork, handleSave, allIds])
 
   return (
     <div className="app">
-      <div className="info-panel">
-        <span className="artwork-name">{currentScript.replace('.js', '')}</span>
-        <button className="save-btn" onClick={handleSave}>
-          💾 Save Image
-        </button>
-      </div>
-
-      <div className="script-grid">
-        <div className="script-buttons">
-          {availableScripts.map((script, index) => (
-            <button
-              key={script}
-              className={`script-btn ${activeButton === index ? 'active' : ''}`}
-              onClick={() => handleScriptClick(index)}
-              title={script}
-            >
-              {index}
-              {index === 34 && <span className="slow-indicator">!</span>}
-            </button>
-          ))}
+      <div className="control-panel">
+        <div className="control-group">
+          <span className="current-file">{currentArtwork.file}</span>
+          <div className="nav-controls">
+            <button className="nav-btn" onClick={navigatePrev} title="Previous (←)">←</button>
+            <button className="nav-btn" onClick={navigateNext} title="Next (→)">→</button>
+            <button className="save-btn" onClick={handleSave} title="Save (S)">💾</button>
+          </div>
+        </div>
+        <div className="grid-buttons">
+          {artworks.map((artwork) => {
+            const isBlocked = BLOCKED_IDS.includes(artwork.id)
+            return (
+              <button
+                key={artwork.id}
+                className={`grid-btn ${currentId === artwork.id ? 'active' : ''} ${isBlocked ? 'blocked' : ''}`}
+                onClick={() => !isBlocked && navigateToArtwork(artwork.id)}
+                disabled={isBlocked}
+                title={isBlocked ? 'Blocked' : artwork.file}
+              >
+                {artwork.id}
+                {isBlocked && <span className="blocked-x">✕</span>}
+              </button>
+            )
+          })}
         </div>
       </div>
 
-      <ArtworkRenderer scriptName={currentScript} />
+      <ArtworkRenderer scriptName={currentArtwork.file} key={currentId} />
     </div>
   )
 }

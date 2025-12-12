@@ -39,12 +39,12 @@ function ArtworkRenderer({ scriptName }) {
           <script>
             // Load the script dynamically
             const script = document.createElement('script');
-            script.src = '/${scriptName}';
+            script.src = '/artworks/${scriptName}';
             script.onload = () => {
               console.log('Script loaded successfully');
             };
             script.onerror = () => {
-              console.error('Failed to load script: /${scriptName}');
+              console.error('Failed to load script: /artworks/${scriptName}');
             };
             document.head.appendChild(script);
           </script>
