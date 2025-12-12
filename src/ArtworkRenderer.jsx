@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { P5_MAIN_URL, P5_SOUND_URL } from './config/constants'
 
 function ArtworkRenderer({ scriptName }) {
   const containerRef = useRef(null)
@@ -14,22 +15,19 @@ function ArtworkRenderer({ scriptName }) {
       containerRef.current.removeChild(iframeRef.current)
     }
 
-    // Create a new iframe with a unique src
+    // Create a new iframe
     const iframe = document.createElement('iframe')
-    iframe.style.width = '100%'
-    iframe.style.height = '100%'
-    iframe.style.border = 'none'
-    iframe.style.background = '#f0f0f0'
+    iframe.className = 'artwork-iframe'
     iframe.title = `Artwork ${scriptName}`
     
-    // Create a simple HTML page that loads the script
+    // Create HTML content that loads the p5.js script
     const htmlContent = `
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="UTF-8">
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+          <script src="${P5_MAIN_URL}"></script>
+          <script src="${P5_SOUND_URL}"></script>
           <style>
             body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f0f0f0; }
             canvas { display: block; }
@@ -37,15 +35,10 @@ function ArtworkRenderer({ scriptName }) {
         </head>
         <body>
           <script>
-            // Load the script dynamically
             const script = document.createElement('script');
             script.src = '/artworks/${scriptName}';
-            script.onload = () => {
-              console.log('Script loaded successfully');
-            };
-            script.onerror = () => {
-              console.error('Failed to load script: /artworks/${scriptName}');
-            };
+            script.onload = () => console.log('Script loaded successfully');
+            script.onerror = () => console.error('Failed to load script: /artworks/${scriptName}');
             document.head.appendChild(script);
           </script>
         </body>
@@ -79,29 +72,14 @@ function ArtworkRenderer({ scriptName }) {
   }, [scriptName])
 
   return (
-    <div ref={containerRef} style={{ width: '100%', height: '100%', position: 'relative' }}>
+    <div ref={containerRef} className="artwork-container">
       {isLoading && (
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          color: '#666',
-          fontSize: '18px'
-        }}>
+        <div className="artwork-loading">
           Loading {scriptName}...
         </div>
       )}
       {error && (
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          color: '#ff4444',
-          fontSize: '18px',
-          textAlign: 'center'
-        }}>
+        <div className="artwork-error">
           {error}
         </div>
       )}
