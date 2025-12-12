@@ -45,7 +45,8 @@ export const artworks = [
   { id: 33, file: 'p33.js' },
   { id: 34, file: 'p34.js', tags: ['slow'] },
   { id: 35, file: 'p35.js' },
-  { id: 36, file: 'p36.js' }
+  { id: 36, file: 'p36.js' },
+  { id: 37, file: 'p37.js' }
 ];
 
 // Helper function to get artwork by id
