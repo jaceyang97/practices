@@ -41,121 +41,56 @@ canvas {
   transform: translate(-50%, -50%);
 }
 
-.grid-buttons {
-  display: grid;
-  grid-template-columns: repeat(19, 1fr);
-  gap: 3px;
-}
-
-.grid-btn {
-  width: 24px;
-  height: 24px;
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  font-size: 10px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: all 0.15s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  position: relative;
-}
-
-.grid-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.grid-btn.active {
-  background: rgba(76, 175, 80, 0.4);
-  border-color: rgba(76, 175, 80, 0.6);
-  color: white;
-  font-weight: 600;
-}
-
-.grid-btn.blocked {
-  background: rgba(255, 50, 50, 0.15);
-  border-color: rgba(255, 50, 50, 0.25);
-  color: rgba(255, 255, 255, 0.3);
-  cursor: not-allowed;
-  opacity: 0.4;
-}
-
-.grid-btn.blocked:hover {
-  background: rgba(255, 50, 50, 0.15);
-  border-color: rgba(255, 50, 50, 0.25);
-}
-
-.blocked-x {
-  position: absolute;
-  top: -3px;
-  right: -3px;
-  background: #ff3333;
-  color: white;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  font-size: 8px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-
 .control-panel {
   position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.85);
-  padding: 8px 12px;
-  border-radius: 8px;
+  top: 16px;
+  left: 16px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 6px;
+  border-radius: 6px;
   z-index: 100;
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
 }
 
-.control-group {
+.control-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.current-file {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  min-width: 50px;
-  text-align: center;
-}
-
-.nav-controls {
-  display: flex;
   gap: 4px;
 }
 
-/* Base control button styles */
+.artwork-select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  outline: none;
+  min-width: 70px;
+}
+
+.artwork-select:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.artwork-select option {
+  background: #222;
+  color: #fff;
+}
+
+/* Control button styles */
 .nav-btn,
 .save-btn {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   padding: 0;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
