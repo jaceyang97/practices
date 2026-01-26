@@ -6,6 +6,35 @@ function ArtworkRenderer({ scriptName }) {
   const iframeRef = useRef(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState('geometric')
+  const [singleShapeMode, setSingleShapeMode] = useState(false)
+
+  // Check if this artwork needs category buttons
+  const needsCategoryButtons = scriptName === 'p47.js' || scriptName === 'p48.js' || scriptName === 'p49.js'
+  const hasSingleShapeToggle = scriptName === 'p49.js'
+
+  // Send category to iframe
+  const sendCategoryToIframe = (category) => {
+    setSelectedCategory(category)
+    if (iframeRef.current && iframeRef.current.contentWindow) {
+      iframeRef.current.contentWindow.postMessage(
+        { type: 'setCategory', category },
+        '*'
+      )
+    }
+  }
+
+  // Send single shape mode toggle to iframe
+  const toggleSingleShapeMode = () => {
+    const newValue = !singleShapeMode
+    setSingleShapeMode(newValue)
+    if (iframeRef.current && iframeRef.current.contentWindow) {
+      iframeRef.current.contentWindow.postMessage(
+        { type: 'setSingleShapeMode', enabled: newValue },
+        '*'
+      )
+    }
+  }
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -72,15 +101,38 @@ function ArtworkRenderer({ scriptName }) {
   }, [scriptName])
 
   return (
-    <div ref={containerRef} className="artwork-container">
-      {isLoading && (
-        <div className="artwork-loading">
-          Loading {scriptName}...
-        </div>
-      )}
-      {error && (
-        <div className="artwork-error">
-          {error}
+    <div className="artwork-wrapper">
+      <div ref={containerRef} className="artwork-container">
+        {isLoading && (
+          <div className="artwork-loading">
+            Loading {scriptName}...
+          </div>
+        )}
+        {error && (
+          <div className="artwork-error">
+            {error}
+          </div>
+        )}
+      </div>
+      {needsCategoryButtons && (
+        <div className="category-buttons">
+          {['geometric', 'symmetry', 'fill', 'density'].map((cat) => (
+            <button
+              key={cat}
+              className={`category-btn ${selectedCategory === cat ? 'selected' : ''}`}
+              onClick={() => sendCategoryToIframe(cat)}
+            >
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </button>
+          ))}
+          {hasSingleShapeToggle && (
+            <button
+              className={`category-btn toggle-btn ${singleShapeMode ? 'selected' : ''}`}
+              onClick={toggleSingleShapeMode}
+            >
+              Single
+            </button>
+          )}
         </div>
       )}
     </div>

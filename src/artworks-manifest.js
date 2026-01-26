@@ -51,7 +51,23 @@ export const artworks = [
   { id: 41, file: 'p41.js' },
   { id: 42, file: 'p42.js' },
   { id: 43, file: 'p43.js' },
-  { id: 44, file: 'p44.js' }
+  { id: 44, file: 'p44.js' },
+  { id: 45, file: 'p45.js' },
+  { id: 46, file: 'p46.js' },
+  { id: 47, file: 'p47.js' },
+  { id: 48, file: 'p48.js' },
+  { id: 49, file: 'p49.js' },
+  { id: 50, file: 'p50.js' },
+  { id: 51, file: 'p51.js' },
+  { id: 52, file: 'p52.js' },
+  { id: 53, file: 'p53.js' },
+  { id: 54, file: 'p54.js' },
+  { id: 55, file: 'p55.js' },
+  { id: 56, file: 'p56.js' },
+  { id: 57, file: 'p57.js' },
+  { id: 58, file: 'p58.js' },
+  { id: 59, file: 'p59.js' },
+  { id: 60, file: 'p60.js' }
 ];
 
 // Helper function to get artwork by id
