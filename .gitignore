@@ -36,4 +36,7 @@ Thumbs.db
 # Auto-generated
 src/artworks-manifest.js
 
+# Project AI context (local only)
+CLAUDE.md
+
 
