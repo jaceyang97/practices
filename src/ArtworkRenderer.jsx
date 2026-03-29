@@ -65,7 +65,7 @@ function ArtworkRenderer({ scriptName }) {
         <body>
           <script>
             const script = document.createElement('script');
-            script.src = '/artworks/${scriptName}';
+            script.src = '/artworks/${scriptName}?t=' + Date.now();
             script.onload = () => console.log('Script loaded successfully');
             script.onerror = () => console.error('Failed to load script: /artworks/${scriptName}');
             document.head.appendChild(script);
