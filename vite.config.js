@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [react(), artworksManifestPlugin()],
   server: {
     port: 3000,
+    watch: {
+      usePolling: true,
+    },
     fs: {
       // Allow serving files from project root
       allow: ['..'],

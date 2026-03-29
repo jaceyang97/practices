@@ -79,6 +79,14 @@ export const getArtworkCount = () => {
           generateManifest()
         }
       })
+      // Full reload when any artwork file is edited
+      server.watcher.on('change', (file) => {
+        const normalized = path.resolve(file)
+        if (normalized.startsWith(artworksDir) && /^p\d+\.js$/.test(path.basename(file))) {
+          console.log(`♻ Reloading: ${path.basename(file)}`)
+          server.ws.send({ type: 'full-reload', path: '*' })
+        }
+      })
     }
   }
 }
