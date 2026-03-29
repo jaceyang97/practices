@@ -13,6 +13,7 @@ build/
 .env.production.local
 
 # Editor directories and files
+.cursor/
 .vscode/
 .idea/
 *.suo
@@ -31,5 +32,8 @@ lerna-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Auto-generated
+src/artworks-manifest.js
 
 
