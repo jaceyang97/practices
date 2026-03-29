@@ -25,7 +25,7 @@ const config = {
 };
 
 function preload() {
-  config.image = loadImage('mona_lisa.jpg');
+  config.image = loadImage('/images/mona_lisa.jpg');
 }
 
 function setup() {

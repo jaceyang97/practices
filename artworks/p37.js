@@ -9,7 +9,7 @@
 let img;
 
 function preload() {
-  img = loadImage('dystrophin-poster.png');
+  img = loadImage('/images/dystrophin-poster.png');
 }
 
 function setup() {

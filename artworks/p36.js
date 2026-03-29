@@ -57,7 +57,7 @@ let white = [255, 255, 255];
 // ========================================
 
 function preload() {
-  img = loadImage('golden_pavilion.jpg');
+  img = loadImage('/images/golden_pavilion.jpg');
 }
 
 function setup() {
