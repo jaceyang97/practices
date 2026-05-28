@@ -118,15 +118,15 @@ function run() {
   //  softens the falloff, larger K sharpens it.
   const S = {
     pattern:     'Crucifix',
-    variantIdx:  0,
-    materialIdx: 0,          // 0 = FLAT (G1), 1 = FRESNEL (G4)
+    variantIdx:  0,          // E1 LINEAR
+    materialIdx: 1,          // 0 = FLAT (G1), 1 = FRESNEL (G4)
     mode:        'viewing',  // 'viewing' (front, locked) | 'lighting' (orbit + zoom)
     lightX:      -4.0,
     lightY:       9.0,
-    lightZ:       7.5,
-    intensity:    1.6,
-    K:            1.0,
-    opacity:      0.92,      // glass cell opacity
+    lightZ:       3.0,
+    intensity:    1.5,
+    K:            4.0,
+    opacity:      1.0,       // glass cell opacity
   };
   const LIGHT_RANGE = 12;
   const LIGHT_Z_MIN = 3.0;
@@ -197,22 +197,22 @@ function run() {
       </div>
       <div class="p64-block p64-block-sliders">
         <div class="p64-srow">
-          <div class="p64-srow-lbl">OPACITY <span id="p64-op-val">92%</span></div>
+          <div class="p64-srow-lbl">OPACITY <span id="p64-op-val">100%</span></div>
           <input type="range" class="p64-slider" id="p64-op"
             min="0.20" max="1.00" step="0.01" value="${S.opacity}">
         </div>
         <div class="p64-srow">
-          <div class="p64-srow-lbl">DISTANCE <span id="p64-dist-val">7.5</span></div>
+          <div class="p64-srow-lbl">DISTANCE <span id="p64-dist-val">3.0</span></div>
           <input type="range" class="p64-slider" id="p64-dist"
             min="${LIGHT_Z_MIN}" max="${LIGHT_Z_MAX}" step="0.1" value="${S.lightZ}">
         </div>
         <div class="p64-srow">
-          <div class="p64-srow-lbl">INTENSITY <span id="p64-int-val">160%</span></div>
+          <div class="p64-srow-lbl">INTENSITY <span id="p64-int-val">150%</span></div>
           <input type="range" class="p64-slider" id="p64-int"
             min="0" max="3" step="0.01" value="${S.intensity}">
         </div>
         <div class="p64-srow">
-          <div class="p64-srow-lbl">KERNEL K <span id="p64-k-val">1.00</span></div>
+          <div class="p64-srow-lbl">KERNEL K <span id="p64-k-val">4.00</span></div>
           <input type="range" class="p64-slider" id="p64-k"
             min="0.2" max="4.0" step="0.01" value="${S.K}">
         </div>
