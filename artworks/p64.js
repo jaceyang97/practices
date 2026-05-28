@@ -117,14 +117,16 @@ function run() {
   //  weight function. K=1 is each variant's design default; smaller K
   //  softens the falloff, larger K sharpens it.
   const S = {
-    pattern:    'Crucifix',
-    variantIdx: 0,
-    mode:       'viewing',   // 'viewing' (front, locked) | 'lighting' (orbit + zoom)
-    lightX:     -4.0,
-    lightY:      9.0,
-    lightZ:      7.5,
-    intensity:   1.6,
-    K:           1.0,
+    pattern:     'Crucifix',
+    variantIdx:  0,
+    materialIdx: 0,          // 0 = FLAT (G1), 1 = FRESNEL (G4)
+    mode:        'viewing',  // 'viewing' (front, locked) | 'lighting' (orbit + zoom)
+    lightX:      -4.0,
+    lightY:       9.0,
+    lightZ:       7.5,
+    intensity:    1.6,
+    K:            1.0,
+    opacity:      0.92,      // glass cell opacity
   };
   const LIGHT_RANGE = 12;
   const LIGHT_Z_MIN = 3.0;
@@ -186,10 +188,19 @@ function run() {
         <div class="p64-patterns" id="p64-patterns"></div>
       </div>
       <div class="p64-block">
+        <div class="p64-lbl">MATERIAL</div>
+        <div class="p64-patterns" id="p64-materials"></div>
+      </div>
+      <div class="p64-block">
         <div class="p64-lbl">SUN POSITION</div>
         <div class="p64-pad" id="p64-pad"><div class="p64-pad-dot" id="p64-pad-dot"></div></div>
       </div>
       <div class="p64-block p64-block-sliders">
+        <div class="p64-srow">
+          <div class="p64-srow-lbl">OPACITY <span id="p64-op-val">92%</span></div>
+          <input type="range" class="p64-slider" id="p64-op"
+            min="0.20" max="1.00" step="0.01" value="${S.opacity}">
+        </div>
         <div class="p64-srow">
           <div class="p64-srow-lbl">DISTANCE <span id="p64-dist-val">7.5</span></div>
           <input type="range" class="p64-slider" id="p64-dist"
@@ -279,39 +290,80 @@ function run() {
     gridGeom.setAttribute('position', new THREE.Float32BufferAttribute(gPts, 3));
     overlayScene.add(new THREE.LineSegments(gridGeom, gridMat));
 
-    // Cells
+    // Cells — two switchable glass materials (G1 FLAT, G4 FRESNEL),
+    // picked from the p65 comparison. They share one opacity uniform;
+    // colMesh.material is hot-swapped by setMaterial(idx).
     function makeCellGeom() {
       const g = new THREE.BoxGeometry(CELL * 0.92, CELL * 0.92, PANE_T);
       g.setAttribute('aCol', new THREE.InstancedBufferAttribute(new Float32Array(MAX_CELLS * 3), 3));
       return g;
     }
-    const colMat = new THREE.ShaderMaterial({
-      vertexShader: `
-        attribute vec3 aCol;
-        varying vec3 vColor;
-        varying vec3 vNormal;
-        void main() {
-          vColor  = aCol;
-          vNormal = normalize(normalMatrix * normal);
-          gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec3 vColor;
-        varying vec3 vNormal;
-        void main() {
-          float shade = 0.78 + 0.22 * abs(vNormal.z);
-          gl_FragColor = vec4(vColor * shade, 1.0);
-        }
-      `,
-    });
+    const cellUniforms = { uOpacity: { value: S.opacity } };
+    const CELL_VTX = `
+      attribute vec3 aCol;
+      varying vec3 vColor;
+      varying vec3 vNormal;
+      varying vec2 vUv;
+      varying vec3 vViewDir;
+      void main() {
+        vColor  = aCol;
+        vNormal = normalize(normalMatrix * normal);
+        vUv     = uv;
+        vec4 mv = modelViewMatrix * instanceMatrix * vec4(position, 1.0);
+        vViewDir = normalize(-mv.xyz);
+        gl_Position = projectionMatrix * mv;
+      }
+    `;
+    function makeCellMat(fragBody) {
+      return new THREE.ShaderMaterial({
+        uniforms: cellUniforms,
+        vertexShader: CELL_VTX,
+        fragmentShader: `
+          uniform float uOpacity;
+          varying vec3 vColor;
+          varying vec3 vNormal;
+          varying vec2 vUv;
+          varying vec3 vViewDir;
+          void main() {
+            float shade = 0.78 + 0.22 * abs(vNormal.z);
+            ${fragBody}
+          }
+        `,
+        transparent: true,
+        depthWrite: false,
+        side: THREE.FrontSide,
+      });
+    }
+    //  G1 FLAT — solid tint × face shade.
+    //  G4 FRESNEL — view-angle rim brightens grazing edges; alpha opens
+    //  up at grazing angles so side faces read as glassier.
+    const cellMats = [
+      makeCellMat('gl_FragColor = vec4(vColor * shade, uOpacity);'),
+      makeCellMat([
+        'vec3 N = normalize(vNormal);',
+        'vec3 V = normalize(vViewDir);',
+        'float f = 1.0 - max(dot(N, V), 0.0);',
+        'float fres = pow(f, 2.2);',
+        'vec3 col = vColor * shade + vec3(0.55) * fres;',
+        'float a = mix(uOpacity, min(1.0, uOpacity + 0.25), fres);',
+        'gl_FragColor = vec4(col, a);',
+      ].join('\n')),
+    ];
     const clearMat  = new THREE.MeshBasicMaterial({ color: 0x05060a });
-    const colMesh   = new THREE.InstancedMesh(makeCellGeom(), colMat, MAX_CELLS);
+    const colMesh   = new THREE.InstancedMesh(makeCellGeom(), cellMats[S.materialIdx], MAX_CELLS);
     const clearMesh = new THREE.InstancedMesh(
       new THREE.BoxGeometry(CELL * 0.92, CELL * 0.92, PANE_T), clearMat, MAX_CELLS);
     colMesh.count = 0; clearMesh.count = 0;
     colMesh.frustumCulled = false; clearMesh.frustumCulled = false;
-    mainScene.add(colMesh, clearMesh);
+    //  Opaque dark slabs first, translucent colour cells on top.
+    clearMesh.renderOrder = 1;
+    colMesh.renderOrder   = 2;
+    mainScene.add(clearMesh, colMesh);
+
+    function setMaterial(idx) {
+      colMesh.material = cellMats[Math.max(0, Math.min(cellMats.length - 1, idx))];
+    }
+    function setOpacity(v) { cellUniforms.uOpacity.value = v; }
 
     // Sun
     const sunGroup = new THREE.Group();
@@ -386,7 +438,7 @@ function run() {
 
     return {
       renderer, mainScene, overlayScene, camera, canvas,
-      updateCellsCommon, updateSunPos, resize,
+      updateCellsCommon, updateSunPos, setMaterial, setOpacity, resize,
     };
   }
 
@@ -608,6 +660,8 @@ function run() {
   const ctx  = buildCommonScene(canvas);
   const pass = setupGodRayPass(ctx, E_VARIANTS);
   pass.setVariant(S.variantIdx);
+  ctx.setMaterial(S.materialIdx);
+  ctx.setOpacity(S.opacity);
 
   function applyCells() { ctx.updateCellsCommon(); }
   function applyLight() { ctx.updateSunPos(getLightPos()); }
@@ -730,6 +784,22 @@ function run() {
     patEl.appendChild(b);
   }
 
+  //  Material picker — the two glass shaders that survived p65 (G1 FLAT,
+  //  G4 FRESNEL). Hot-swaps the cell mesh material.
+  const MATERIALS = ['FLAT', 'FRESNEL'];
+  const matEl = document.getElementById('p64-materials');
+  MATERIALS.forEach((name, idx) => {
+    const b = document.createElement('button');
+    b.className = 'p64-pat' + (idx === S.materialIdx ? ' active' : '');
+    b.textContent = name;
+    b.addEventListener('click', () => {
+      S.materialIdx = idx;
+      matEl.querySelectorAll('.p64-pat').forEach(x => x.classList.toggle('active', x === b));
+      ctx.setMaterial(idx);
+    });
+    matEl.appendChild(b);
+  });
+
   const pad    = document.getElementById('p64-pad');
   const padDot = document.getElementById('p64-pad-dot');
   const PAD_R  = 72;
@@ -765,6 +835,13 @@ function run() {
     try { pad.releasePointerCapture(e.pointerId); } catch (_) {}
   });
 
+  const opInput = document.getElementById('p64-op');
+  const opVal   = document.getElementById('p64-op-val');
+  opInput.addEventListener('input', () => {
+    S.opacity = parseFloat(opInput.value);
+    opVal.textContent = Math.round(S.opacity * 100) + '%';
+    ctx.setOpacity(S.opacity);
+  });
   const distInput = document.getElementById('p64-dist');
   const distVal   = document.getElementById('p64-dist-val');
   distInput.addEventListener('input', () => {
