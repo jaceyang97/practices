@@ -1,15 +1,14 @@
 /**
  * Practice 63 — Cathedral Glass
  *
- * A square stained-glass pane lit from far away by a directional sun.
- * Light rays are PARALLEL (sun treated as infinitely distant), so the
- * projection on the floor is a perfectly rigid sheared copy of the pane,
- * not a fan-shaped fan. Every cell of the pane is a glass tile: either a
- * coloured pane or a translucent clear-glass pane. Colour transitions
- * from white to tint happen at the glass plane itself; brightness peaks
- * there and tapers to either side.
- *
- * 10 hand-crafted patterns. Custom-styled HTML control panel.
+ * A square stained-glass pane lit from CLOSE by a point sun fixed at a
+ * short, constant distance behind the pane. Because the source is near,
+ * rays from each cell DIVERGE in a fan — beams from edge cells angle
+ * outward, beams from centre cells stay axial. The control pad simply
+ * slides the light around on the plane PARALLEL to the pane (X,Y), with
+ * Z held constant. Each cell is a glass tile: tinted colour or translucent
+ * clear. Volumetric shafts use a tight bright core + wide soft halo for a
+ * dust-lit cathedral feel.
  *
  * Code by Jace Yang
  */
@@ -73,56 +72,10 @@ function run() {
   //  `null` for clear (translucent white) glass. Every cell is glass — the
   //  pattern only decides whether the pane is tinted or clear.
   const PATTERNS = {
-    'Rose Window':     roseWindow,
-    'Quatrefoil':      quatrefoil,
-    'Crucifix':        crucifix,
-    'Sunburst':        sunburst,
-    'Star of David':   starOfDavid,
-    'Mandala':         mandala,
-    'Lancet':          lancet,
-    'Diamond Lattice': diamondLattice,
-    'Concentric':      concentricRings,
-    'Compass Rose':    compassRose,
+    'Crucifix':     crucifix,
+    'Sunburst':     sunburst,
+    'Compass Rose': compassRose,
   };
-
-  function roseWindow(c, r) {
-    const dx = c - CX, dy = r - CY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist > 7.6) return null;
-    const angle = Math.atan2(dy, dx);
-    const wedge = (((Math.floor(((angle + Math.PI) / (2 * Math.PI)) * 12)) % 12) + 12) % 12;
-    const ring = Math.round(dist);
-    if (ring === 0) return C.gold;
-    if (ring === 1) return [C.ruby, C.amber, C.ruby][wedge % 3];
-    if (ring === 2) return [C.deepBlue, C.crimson, C.purple, C.deepBlue][wedge % 4];
-    if (ring === 3) return [C.amber, C.deepBlue][wedge % 2];
-    if (ring === 4) return [C.blue, C.deepBlue][wedge % 2];
-    if (ring === 5) return [C.deepBlue, C.crimson, C.deepBlue][wedge % 3];
-    if (ring === 6) return [C.deepBlue, null][wedge % 2];
-    if (ring === 7) return [C.deepBlue, null, null][wedge % 3];
-    return null;
-  }
-
-  function quatrefoil(c, r) {
-    const dx = c - CX, dy = r - CY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    const off = 2.8;
-    const lobeR = 2.8;
-    const lobes = [[off, off], [-off, off], [off, -off], [-off, -off]];
-    let inLobe = false, lobeDist = 999;
-    for (const [lx, ly] of lobes) {
-      const d = Math.sqrt((dx - lx) ** 2 + (dy - ly) ** 2);
-      if (d < lobeR) { inLobe = true; lobeDist = Math.min(lobeDist, d); }
-    }
-    if (dist < 1.2) return C.gold;
-    if (dist < 2.2) return C.amber;
-    if (inLobe && lobeDist < 1.2) return C.cream;
-    if (inLobe && lobeDist < 2.0) return C.ruby;
-    if (inLobe) return C.crimson;
-    if (dist < 6.0) return C.deepBlue;
-    if (dist < 7.0) return C.blue;
-    return null;
-  }
 
   function crucifix(c, r) {
     const dx = c - CX, dy = r - CY;
@@ -155,74 +108,6 @@ function run() {
     return C.deepBlue;
   }
 
-  function starOfDavid(c, r) {
-    const dx = c - CX, dy = r - CY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist > 7.6) return null;
-    // Upward-pointing triangle (apex at top, base at bottom)
-    const upTri  = (dy <= 4.5 && dy >= -2.5 && Math.abs(dx) <= (4.5 - dy) * 0.55);
-    // Downward-pointing triangle
-    const dnTri  = (dy >= -4.5 && dy <= 2.5 && Math.abs(dx) <= (dy + 4.5) * 0.55);
-    if (upTri && dnTri) return C.gold;
-    if (upTri) return C.ruby;
-    if (dnTri) return C.deepBlue;
-    if (dist < 6.5) return C.crimson;
-    return null;
-  }
-
-  function mandala(c, r) {
-    const dx = c - CX, dy = r - CY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist > 7.6) return null;
-    const ang = Math.atan2(dy, dx);
-    // Distance to nearest of 8 axes (45° spaced)
-    const slice = Math.abs(((ang % (Math.PI/4)) + Math.PI/4) % (Math.PI/4) - Math.PI/8);
-    const onSpoke = slice < 0.18;
-    if (dist < 1) return C.gold;
-    if (dist < 2 && onSpoke) return C.cream;
-    if (dist < 2) return C.amber;
-    if (dist < 3.5 && onSpoke) return C.gold;
-    if (dist < 3.5) return C.ruby;
-    if (dist < 5 && onSpoke) return C.amber;
-    if (dist < 5) return C.deepBlue;
-    if (dist < 6.5 && onSpoke) return C.emerald;
-    if (dist < 6.5) return C.purple;
-    if (dist <= 7.6 && onSpoke) return C.deepBlue;
-    return null;
-  }
-
-  function lancet(c, r) {
-    const dx = c - CX, dy = r - CY;
-    if (dy > 5) {
-      // Arched top
-      const archR = Math.sqrt(Math.max(0, 7*7 - (dy - 5)*(dy - 5) * 2.4));
-      if (Math.abs(dx) > archR) return null;
-    }
-    if (Math.abs(dy) > 7.5) return null;
-    const stripes = [C.deepBlue, C.amber, C.deepBlue, C.ruby, C.deepBlue, C.emerald,
-                     C.deepBlue, C.gold, C.deepBlue, C.crimson, C.deepBlue, C.amber,
-                     C.deepBlue, C.ruby, C.deepBlue];
-    return stripes[c];
-  }
-
-  function diamondLattice(c, r) {
-    const dx = c - CX, dy = r - CY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist > 7.6) return null;
-    // Diamond (Chebyshev rotated)
-    const a = (Math.abs(dx + dy) + Math.abs(dx - dy)) / 2;
-    const palette = [C.gold, C.amber, C.ruby, C.crimson, C.purple, C.deepBlue, C.blue, C.emerald];
-    return palette[Math.floor(a) % palette.length];
-  }
-
-  function concentricRings(c, r) {
-    const dx = c - CX, dy = r - CY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist > 7.6) return null;
-    const palette = [C.gold, C.amber, C.crimson, C.ruby, C.purple, C.deepBlue, C.blue, C.teal];
-    return palette[Math.floor(dist) % palette.length];
-  }
-
   function compassRose(c, r) {
     const dx = c - CX, dy = r - CY;
     const dist = Math.sqrt(dx*dx + dy*dy);
@@ -239,16 +124,23 @@ function run() {
   }
 
   // ============================================================== Settings
+  //  Light source lives on a plane PARALLEL to the glass at Z = -lightZ.
+  //  Pad slides (lightX, lightY) within that plane; the distance slider
+  //  controls lightZ separately. X/Y and Z are independent axes.
+  const LIGHT_RANGE = 11;          // pad extent: ±LIGHT_RANGE in X and Y
+  const LIGHT_Z_MIN = 2.5;         // closest the light can sit behind the pane
+  const LIGHT_Z_MAX = 28;          // farthest
+
   const S = {
-    pattern:       'Rose Window',
-    mode:          'viewing',
-    sunAzimuth:    -22,            // degrees, 0 = behind pane
-    sunElevation:  38,             // degrees, 0 = horizon, 90 = overhead
-    glassOpacity:  0.90,
-    clearOpacity:  0.32,
-    beamIntensity: 0.55,
-    beamWidth:     0.75,
-    beamSoftness:  1.2,
+    pattern:       'Crucifix',
+    mode:          'lighting',
+    lightX:        0,              // light X on plane parallel to pane
+    lightY:        8.0,            // light Y on plane parallel to pane (above centre)
+    lightZ:        7.5,            // distance behind the pane
+    glassOpacity:  0.96,
+    beamIntensity: 1.30,
+    beamWidth:     2.2,
+    beamSoftness:  1.8,
   };
 
   // ================================================================ Scene
@@ -298,8 +190,10 @@ function run() {
   scene.add(floor);
 
   // ============================================================ Lead frame
+  //  Real stained-glass cames are tin/lead — a cool silver tone reads as the
+  //  metal grout between tiles and as the bright outer perimeter of the pane.
   const frameGeom = new THREE.BoxGeometry(PANE_W + 0.5, PANE_H + 0.5, PANE_T);
-  const frameMat  = new THREE.MeshBasicMaterial({ color: 0x040404 });
+  const frameMat  = new THREE.MeshBasicMaterial({ color: 0xb6bcc6 });
   const paneFrame = new THREE.Mesh(frameGeom, frameMat);
   paneFrame.renderOrder = 1;
   scene.add(paneFrame);
@@ -315,6 +209,12 @@ function run() {
     return g;
   }
 
+  //  Coloured glass: dead-flat solid colour. The reference look (clean tile
+  //  + soft outer bloom + a strong volumetric beam below) only works when the
+  //  tile itself stays uniform — any fresnel/edge highlight on the cell reads
+  //  as a 3-D bevel and ruins the stained-glass illusion. All "glassiness"
+  //  here comes from the surrounding lead came and the volumetric beam, not
+  //  from per-tile shading.
   const colouredMat = new THREE.ShaderMaterial({
     uniforms: { uOpacity: { value: S.glassOpacity } },
     vertexShader: `
@@ -344,9 +244,15 @@ function run() {
   colouredMesh.frustumCulled = false;
   scene.add(colouredMesh);
 
+  //  Clear / unlit glass: opaque dark slab. The pane reads like the reference
+  //  — a black grid of cells with a silver lead came showing through only in
+  //  the inter-tile gaps + outer perimeter. Any "glow" near unlit cells comes
+  //  from the additive volumetric beam haze of neighbouring lit cells, which
+  //  is the right physics: light bleeding sideways through the glass plane.
   const clearMat = new THREE.MeshBasicMaterial({
-    color: 0xf1ead4, transparent: true, opacity: S.clearOpacity,
-    depthWrite: false, blending: THREE.NormalBlending,
+    color: 0x07090c,
+    transparent: false,
+    depthWrite: true,
   });
   const clearGeom = new THREE.BoxGeometry(CELL_W * 0.93, CELL_H * 0.93, PANE_T * 1.06);
   const clearMesh = new THREE.InstancedMesh(clearGeom, clearMat, MAX_CELLS);
@@ -357,29 +263,87 @@ function run() {
   scene.add(clearMesh);
 
   // ================================================================= Sun
-  //  Parallel light is direction-only, but we still render a sun sphere as
-  //  a visual handle. Placed far back along -lightDir so it reads as the
-  //  "infinitely distant" source.
+  //  Sun sphere sits at the actual light position — a CLOSE point source
+  //  on the plane parallel to the glass. Each glow layer is a sphere whose
+  //  fragment uses dot(N, V) as a radial coordinate; powering down with
+  //  different exponents gives a smooth exponential gradient stack rather
+  //  than three flat concentric circles.
+  const SUN_CORE_R     = 0.55;
+  const SUN_CORONA_R   = 1.30;
+  const SUN_GLOW_R     = 2.80;
+  const SUN_BLOOM_R    = 5.40;
+
+  function makeSunGlowMat(coreHex, edgeHex, sharp, intensity) {
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        uCore:      { value: new THREE.Color(coreHex) },
+        uEdge:      { value: new THREE.Color(edgeHex) },
+        uSharp:     { value: sharp },
+        uIntensity: { value: intensity },
+      },
+      vertexShader: `
+        varying vec3 vNormal;
+        varying vec3 vViewDir;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+          vViewDir = normalize(-mvPos.xyz);
+          gl_Position = projectionMatrix * mvPos;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uCore;
+        uniform vec3 uEdge;
+        uniform float uSharp;
+        uniform float uIntensity;
+        varying vec3 vNormal;
+        varying vec3 vViewDir;
+        void main() {
+          vec3 N = normalize(vNormal);
+          vec3 V = normalize(vViewDir);
+          float f = max(dot(N, V), 0.0);
+          float g = pow(f, uSharp);
+          vec3 col = mix(uEdge, uCore, g) * uIntensity * g;
+          gl_FragColor = vec4(col, g * uIntensity);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.FrontSide,
+    });
+  }
+
+  // Solid hot disc — the sun's actual photosphere
   const sunCore = new THREE.Mesh(
-    new THREE.SphereGeometry(1.3, 32, 24),
-    new THREE.MeshBasicMaterial({ color: 0xfff5d0 })
+    new THREE.SphereGeometry(SUN_CORE_R, 40, 28),
+    new THREE.MeshBasicMaterial({ color: 0xfffdf2 })
   );
+  sunCore.renderOrder = 6;
   scene.add(sunCore);
-  const sunHalo = new THREE.Mesh(
-    new THREE.SphereGeometry(3.4, 32, 24),
-    new THREE.MeshBasicMaterial({
-      color: 0xffd07a, transparent: true, opacity: 0.42,
-      blending: THREE.AdditiveBlending, depthWrite: false,
-    })
+
+  // Tight corona — bright warm-white halo wrapping the disc
+  const sunCorona = new THREE.Mesh(
+    new THREE.SphereGeometry(SUN_CORONA_R, 40, 28),
+    makeSunGlowMat(0xfff5d0, 0xffc864, 1.6, 1.35)
   );
-  scene.add(sunHalo);
+  sunCorona.renderOrder = 7;
+  scene.add(sunCorona);
+
+  // Mid glow — amber spread
+  const sunGlow = new THREE.Mesh(
+    new THREE.SphereGeometry(SUN_GLOW_R, 40, 28),
+    makeSunGlowMat(0xffc878, 0xff8a30, 2.2, 0.65)
+  );
+  sunGlow.renderOrder = 8;
+  scene.add(sunGlow);
+
+  // Outer bloom — wide soft haze that fades to nothing
   const sunBloom = new THREE.Mesh(
-    new THREE.SphereGeometry(7.0, 32, 24),
-    new THREE.MeshBasicMaterial({
-      color: 0xfdb95a, transparent: true, opacity: 0.10,
-      blending: THREE.AdditiveBlending, depthWrite: false,
-    })
+    new THREE.SphereGeometry(SUN_BLOOM_R, 40, 28),
+    makeSunGlowMat(0xffa050, 0xff5020, 3.4, 0.26)
   );
+  sunBloom.renderOrder = 9;
   scene.add(sunBloom);
 
   // ============================================================== Beams
@@ -398,10 +362,13 @@ function run() {
       varying vec3 vColor;
       varying float vT;
       varying float vTGlass;
+      varying vec2 vRad;
       void main() {
         vColor = aColor;
         vT = position.y;
         vTGlass = aTGlass;
+        // Box geometry spans [-0.5, 0.5] in x and z; map to [-1, 1] for radial use
+        vRad = vec2(position.x, position.z) * 2.0;
         gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position, 1.0);
       }
     `,
@@ -411,19 +378,33 @@ function run() {
       varying vec3 vColor;
       varying float vT;
       varying float vTGlass;
+      varying vec2 vRad;
       void main() {
-        vec3 sunCol = vec3(1.0, 0.97, 0.86);
-        // Hard tint transition at the glass plane
-        vec3 col = mix(sunCol, vColor, smoothstep(vTGlass - 0.003, vTGlass + 0.003, vT));
-        float dT = vT - vTGlass;
-        // Narrow sharp peak at the glass + asymmetric haze trailing into the room
-        float peakSigma = 0.045;
-        float peak = exp(-(dT * dT) / (peakSigma * peakSigma));
-        float hazeSigma = max(0.18, 0.45 * uSoftness);
-        float side = (dT < 0.0) ? 0.55 : 1.0;
-        float haze = exp(-(dT * dT) / (hazeSigma * hazeSigma * side * side)) * 0.18;
-        float a = max(peak, haze) * uIntensity;
-        gl_FragColor = vec4(col * (0.6 + a * 1.4) * a, a);
+        //  Light leaving a stained tile is already the tile's colour — there
+        //  is no white-on-glass moment. Any sun-white mix here saturates to
+        //  pure white under additive blending and reads as a fake highlight
+        //  wedge on the front face of the beam box. So: tinted colour only.
+        vec3 col = vColor;
+
+        //  Soft single-gaussian radial cross-section. One smooth bell, no
+        //  bright "core" stack — that stack was what made each beam read as
+        //  a hot spike at the glass and a long taper into the room. With one
+        //  wide gaussian the shaft is uniformly diffuse and adjacent beams
+        //  blend into a continuous wash of colour.
+        float r = length(vRad);
+        float radial = exp(-r * r * 1.7);
+
+        //  Length-wise: smooth exponential decay along the shaft. Brightness
+        //  is consistent across the beam — no on-glass peak. Softness slows
+        //  the decay so longer shafts hold their tint.
+        float dT = max(0.0, vT - vTGlass);
+        float lengthFade = exp(-dT * 1.6 / max(0.3, uSoftness));
+
+        float density = radial * lengthFade;
+        float a = density * uIntensity * 0.34;
+        //  Pure premultiplied tint — no white boost term. Density modulates
+        //  saturation through alpha; colour channels never exceed vColor.
+        gl_FragColor = vec4(col * a, a);
       }
     `,
     transparent: true,
@@ -467,12 +448,15 @@ function run() {
       varying vec3 vColor;
       varying vec2 vUv;
       void main() {
-        // Soft-edged SQUARE pool (matches the rigid projection of parallel light)
+        // Soft circular pool with gentle square hint — broader than the cell
+        // so adjacent pools overlap into a continuous wash of colour.
         vec2 p = abs(vUv - 0.5) * 2.0;
-        float m = max(p.x, p.y);
+        float sq  = max(p.x, p.y);
+        float rd  = length(p);
+        float m   = mix(rd, sq, 0.35);
         if (m > 1.0) discard;
-        float a = pow(1.0 - m, 1.4) * uOpacity;
-        gl_FragColor = vec4(vColor * (0.6 + a * 1.6) * a, a);
+        float a = pow(1.0 - m, 2.2) * uOpacity;
+        gl_FragColor = vec4(vColor * (0.55 + a * 1.5) * a, a);
       }
     `,
     transparent: true,
@@ -547,36 +531,28 @@ function run() {
     clearMesh.instanceMatrix.needsUpdate    = true;
   }
 
-  function getLightDir() {
-    // Parallel-light direction. Azimuth rotates around Y; elevation tilts down.
-    const az = S.sunAzimuth   * Math.PI / 180;
-    const el = S.sunElevation * Math.PI / 180;
-    return new THREE.Vector3(
-      -Math.sin(az) * Math.cos(el),
-      -Math.sin(el),
-       Math.cos(az) * Math.cos(el),
-    );
+  function getLightPos() {
+    // Light lives on a plane PARALLEL to the glass pane at Z = -lightZ.
+    // X/Y come from the control pad; Z comes from the distance slider.
+    return new THREE.Vector3(S.lightX, S.lightY, -S.lightZ);
   }
 
   function updateLight() {
-    const dir = getLightDir();
-    if (dir.lengthSq() < 1e-6) dir.set(0, 0, 1);
+    const lightPos = getLightPos();
 
-    // Sun visual is placed far "back" along -dir, so it reads as a distant
-    // source and rays appear parallel.
-    const SUN_FAR = 38;
-    const sunPos = dir.clone().multiplyScalar(-SUN_FAR);
-    sunCore.position.copy(sunPos);
-    sunHalo.position.copy(sunPos);
-    sunBloom.position.copy(sunPos);
-
-    const q = new THREE.Quaternion().setFromUnitVectors(_up, dir);
+    // Sun visual sits at the actual light position (point source, close).
+    sunCore.position.copy(lightPos);
+    sunCorona.position.copy(lightPos);
+    sunGlow.position.copy(lightPos);
+    sunBloom.position.copy(lightPos);
 
     const bColor  = beamMesh.geometry.getAttribute('aColor').array;
     const bTGlass = beamMesh.geometry.getAttribute('aTGlass').array;
     const pColor  = poolMesh.geometry.getAttribute('aColor').array;
 
     let bi = 0, pi = 0;
+    const tmpDir = new THREE.Vector3();
+    const tmpQ   = new THREE.Quaternion();
 
     for (let i = 0; i < cells.length; i++) {
       const cell = cells[i];
@@ -584,23 +560,32 @@ function run() {
 
       const cellPos = cellWorldPos(cell.col, cell.row);
 
-      // Forward distance until the parallel ray hits the floor (if it does)
+      // PER-CELL ray direction from the (close) point source through this
+      // cell, continuing forward into the room. Cells off the optical axis
+      // get angled-outward beams — that's the diverging fan visible in the
+      // reference screenshots, which a parallel sun couldn't produce.
+      tmpDir.subVectors(cellPos, lightPos).normalize();
+
+      // Forward distance until the diverging ray hits the floor (if it does)
       let postLen, endPos;
-      const FAR = 80;
-      if (dir.y < -0.001) {
-        postLen = (FLOOR_Y - cellPos.y) / dir.y;
-        endPos = new THREE.Vector3().copy(cellPos).addScaledVector(dir, postLen);
+      const FAR = 70;
+      if (tmpDir.y < -0.001) {
+        postLen = (FLOOR_Y - cellPos.y) / tmpDir.y;
+        postLen = Math.min(postLen, FAR);
+        endPos = new THREE.Vector3().copy(cellPos).addScaledVector(tmpDir, postLen);
       } else {
         postLen = FAR;
-        endPos = new THREE.Vector3().copy(cellPos).addScaledVector(dir, FAR);
+        endPos = new THREE.Vector3().copy(cellPos).addScaledVector(tmpDir, FAR);
       }
       const totalLen = Math.max(0.01, PRE_LEN + postLen);
       const tGlass = PRE_LEN / totalLen; // 0 when PRE_LEN=0: peak at beam start
 
+      tmpQ.setFromUnitVectors(_up, tmpDir);
+
       // Beam starts PRE_LEN behind the cell (at the cell if PRE_LEN=0)
-      const startPos = new THREE.Vector3().copy(cellPos).addScaledVector(dir, -PRE_LEN);
+      const startPos = new THREE.Vector3().copy(cellPos).addScaledVector(tmpDir, -PRE_LEN);
       _dummy.position.copy(startPos);
-      _dummy.quaternion.copy(q);
+      _dummy.quaternion.copy(tmpQ);
       _dummy.scale.set(S.beamWidth, totalLen, S.beamWidth);
       _dummy.updateMatrix();
       beamMesh.setMatrixAt(bi, _dummy.matrix);
@@ -610,11 +595,11 @@ function run() {
       bTGlass[bi]        = tGlass;
       bi++;
 
-      // SQUARE floor pool, axis-aligned, same width as the cell. Pool is
-      // rotated by the projection but we keep it axis-aligned for simplicity
-      // — looks like a slightly oversized cell shadow.
-      if (dir.y < -0.001) {
-        const poolSize = CELL_W * 1.15;
+      // SQUARE floor pool, axis-aligned, same width as the cell. The pool
+      // is offset by the diverging projection (each cell lands separately)
+      // so the on-floor pattern naturally spreads outward from the centre.
+      if (tmpDir.y < -0.001) {
+        const poolSize = CELL_W * 2.1;
         _dummy.position.set(endPos.x, FLOOR_Y + 0.02, endPos.z);
         _dummy.quaternion.identity();
         _dummy.scale.set(poolSize, 1, poolSize);
@@ -649,7 +634,7 @@ function run() {
   function lerp(a, b, k) { return a + (b - a) * k; }
 
   function viewingTarget()  { return { theta: 0,    phi: 0.03, radius: 27 }; }
-  function lightingTarget() { return { theta: -0.85, phi: 0.32, radius: 48 }; }
+  function lightingTarget() { return { theta: -0.85, phi: 0.32, radius: 95 }; }
 
   function applyMode(mode, animate = true) {
     S.mode = mode;
@@ -693,7 +678,7 @@ function run() {
     if (S.mode !== 'lighting') return;
     e.preventDefault();
     cam.radius *= 1 + e.deltaY * 0.0008;
-    cam.radius = Math.max(12, Math.min(100, cam.radius));
+    cam.radius = Math.max(12, Math.min(220, cam.radius));
     cam.t = 1;
   }, { passive: false });
 
@@ -794,13 +779,21 @@ function run() {
 
       <div class="p63-section">
         <div class="p63-row">
-          <div class="p63-label">SUN</div>
-          <div class="p63-val" id="p63-sun-val">az 0° &middot; el 30°</div>
+          <div class="p63-label">LIGHT POSITION</div>
+          <div class="p63-val" id="p63-sun-val">x 0.0 &middot; y 0.0</div>
         </div>
         <div class="p63-pad" id="p63-pad">
-          <div class="p63-pad-marker top">BEHIND</div>
+          <div class="p63-pad-marker top">UP</div>
           <div class="p63-pad-dot" id="p63-pad-dot"></div>
         </div>
+      </div>
+
+      <div class="p63-section">
+        <div class="p63-row">
+          <div class="p63-label">LIGHT DISTANCE</div>
+          <div class="p63-val" id="p63-dist-val">7.5</div>
+        </div>
+        <input type="range" class="p63-slider" id="p63-dist" min="${LIGHT_Z_MIN}" max="${LIGHT_Z_MAX}" step="0.1" value="${S.lightZ}">
       </div>
 
       <div class="p63-section">
@@ -816,7 +809,7 @@ function run() {
           <div class="p63-label">LIGHT INTENSITY</div>
           <div class="p63-val" id="p63-light-val">85%</div>
         </div>
-        <input type="range" class="p63-slider" id="p63-light" min="0" max="1.5" step="0.01" value="${S.beamIntensity}">
+        <input type="range" class="p63-slider" id="p63-light" min="0" max="2.5" step="0.01" value="${S.beamIntensity}">
       </div>
 
       <div class="p63-section">
@@ -852,32 +845,33 @@ function run() {
       });
     });
 
-    // Sun pad — drag a dot inside a circle to set (azimuth, elevation).
-    // Center = directly overhead; edge = horizon; top of pad = "behind pane".
+    // Light-position pad — drag a dot inside a circle to set (lightX, lightY)
+    // on the plane PARALLEL to the glass. Centre = light directly behind the
+    // pane centre; top = light up; right = light right; etc. Z is fixed.
     const pad     = root.querySelector('#p63-pad');
     const padDot  = root.querySelector('#p63-pad-dot');
     const sunVal  = root.querySelector('#p63-sun-val');
     const padR    = 76;                          // logical radius (slightly inset)
     function refreshPad() {
-      const az = S.sunAzimuth * Math.PI / 180;
-      const el = Math.max(0, S.sunElevation) * Math.PI / 180;
-      const r  = (1 - el / (Math.PI / 2)) * padR;
-      const x  = 85 + Math.sin(az) * r;
-      const y  = 85 - Math.cos(az) * r;
-      padDot.style.left = x + 'px';
-      padDot.style.top  = y + 'px';
-      sunVal.innerHTML  = `az ${Math.round(S.sunAzimuth)}° &middot; el ${Math.round(S.sunElevation)}°`;
+      // Map (lightX, lightY) in world units to pad pixels.
+      // Pad axes: +x → right, +y world → up (so y-pixel goes negative).
+      const px = 85 + (S.lightX / LIGHT_RANGE) * padR;
+      const py = 85 - (S.lightY / LIGHT_RANGE) * padR;
+      padDot.style.left = px + 'px';
+      padDot.style.top  = py + 'px';
+      sunVal.innerHTML  = `x ${S.lightX.toFixed(1)} &middot; y ${S.lightY.toFixed(1)}`;
     }
     function padFromXY(clientX, clientY) {
       const rect = pad.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top  + rect.height / 2;
-      const dx = clientX - cx;
-      const dy = clientY - cy;
-      const r  = Math.min(padR, Math.sqrt(dx*dx + dy*dy));
-      const a  = Math.atan2(dx, -dy); // 0 at top, +clockwise
-      S.sunAzimuth   = a * 180 / Math.PI;
-      S.sunElevation = (1 - r / padR) * 90;
+      let dx = clientX - cx;
+      let dy = clientY - cy;
+      // Clamp to circular pad
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d > padR) { dx *= padR / d; dy *= padR / d; }
+      S.lightX =  (dx / padR) * LIGHT_RANGE;
+      S.lightY = -(dy / padR) * LIGHT_RANGE;   // screen-y is inverted
       refreshPad();
       updateLight();
     }
@@ -909,6 +903,9 @@ function run() {
       input.addEventListener('input', tick);
       tick();
     }
+    bindSlider('p63-dist', 'p63-dist-val',
+      v => { S.lightZ = v; updateLight(); },
+      v => v.toFixed(1));
     bindSlider('p63-glass', 'p63-glass-val',
       v => { S.glassOpacity = v; colouredMat.uniforms.uOpacity.value = v; },
       v => Math.round(v * 100) + '%');
