@@ -8,7 +8,7 @@
 
 <br>
 
-![pieces](https://img.shields.io/badge/sketches-71-1f6feb?style=flat-square)
+![pieces](https://img.shields.io/badge/sketches-72-1f6feb?style=flat-square)
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
@@ -139,6 +139,7 @@
   </tr>
   <tr>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p70.js" title="Brix"><img src="assets/gallery/p70.webp" width="260" alt="Brix"></a><br><a href="artworks/p70.js" title="Brix"><b>Brix</b></a><br><sub>p70 · after Horacio García Rossi, 1959</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p71.js" title="Equal and Unequal"><img src="assets/gallery/p71.webp" width="260" alt="Equal and Unequal"></a><br><a href="artworks/p71.js" title="Equal and Unequal"><b>Equal &amp; Unequal</b></a><br><sub>p71 · after Anton Stankowski, 1951</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p72.js" title="Pleated Checkerboard"><img src="assets/gallery/p72.webp" width="260" alt="Pleated Checkerboard"></a><br><a href="artworks/p72.js" title="Pleated Checkerboard"><b>Pleated Checkerboard</b></a><br><sub>p72 · after Sarilotto, 1978</sub></td>
   </tr>
 </table>
@@ -163,6 +164,7 @@ Several pieces are faithful recreations of existing works, studied by rebuilding
 - **Central Gravity** — after Milan Dobeš, 1965 &nbsp;`p68`
 - **Double Progression** — after Julio Le Parc, 1959 &nbsp;`p69`
 - **Brix** — after Horacio García Rossi, 1959 &nbsp;`p70`
+- **Equal &amp; Unequal** — after Anton Stankowski, 1951 &nbsp;`p71`
 - **Pleated Checkerboard** — after Sarilotto, 1978 &nbsp;`p72`
 
 The early line-and-grid studies (`p0`–`p8`) follow exercises from Tim Holman's *Speedrunning through p5.js* talk.
