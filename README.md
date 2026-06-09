@@ -8,7 +8,7 @@
 
 <br>
 
-![pieces](https://img.shields.io/badge/sketches-72-1f6feb?style=flat-square)
+![pieces](https://img.shields.io/badge/sketches-73-1f6feb?style=flat-square)
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
@@ -142,6 +142,9 @@
     <td align="center" valign="top" width="33.33%"><a href="artworks/p71.js" title="Equal and Unequal"><img src="assets/gallery/p71.webp" width="260" alt="Equal and Unequal"></a><br><a href="artworks/p71.js" title="Equal and Unequal"><b>Equal &amp; Unequal</b></a><br><sub>p71 · after Anton Stankowski, 1951</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p72.js" title="Pleated Checkerboard"><img src="assets/gallery/p72.webp" width="260" alt="Pleated Checkerboard"></a><br><a href="artworks/p72.js" title="Pleated Checkerboard"><b>Pleated Checkerboard</b></a><br><sub>p72 · after Sarilotto, 1978</sub></td>
   </tr>
+  <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p73.js" title="Symphonie Inachevée"><img src="assets/gallery/p73.webp" width="260" alt="Symphonie Inachevée"></a><br><a href="artworks/p73.js" title="Symphonie Inachevée"><b>Symphonie Inachevée</b></a><br><sub>p73 · after Victor Vasarely, 1966</sub></td>
+  </tr>
 </table>
 
 ---
@@ -166,6 +169,7 @@ Several pieces are faithful recreations of existing works, studied by rebuilding
 - **Brix** — after Horacio García Rossi, 1959 &nbsp;`p70`
 - **Equal &amp; Unequal** — after Anton Stankowski, 1951 &nbsp;`p71`
 - **Pleated Checkerboard** — after Sarilotto, 1978 &nbsp;`p72`
+- **Symphonie Inachevée** — after Victor Vasarely, 1966 &nbsp;`p73`
 
 The early line-and-grid studies (`p0`–`p8`) follow exercises from Tim Holman's *Speedrunning through p5.js* talk.
 
@@ -191,7 +195,7 @@ Use the arrow keys or the control panel to move between pieces; press **S** to s
 
 <br>
 
-- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p72.js`).
+- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p73.js`).
 - A small Vite plugin scans that folder and auto-generates the gallery manifest — adding a file is all it takes.
 - The thumbnails above are rendered headlessly straight from the live sketches (see [`scripts/capture_gallery.py`](scripts/capture_gallery.py)).
 
