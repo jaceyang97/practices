@@ -8,7 +8,7 @@
 
 <br>
 
-![pieces](https://img.shields.io/badge/sketches-69-1f6feb?style=flat-square)
+![pieces](https://img.shields.io/badge/sketches-70-1f6feb?style=flat-square)
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
@@ -79,62 +79,65 @@
   </tr>
   <tr>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p33.js" title="Camellia Point Cloud"><img src="assets/gallery/p33.webp" width="260" alt="Camellia Point Cloud"></a><br><a href="artworks/p33.js" title="Camellia Point Cloud"><b>Camellia Cloud</b></a><br><sub>p33 · webgl</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p34.js" title="Tetrahedron with Oriented Camellias"><img src="assets/gallery/p34.webp" width="260" alt="Tetrahedron with Oriented Camellias"></a><br><a href="artworks/p34.js" title="Tetrahedron with Oriented Camellias"><b>Camellia Tetrahedron</b></a><br><sub>p34 · webgl</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p35.js" title="Calico Logo"><img src="assets/gallery/p35.webp" width="260" alt="Calico Logo"></a><br><a href="artworks/p35.js" title="Calico Logo"><b>Calico Logo</b></a><br><sub>p35 · logo</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p36.js" title="Golden Pavilion on Fire"><img src="assets/gallery/p36.webp" width="260" alt="Golden Pavilion on Fire"></a><br><a href="artworks/p36.js" title="Golden Pavilion on Fire"><b>Pavilion on Fire</b></a><br><sub>p36 · halftone</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p36.js" title="Golden Pavilion on Fire"><img src="assets/gallery/p36.webp" width="260" alt="Golden Pavilion on Fire"></a><br><a href="artworks/p36.js" title="Golden Pavilion on Fire"><b>Pavilion on Fire</b></a><br><sub>p36 · halftone</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p37.js" title="Dystrophin Poster Display"><img src="assets/gallery/p37.webp" width="260" alt="Dystrophin Poster Display"></a><br><a href="artworks/p37.js" title="Dystrophin Poster Display"><b>Dystrophin Poster</b></a><br><sub>p37 · image</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p38.js" title="Six Grids, Five Folds"><img src="assets/gallery/p38.webp" width="260" alt="Six Grids, Five Folds"></a><br><a href="artworks/p38.js" title="Six Grids, Five Folds"><b>Folded Grids</b></a><br><sub>p38 · after John Walker, 2008</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p39.js" title="Folding Grid"><img src="assets/gallery/p39.webp" width="260" alt="Folding Grid"></a><br><a href="artworks/p39.js" title="Folding Grid"><b>Folding Grid</b></a><br><sub>p39 · geometric</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p39.js" title="Folding Grid"><img src="assets/gallery/p39.webp" width="260" alt="Folding Grid"></a><br><a href="artworks/p39.js" title="Folding Grid"><b>Folding Grid</b></a><br><sub>p39 · geometric</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p40.js" title="Vanish"><img src="assets/gallery/p40.webp" width="260" alt="Vanish"></a><br><a href="artworks/p40.js" title="Vanish"><b>Vanish</b></a><br><sub>p40 · after Sol LeWitt, 1994</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p41.js" title="Ring and Cross Panels"><img src="assets/gallery/p41.webp" width="260" alt="Ring and Cross Panels"></a><br><a href="artworks/p41.js" title="Ring and Cross Panels"><b>Ring &amp; Cross</b></a><br><sub>p41 · after Sol LeWitt</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p42.js" title="Wall Drawing #821"><img src="assets/gallery/p42.webp" width="260" alt="Wall Drawing #821"></a><br><a href="artworks/p42.js" title="Wall Drawing #821"><b>Wall Drawing #821</b></a><br><sub>p42 · after Sol LeWitt, 1997</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p42.js" title="Wall Drawing #821"><img src="assets/gallery/p42.webp" width="260" alt="Wall Drawing #821"></a><br><a href="artworks/p42.js" title="Wall Drawing #821"><b>Wall Drawing #821</b></a><br><sub>p42 · after Sol LeWitt, 1997</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p43.js" title="Abstract Painting, Blue"><img src="assets/gallery/p43.webp" width="260" alt="Abstract Painting, Blue"></a><br><a href="artworks/p43.js" title="Abstract Painting, Blue"><b>Painting, Blue</b></a><br><sub>p43 · after Ad Reinhardt, 1953</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p44.js" title="Abstract Painting Black"><img src="assets/gallery/p44.webp" width="260" alt="Abstract Painting Black"></a><br><a href="artworks/p44.js" title="Abstract Painting Black"><b>Painting, Black</b></a><br><sub>p44 · after Ad Reinhardt, 1960s</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p45.js" title="Anthropic Shape Library"><img src="assets/gallery/p45.webp" width="260" alt="Anthropic Shape Library"></a><br><a href="artworks/p45.js" title="Anthropic Shape Library"><b>Shape Library</b></a><br><sub>p45 · grid</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p45.js" title="Anthropic Shape Library"><img src="assets/gallery/p45.webp" width="260" alt="Anthropic Shape Library"></a><br><a href="artworks/p45.js" title="Anthropic Shape Library"><b>Shape Library</b></a><br><sub>p45 · grid</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p46.js" title="One Shape, Seven Colors"><img src="assets/gallery/p46.webp" width="260" alt="One Shape, Seven Colors"></a><br><a href="artworks/p46.js" title="One Shape, Seven Colors"><b>Seven Colors</b></a><br><sub>p46 · grid</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p47.js" title="Shape Grid with 2×2 Block"><img src="assets/gallery/p47.webp" width="260" alt="Shape Grid with 2×2 Block"></a><br><a href="artworks/p47.js" title="Shape Grid with 2×2 Block"><b>Accent Block Grid</b></a><br><sub>p47 · grid</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p48.js" title="Shape Category Browser"><img src="assets/gallery/p48.webp" width="260" alt="Shape Category Browser"></a><br><a href="artworks/p48.js" title="Shape Category Browser"><b>Shape Browser</b></a><br><sub>p48 · svg</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p48.js" title="Shape Category Browser"><img src="assets/gallery/p48.webp" width="260" alt="Shape Category Browser"></a><br><a href="artworks/p48.js" title="Shape Category Browser"><b>Shape Browser</b></a><br><sub>p48 · svg</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p49.js" title="Shape Grid 2×2 Block"><img src="assets/gallery/p49.webp" width="260" alt="Shape Grid 2×2 Block"></a><br><a href="artworks/p49.js" title="Shape Grid 2×2 Block"><b>2×2 Block Grid</b></a><br><sub>p49 · grid</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p50.js" title="Shape Grid 2×2 Block"><img src="assets/gallery/p50.webp" width="260" alt="Shape Grid 2×2 Block"></a><br><a href="artworks/p50.js" title="Shape Grid 2×2 Block"><b>Color Accent Grid</b></a><br><sub>p50 · grid</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p51.js" title="SVG Shape Grid Mosaic"><img src="assets/gallery/p51.webp" width="260" alt="SVG Shape Grid Mosaic"></a><br><a href="artworks/p51.js" title="SVG Shape Grid Mosaic"><b>Shape Mosaic</b></a><br><sub>p51 · geometric</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p51.js" title="SVG Shape Grid Mosaic"><img src="assets/gallery/p51.webp" width="260" alt="SVG Shape Grid Mosaic"></a><br><a href="artworks/p51.js" title="SVG Shape Grid Mosaic"><b>Shape Mosaic</b></a><br><sub>p51 · geometric</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p52.js" title="18 Mini Compositions Grid"><img src="assets/gallery/p52.webp" width="260" alt="18 Mini Compositions Grid"></a><br><a href="artworks/p52.js" title="18 Mini Compositions Grid"><b>18 Compositions</b></a><br><sub>p52 · grid</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p53.js" title="Six Shape Compositions"><img src="assets/gallery/p53.webp" width="260" alt="Six Shape Compositions"></a><br><a href="artworks/p53.js" title="Six Shape Compositions"><b>Six Compositions</b></a><br><sub>p53 · grid</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p54.js" title="SVG Shape Collage Grid"><img src="assets/gallery/p54.webp" width="260" alt="SVG Shape Collage Grid"></a><br><a href="artworks/p54.js" title="SVG Shape Collage Grid"><b>Shape Collage</b></a><br><sub>p54 · grid</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p54.js" title="SVG Shape Collage Grid"><img src="assets/gallery/p54.webp" width="260" alt="SVG Shape Collage Grid"></a><br><a href="artworks/p54.js" title="SVG Shape Collage Grid"><b>Shape Collage</b></a><br><sub>p54 · grid</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p55.js" title="Chromatic Density Grid"><img src="assets/gallery/p55.webp" width="260" alt="Chromatic Density Grid"></a><br><a href="artworks/p55.js" title="Chromatic Density Grid"><b>Density Gradient</b></a><br><sub>p55 · grid</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p56.js" title="Scale and Overlap"><img src="assets/gallery/p56.webp" width="260" alt="Scale and Overlap"></a><br><a href="artworks/p56.js" title="Scale and Overlap"><b>Scale &amp; Overlap</b></a><br><sub>p56 · collage</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p57.js" title="Order to Chaos"><img src="assets/gallery/p57.webp" width="260" alt="Order to Chaos"></a><br><a href="artworks/p57.js" title="Order to Chaos"><b>Order to Chaos</b></a><br><sub>p57 · grid</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p57.js" title="Order to Chaos"><img src="assets/gallery/p57.webp" width="260" alt="Order to Chaos"></a><br><a href="artworks/p57.js" title="Order to Chaos"><b>Order to Chaos</b></a><br><sub>p57 · grid</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p58.js" title="SVG Shape Packing"><img src="assets/gallery/p58.webp" width="260" alt="SVG Shape Packing"></a><br><a href="artworks/p58.js" title="SVG Shape Packing"><b>Shape Packing</b></a><br><sub>p58 · packing</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p59.js" title="Recursive Mondrian Grid"><img src="assets/gallery/p59.webp" width="260" alt="Recursive Mondrian Grid"></a><br><a href="artworks/p59.js" title="Recursive Mondrian Grid"><b>Mondrian Split</b></a><br><sub>p59 · recursion</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p60.js" title="Concentric Ripples"><img src="assets/gallery/p60.webp" width="260" alt="Concentric Ripples"></a><br><a href="artworks/p60.js" title="Concentric Ripples"><b>Radial Ripples</b></a><br><sub>p60 · concentric</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p60.js" title="Concentric Ripples"><img src="assets/gallery/p60.webp" width="260" alt="Concentric Ripples"></a><br><a href="artworks/p60.js" title="Concentric Ripples"><b>Radial Ripples</b></a><br><sub>p60 · concentric</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p61.js" title="Converging Grid"><img src="assets/gallery/p61.webp" width="260" alt="Converging Grid"></a><br><a href="artworks/p61.js" title="Converging Grid"><b>Converging Grid</b></a><br><sub>p61 · after Pixel Symphony, 2025</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p62.js" title="DAC Badge Generator"><img src="assets/gallery/p62.webp" width="260" alt="DAC Badge Generator"></a><br><a href="artworks/p62.js" title="DAC Badge Generator"><b>DAC Badges</b></a><br><sub>p62 · generative</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p63.js" title="Cathedral Glass"><img src="assets/gallery/p63.webp" width="260" alt="Cathedral Glass"></a><br><a href="artworks/p63.js" title="Cathedral Glass"><b>Cathedral Glass</b></a><br><sub>p63 · three.js</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p63.js" title="Cathedral Glass"><img src="assets/gallery/p63.webp" width="260" alt="Cathedral Glass"></a><br><a href="artworks/p63.js" title="Cathedral Glass"><b>Cathedral Glass</b></a><br><sub>p63 · three.js</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p64.js" title="God-Ray Weight Function"><img src="assets/gallery/p64.webp" width="260" alt="God-Ray Weight Function"></a><br><a href="artworks/p64.js" title="God-Ray Weight Function"><b>God-Ray Falloff</b></a><br><sub>p64 · three.js</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p66.js" title="Cathedral Unit-Distance Glass"><img src="assets/gallery/p66.webp" width="260" alt="Cathedral Unit-Distance Glass"></a><br><a href="artworks/p66.js" title="Cathedral Unit-Distance Glass"><b>Leaded Glass Dome</b></a><br><sub>p66 · three.js</sub></td>
-    <td align="center" valign="top" width="33.33%"><a href="artworks/p67.js" title="3 Carrés Noirs"><img src="assets/gallery/p67.webp" width="260" alt="3 Carrés Noirs"></a><br><a href="artworks/p67.js" title="3 Carrés Noirs"><b>3 Carrés Noirs</b></a><br><sub>p67 · after Vera Molnár, 1950</sub></td>
   </tr>
   <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p67.js" title="3 Carrés Noirs"><img src="assets/gallery/p67.webp" width="260" alt="3 Carrés Noirs"></a><br><a href="artworks/p67.js" title="3 Carrés Noirs"><b>3 Carrés Noirs</b></a><br><sub>p67 · after Vera Molnár, 1950</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p68.js" title="Central Gravity"><img src="assets/gallery/p68.webp" width="260" alt="Central Gravity"></a><br><a href="artworks/p68.js" title="Central Gravity"><b>Central Gravity</b></a><br><sub>p68 · after Milan Dobeš, 1965</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p69.js" title="Double Progression"><img src="assets/gallery/p69.webp" width="260" alt="Double Progression"></a><br><a href="artworks/p69.js" title="Double Progression"><b>Double Progression</b></a><br><sub>p69 · after Julio Le Parc, 1959</sub></td>
+  </tr>
+  <tr>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p70.js" title="Brix"><img src="assets/gallery/p70.webp" width="260" alt="Brix"></a><br><a href="artworks/p70.js" title="Brix"><b>Brix</b></a><br><sub>p70 · after Horacio García Rossi, 1959</sub></td>
   </tr>
 </table>

@@ -9,7 +9,7 @@ export const P5_MAIN_URL = `${P5_CDN_BASE}/p5.min.js`
 export const P5_SOUND_URL = `${P5_CDN_BASE}/addons/p5.sound.min.js`
 
 // Artwork IDs that are blocked from display
-export const BLOCKED_ARTWORK_IDS = [34]
+export const BLOCKED_ARTWORK_IDS = []
 
 // UI configuration
 export const GRID_COLUMNS = 19
