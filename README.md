@@ -1,14 +1,10 @@
 <div align="center">
 
-<img src="assets/gallery/_banner.webp" width="100%" alt="A selection of generative sketches from this archive">
+<img src="assets/gallery/p16.webp" width="16%" alt="p16"><img src="assets/gallery/p21.webp" width="16%" alt="p21"><img src="assets/gallery/p31.webp" width="16%" alt="p31"><img src="assets/gallery/p61.webp" width="16%" alt="p61"><img src="assets/gallery/p64.webp" width="16%" alt="p64"><img src="assets/gallery/p68.webp" width="16%" alt="p68">
 
 # practices
 
 **An ongoing archive of generative art — drawn with code.**
-
-69 standalone sketches in [p5.js](https://p5js.org) &amp; [three.js](https://threejs.org): geometric studies,
-flow fields, recursive fractals, image mosaics, op-art recreations, and volumetric 3D glass.
-Every piece is a single self-contained script — open it, run it, remix it.
 
 <br>
 
@@ -16,7 +12,6 @@ Every piece is a single self-contained script — open it, run it, remix it.
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
-![last commit](https://img.shields.io/github/last-commit/jaceyang97/practices?style=flat-square&color=8957e5)
 
 </div>
 
@@ -24,7 +19,7 @@ Every piece is a single self-contained script — open it, run it, remix it.
 
 ## Gallery
 
-<sub>Ordered as made, from the first studies to the latest pieces. Click any sketch to read its source.</sub>
+<sub>Ordered as made, from the first studies to the latest pieces.</sub>
 
 <table>
   <tr>
@@ -147,7 +142,7 @@ Every piece is a single self-contained script — open it, run it, remix it.
 ---
 
 <details>
-<summary><b>Recreations &amp; references</b></summary>
+<summary><b>References</b></summary>
 
 <br>
 
@@ -194,7 +189,3 @@ Use the arrow keys or the control panel to move between pieces; press **S** to s
 - The thumbnails above are rendered headlessly straight from the live sketches (see [`scripts/capture_gallery.py`](scripts/capture_gallery.py)).
 
 </details>
-
-<div align="center">
-<sub>68 sketches · 63 p5.js · 5 WebGL/three.js · MIT licensed</sub>
-</div>
