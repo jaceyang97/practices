@@ -39,6 +39,46 @@ P5_VER = "1.7.0"
 DEBUG_PORT = 9222
 MAX_THUMB = 640  # longest side, never upscaled
 
+
+# --------------------------------------------------------------- square padding
+# Gallery cells must all be the SAME square size so the README grid stays even.
+# A sketch's drawing pane can be any aspect ratio; we letterbox the capture into
+# a square, filling the margin with the piece's OWN background — the median color
+# of its border ring — so the filler blends in instead of reading as a frame.
+def border_fill(im, frac=0.02):
+    im = im.convert("RGB")
+    w, h = im.size
+    b = max(2, round(frac * min(w, h)))
+    strips = (im.crop((0, 0, w, b)), im.crop((0, h - b, w, h)),
+              im.crop((0, 0, b, h)), im.crop((w - b, 0, w, h)))
+    data = b"".join(s.tobytes() for s in strips)  # interleaved RGB bytes
+    return tuple(sorted(data[c::3])[len(data) // 6] for c in range(3))  # per-channel median
+
+
+def pad_square(im):
+    im = im.convert("RGB"); w, h = im.size
+    if w == h:
+        return im
+    S = max(w, h)
+    canvas = Image.new("RGB", (S, S), border_fill(im))
+    canvas.paste(im, ((S - w) // 2, (S - h) // 2))
+    return canvas
+
+
+def square_existing():
+    """Pad every already-captured thumbnail to a square in place (no Chrome)."""
+    files = sorted(glob.glob(os.path.join(OUT_DIR, "p*.webp")),
+                   key=lambda f: int(re.search(r"\d+", os.path.basename(f)).group()))
+    n = 0
+    for f in files:
+        im = Image.open(f).convert("RGB")
+        if im.width == im.height:
+            continue
+        S = max(im.size)
+        pad_square(im).save(f, "WEBP", quality=82, method=6)
+        n += 1; print(f"  squared {os.path.basename(f)} {im.size[0]}x{im.size[1]} -> {S}x{S}")
+    print(f"squared {n} thumbnail(s) -> {OUT_DIR}")
+
 CAPTURE_HTML = f"""<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><title>capture</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/{P5_VER}/p5.min.js"></script>
@@ -158,12 +198,18 @@ return JSON.stringify({x:r.left,y:r.top,w:r.width,h:r.height});})()"""
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--port", required=True, help="dev-server port (npm run dev)")
+    ap.add_argument("--port", help="dev-server port (npm run dev); required unless --square-existing")
     ap.add_argument("--debug-port", type=int, default=DEBUG_PORT, help="Chrome remote-debugging port")
     ap.add_argument("--ids", default="", help="comma list of ids to capture (default: all)")
+    ap.add_argument("--square-existing", action="store_true",
+                    help="pad already-captured thumbnails to square in place (no Chrome needed) and exit")
     args = ap.parse_args()
 
     os.makedirs(OUT_DIR, exist_ok=True)
+    if args.square_existing:
+        square_existing(); return
+    if not args.port:
+        ap.error("--port is required (the npm run dev port) unless --square-existing")
     if args.ids:
         ids = [s if s.endswith(".js") else s + ".js" for s in args.ids.split(",")]
     else:
@@ -209,6 +255,7 @@ def main():
                 scale = min(1.0, MAX_THUMB / max(w, h))
                 if scale < 1:
                     im = im.resize((round(w * scale), round(h * scale)), Image.LANCZOS)
+                im = pad_square(im)  # letterbox to a uniform square gallery cell
                 im.save(os.path.join(OUT_DIR, f"{aid}.webp"), "WEBP", quality=82, method=6)
                 ok += 1
                 print(f"  {aid}: {w}x{h}")
