@@ -8,7 +8,7 @@
 
 <br>
 
-![pieces](https://img.shields.io/badge/sketches-74-1f6feb?style=flat-square)
+![pieces](https://img.shields.io/badge/sketches-75-1f6feb?style=flat-square)
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
@@ -145,6 +145,7 @@
   <tr>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p73.js" title="Symphonie Inachevée"><img src="assets/gallery/p73.webp" width="260" alt="Symphonie Inachevée"></a><br><a href="artworks/p73.js" title="Symphonie Inachevée"><b>Symphonie Inachevée</b></a><br><sub>p73 · after Victor Vasarely, 1966</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p74.js" title="Multiple Painting (Series 14 No. 1)"><img src="assets/gallery/p74.webp" width="260" alt="Multiple Painting (Series 14 No. 1)"></a><br><a href="artworks/p74.js" title="Multiple Painting (Series 14 No. 1)"><b>Multiple Painting</b></a><br><sub>p74 · after Germaine Derbecq, 1969</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p75.js" title="34"><img src="assets/gallery/p75.webp" width="260" alt="34"></a><br><a href="artworks/p75.js" title="34"><b>34</b></a><br><sub>p75 · after Marcello Morandini, 1968</sub></td>
   </tr>
 </table>
 
@@ -172,6 +173,7 @@ Several pieces are faithful recreations of existing works, studied by rebuilding
 - **Pleated Checkerboard** — after Sarilotto, 1978 &nbsp;`p72`
 - **Symphonie Inachevée** — after Victor Vasarely, 1966 &nbsp;`p73`
 - **Multiple Painting** — after Germaine Derbecq, 1969 &nbsp;`p74`
+- **34** — after Marcello Morandini, 1968 &nbsp;`p75`
 
 The early line-and-grid studies (`p0`–`p8`) follow exercises from Tim Holman's *Speedrunning through p5.js* talk.
 
@@ -197,7 +199,7 @@ Use the arrow keys or the control panel to move between pieces; press **S** to s
 
 <br>
 
-- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p74.js`).
+- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p75.js`).
 - A small Vite plugin scans that folder and auto-generates the gallery manifest — adding a file is all it takes.
 - The thumbnails above are rendered headlessly straight from the live sketches (see [`scripts/capture_gallery.py`](scripts/capture_gallery.py)).
 
