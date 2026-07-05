@@ -8,7 +8,7 @@
 
 <br>
 
-![pieces](https://img.shields.io/badge/sketches-77-1f6feb?style=flat-square)
+![pieces](https://img.shields.io/badge/sketches-78-1f6feb?style=flat-square)
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
@@ -150,6 +150,7 @@
   <tr>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p76.js" title="LAKH 22 VARZ"><img src="assets/gallery/p76.webp" width="260" alt="LAKH 22 VARZ"></a><br><a href="artworks/p76.js" title="LAKH 22 VARZ"><b>LAKH 22 VARZ</b></a><br><sub>p76 · after Elena Asins, 1991</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p77.js" title="Untitled (無題)"><img src="assets/gallery/p77.webp" width="260" alt="Untitled (無題)"></a><br><a href="artworks/p77.js" title="Untitled (無題)"><b>Squares &amp; Tabs</b></a><br><sub>p77 · after Kishio Suga, 1975</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p78.js" title="Composition"><img src="assets/gallery/p78.webp" width="260" alt="Composition"></a><br><a href="artworks/p78.js" title="Composition"><b>Diagonal Cascade</b></a><br><sub>p78 · after Theo van Doesburg, c. 1920s</sub></td>
   </tr>
 </table>
 
