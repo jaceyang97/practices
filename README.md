@@ -8,7 +8,7 @@
 
 <br>
 
-![pieces](https://img.shields.io/badge/sketches-78-1f6feb?style=flat-square)
+![pieces](https://img.shields.io/badge/sketches-79-1f6feb?style=flat-square)
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
@@ -152,6 +152,9 @@
     <td align="center" valign="top" width="33.33%"><a href="artworks/p77.js" title="Untitled (無題)"><img src="assets/gallery/p77.webp" width="260" alt="Untitled (無題)"></a><br><a href="artworks/p77.js" title="Untitled (無題)"><b>Squares &amp; Tabs</b></a><br><sub>p77 · after Kishio Suga, 1975</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p78.js" title="Composition"><img src="assets/gallery/p78.webp" width="260" alt="Composition"></a><br><a href="artworks/p78.js" title="Composition"><b>Diagonal Cascade</b></a><br><sub>p78 · after Theo van Doesburg, c. 1920s</sub></td>
   </tr>
+  <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p79.js" title="Ascension"><img src="assets/gallery/p79.webp" width="260" alt="Ascension"></a><br><a href="artworks/p79.js" title="Ascension"><b>Ascension</b></a><br><sub>p79 · after Vera Molnár, 1984</sub></td>
+  </tr>
 </table>
 
 ---
@@ -180,6 +183,9 @@ Several pieces are faithful recreations of existing works, studied by rebuilding
 - **Multiple Painting** — after Germaine Derbecq, 1969 &nbsp;`p74`
 - **34** — after Marcello Morandini, 1968 &nbsp;`p75`
 - **LAKH 22 VARZ** — after Elena Asins, 1991 &nbsp;`p76`
+- **Squares &amp; Tabs** — after Kishio Suga, 1975 &nbsp;`p77`
+- **Diagonal Cascade** — after Theo van Doesburg, c. 1920s &nbsp;`p78`
+- **Ascension** — after Vera Molnár, 1984 &nbsp;`p79`
 
 The early line-and-grid studies (`p0`–`p8`) follow exercises from Tim Holman's *Speedrunning through p5.js* talk.
 
@@ -205,7 +211,7 @@ Use the arrow keys or the control panel to move between pieces; press **S** to s
 
 <br>
 
-- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p77.js`).
+- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p79.js`).
 - A small Vite plugin scans that folder and auto-generates the gallery manifest — adding a file is all it takes.
 - The thumbnails above are rendered headlessly straight from the live sketches (see [`scripts/capture_gallery.py`](scripts/capture_gallery.py)).
 
