@@ -6,9 +6,11 @@
 
 **An ongoing archive of generative art — drawn with code.**
 
+<sub>80 standalone sketches in p5.js and three.js.</sub>
+
 <br>
 
-![pieces](https://img.shields.io/badge/sketches-79-1f6feb?style=flat-square)
+![pieces](https://img.shields.io/badge/sketches-80-1f6feb?style=flat-square)
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
@@ -154,6 +156,7 @@
   </tr>
   <tr>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p79.js" title="Ascension"><img src="assets/gallery/p79.webp" width="260" alt="Ascension"></a><br><a href="artworks/p79.js" title="Ascension"><b>Ascension</b></a><br><sub>p79 · after Vera Molnár, 1984</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p80.js" title="Summer"><img src="assets/gallery/p80.webp" width="260" alt="Summer: blue watercolour, hand-ruled ink grid and white gouache marks"></a><br><a href="artworks/p80.js" title="Summer"><b>Summer</b></a><br><sub>p80 · after Agnes Martin, 1964</sub></td>
   </tr>
 </table>
 
@@ -186,6 +189,7 @@ Several pieces are faithful recreations of existing works, studied by rebuilding
 - **Squares &amp; Tabs** — after Kishio Suga, 1975 &nbsp;`p77`
 - **Diagonal Cascade** — after Theo van Doesburg, c. 1920s &nbsp;`p78`
 - **Ascension** — after Vera Molnár, 1984 &nbsp;`p79`
+- **Summer** — after Agnes Martin, 1964 &nbsp;`p80` · [study notes](artworks/p80-study.md)
 
 The early line-and-grid studies (`p0`–`p8`) follow exercises from Tim Holman's *Speedrunning through p5.js* talk.
 
@@ -211,7 +215,7 @@ Use the arrow keys or the control panel to move between pieces; press **S** to s
 
 <br>
 
-- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p79.js`).
+- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p80.js`).
 - A small Vite plugin scans that folder and auto-generates the gallery manifest — adding a file is all it takes.
 - The thumbnails above are rendered headlessly straight from the live sketches (see [`scripts/capture_gallery.py`](scripts/capture_gallery.py)).
 
