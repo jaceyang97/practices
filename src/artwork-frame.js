@@ -1,4 +1,5 @@
 import { P5_MAIN_URL, P5_SOUND_URL } from './config/constants'
+import { installCanvasViewport } from './canvas-viewport'
 
 export const FRAME_CHANNEL = 'workshop-artwork'
 export const FRAME_TIMEOUT = 30000
@@ -38,10 +39,10 @@ function installFrameBridge(channel, timeout, scriptName) {
   window.addEventListener('keydown', (event) => {
     const target = event.target
     if (event.isComposing || event.ctrlKey || event.altKey || event.metaKey) return
-    if (event.shiftKey && !['S', 'R'].includes(event.key)) return
+    if (event.shiftKey && !['S', 'R', 'F', '+'].includes(event.key)) return
     if (target?.isContentEditable || target?.closest?.('input, textarea, select')) return
     if (event.repeat) return
-    if (!['ArrowLeft', 'ArrowRight', 'Escape', 's', 'S', 'r', 'R', '/'].includes(event.key) && !/^[0-9]$/.test(event.key)) return
+    if (!['ArrowLeft', 'ArrowRight', 'Escape', 's', 'S', 'r', 'R', 'f', 'F', '+', '-', '=', '/'].includes(event.key) && !/^[0-9]$/.test(event.key)) return
     event.preventDefault()
     event.stopImmediatePropagation()
     send('shortcut', { key: event.key })
@@ -50,7 +51,7 @@ function installFrameBridge(channel, timeout, scriptName) {
     if (nativeLayout || !canvas?.classList.contains('p5Canvas')) return
     const width = instance.width
     const height = instance.height
-    const scale = Math.min(1, Math.max(1, innerWidth - 24) / width, Math.max(1, innerHeight - 24) / height)
+    const scale = Math.min(1, Math.max(1, innerWidth) / width, Math.max(1, innerHeight) / height)
     // CSS sizing keeps the pixel backing and p5's scaled mouse coordinates.
     canvas.style.width = `${width * scale}px`
     canvas.style.height = `${height * scale}px`
@@ -64,7 +65,10 @@ function installFrameBridge(channel, timeout, scriptName) {
     const ready = Boolean(loaded && instance?._setupDone && rendered && canvas?.width && canvas?.height
       && flags.every((flag) => flag === undefined || flag === true))
     if (lastReady === true && !ready) deadline = Date.now() + timeout
-    if (ready) fit(canvas, instance)
+    if (ready) {
+      fit(canvas, instance)
+      window.__canvasViewport?.attach(canvas)
+    }
     report(ready)
     if (!ready && Date.now() > deadline) fail('The artwork took too long to load. Please retry.')
   }
@@ -79,7 +83,8 @@ export function createArtworkDocument(scriptName) {
   const scriptUrl = `/artworks/${encodeURIComponent(scriptName)}?t=${Date.now()}`
   return `<!doctype html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<style>html{margin:0;min-height:100%;background:#f7f7f4}canvas{display:block}.p63-panel{max-height:calc(100vh - 36px);overflow-y:auto;box-sizing:border-box}</style>
+<style>html{margin:0;min-height:100%;background:#f7f7f4;overflow:hidden}canvas{display:block}.p63-panel{max-height:calc(100vh - 36px);overflow-y:auto;box-sizing:border-box}</style>
+<script>(${installCanvasViewport.toString()})(${scriptLiteral(FRAME_CHANNEL)});</script>
 <script>(${installFrameBridge.toString()})(${scriptLiteral(FRAME_CHANNEL)},${FRAME_TIMEOUT},${scriptLiteral(scriptName)});</script>
 <script src="${attribute(P5_MAIN_URL)}" onerror="window.__artworkFrame.fail('Could not load p5.js. Please retry.')"></script>
 <script src="${attribute(P5_SOUND_URL)}" onerror="window.__artworkFrame.fail('Could not load p5 sound. Please retry.')"></script>

@@ -5,17 +5,17 @@ const CATEGORIES = ['geometric', 'symmetry', 'fill', 'density']
 const INITIAL_CONTROLS = { category: 'geometric', single: false }
 
 const ArtworkRenderer = forwardRef(function ArtworkRenderer({
-  scriptName, artworkTitle, onReadyChange, onShortcut,
+  scriptName, artworkTitle, onReadyChange, onShortcut, onViewportChange,
 }, ref) {
   const containerRef = useRef(null)
   const iframeRef = useRef(null)
-  const callbacksRef = useRef({ onReadyChange, onShortcut })
+  const callbacksRef = useRef({ onReadyChange, onShortcut, onViewportChange })
   const controlsRef = useRef(INITIAL_CONTROLS)
   const previousScriptRef = useRef(scriptName)
   const [revision, setRevision] = useState(0)
   const [status, setStatus] = useState({ ready: false, error: null })
   const [controls, setControls] = useState(INITIAL_CONTROLS)
-  callbacksRef.current = { onReadyChange, onShortcut }
+  callbacksRef.current = { onReadyChange, onShortcut, onViewportChange }
   const needsCategories = ['p47.js', 'p48.js', 'p49.js'].includes(scriptName)
 
   const reload = useCallback(() => setRevision((value) => value + 1), [])
@@ -26,6 +26,11 @@ const ArtworkRenderer = forwardRef(function ArtworkRenderer({
   useImperativeHandle(ref, () => ({
     reload,
     getCanvas,
+    fitView: () => iframeRef.current?.contentWindow?.__canvasViewport?.fit(),
+    zoomIn: () => iframeRef.current?.contentWindow?.__canvasViewport?.zoomIn(),
+    zoomOut: () => iframeRef.current?.contentWindow?.__canvasViewport?.zoomOut(),
+    setInteractionMode: (mode) => iframeRef.current?.contentWindow?.__canvasViewport?.setMode(mode),
+    getViewport: () => iframeRef.current?.contentWindow?.__canvasViewport?.getState() || { zoom: 1, mode: 'inspect' },
     regenerate() {
       const frame = iframeRef.current?.contentWindow
       const study = frame?.agnesStudy || frame?.summer80
@@ -76,7 +81,7 @@ const ArtworkRenderer = forwardRef(function ArtworkRenderer({
     iframe.allow = 'microphone'
     // The flower study positions its canvas and sliders with absolute pixels.
     if (scriptName === 'p32.js') {
-      iframe.style.minWidth = '1400px'
+      iframe.style.minWidth = '1520px'
       iframe.style.minHeight = '840px'
     }
     let controlsRestored = false
@@ -87,7 +92,9 @@ const ArtworkRenderer = forwardRef(function ArtworkRenderer({
     const receive = (event) => {
       if (event.source !== iframe.contentWindow || event.data?.channel !== FRAME_CHANNEL) return
       const message = event.data
-      if (message.type === 'shortcut' && typeof message.key === 'string') {
+      if (message.type === 'viewport' && typeof message.zoom === 'number' && ['inspect', 'interact'].includes(message.mode)) {
+        callbacksRef.current.onViewportChange?.({ zoom: message.zoom, mode: message.mode })
+      } else if (message.type === 'shortcut' && typeof message.key === 'string') {
         callbacksRef.current.onShortcut?.(message.key)
       } else if (message.type === 'error') {
         window.clearTimeout(watchdog)

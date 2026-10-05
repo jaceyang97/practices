@@ -3,6 +3,8 @@ import ArtworkRenderer from './ArtworkRenderer'
 import ArtworkGrid from './components/ArtworkGrid'
 import WorkshopHeader from './components/WorkshopHeader'
 import PreviewToolbar from './components/PreviewToolbar'
+import ArtworkBrowser from './components/ArtworkBrowser'
+import ViewportControls from './components/ViewportControls'
 import { filterArtworks, workshopArtworks } from './artworks-data'
 import { useArtworkNavigation, useKeyboardShortcuts, useCanvasSave } from './hooks'
 import { BLOCKED_ARTWORK_IDS } from './config/constants'
@@ -14,7 +16,8 @@ function App() {
   const [query, setQuery] = useState(initialParams.get('q') || '')
   const [artist, setArtist] = useState(initialParams.get('artist') || '')
   const [order, setOrder] = useState(initialParams.get('order') === 'oldest' ? 'oldest' : 'newest')
-  const [focused, setFocused] = useState(false)
+  const [focused, setFocused] = useState(true)
+  const [viewport, setViewport] = useState({ zoom: 1, mode: 'inspect' })
   const [ready, setReady] = useState(false)
   const [status, setStatus] = useState('')
   const rendererRef = useRef(null)
@@ -63,6 +66,7 @@ function App() {
     if (nextView === 'preview') {
       browseScroll.current = window.scrollY
       window.scrollTo(0, 0)
+      setFocused(true)
     } else {
       restoreBrowse.current = true
       setFocused(false)
@@ -72,6 +76,7 @@ function App() {
   const openArtwork = useCallback(id => {
     navigateToArtwork(id)
     changeView('preview')
+    setFocused(true)
   }, [navigateToArtwork, changeView])
   const handleSave = useCallback(async () => {
     if (!ready) return
@@ -84,10 +89,16 @@ function App() {
     if (ready) { setStatus(''); rendererRef.current?.regenerate() }
   }, [ready])
   const onShortcut = useCallback(key => {
-    if (key === '/') { searchRef.current?.focus(); return true }
+    if (key === '/') {
+      if (view === 'preview') setFocused(false)
+      requestAnimationFrame(() => searchRef.current?.focus())
+      return true
+    }
     if (/^[0-9]$/.test(key) && allIds.includes(Number(key))) { openArtwork(Number(key)); return true }
     if (key === 'Escape' && view === 'preview') {
-      if (focused) setFocused(false)
+      const menu = document.querySelector('.preview-menu[open]')
+      if (menu) menu.removeAttribute('open')
+      else if (!focused) setFocused(true)
       else changeView('browse')
       return true
     }
@@ -98,6 +109,9 @@ function App() {
     }
     if (view === 'preview' && key.toLowerCase() === 's') { handleSave(); return true }
     if (view === 'preview' && key.toLowerCase() === 'r') { handleRegenerate(); return true }
+    if (view === 'preview' && key.toLowerCase() === 'f') { rendererRef.current?.fitView(); return true }
+    if (view === 'preview' && ['+', '='].includes(key)) { rendererRef.current?.zoomIn(); return true }
+    if (view === 'preview' && key === '-') { rendererRef.current?.zoomOut(); return true }
     return false
   }, [view, focused, changeView, navigateNext, navigatePrev, handleSave, handleRegenerate, allIds, openArtwork])
   useKeyboardShortcuts({ onShortcut })
@@ -106,32 +120,31 @@ function App() {
   return (
     <div className={`workshop ${view === 'preview' ? 'preview-mode' : 'browse-mode'} ${focused ? 'is-focused' : ''}`}>
       <a href="#workshop-content" className="skip-link">Skip to works</a>
-      <WorkshopHeader view={view} onViewChange={changeView} total={workshopArtworks.length} count={filtered.length}
+      {view === 'browse' && <WorkshopHeader view={view} onViewChange={changeView} total={workshopArtworks.length} count={filtered.length}
         query={query} onQueryChange={setQuery} artist={artist} onArtistChange={setArtist}
-        order={order} onOrderChange={setOrder} searchRef={searchRef} />
+        order={order} onOrderChange={setOrder} searchRef={searchRef} />}
       {view === 'browse' ? (
         <main id="workshop-content" className="browse-grid" aria-label="All works">
           <ArtworkGrid artworks={filtered} currentId={currentId} onSelect={openArtwork} onClear={clearFilters} />
         </main>
       ) : (
         <main id="workshop-content" className="workbench">
-          <aside className="workbench-browser" aria-label="Switch artwork">
-            <ArtworkGrid artworks={filtered} currentId={currentId} onSelect={openArtwork} compact onClear={clearFilters} />
-          </aside>
+          {!focused && <ArtworkBrowser artworks={filtered} currentId={currentId} onSelect={openArtwork} onClear={clearFilters}
+            query={query} onQueryChange={setQuery} artist={artist} onArtistChange={setArtist}
+            order={order} onOrderChange={setOrder} searchRef={searchRef} onClose={() => setFocused(true)} />}
           <section className="workbench-preview" aria-label="Interactive artwork preview">
             <PreviewToolbar artwork={currentArtwork} position={navigationIds.indexOf(currentId) + 1}
-              count={filtered.length} ready={ready} focused={focused} onPrev={navigatePrev} onNext={navigateNext}
+              count={filtered.length} ready={ready} browserOpen={!focused} onPrev={navigatePrev} onNext={navigateNext}
               onSave={handleSave} onRegenerate={handleRegenerate} onReload={() => rendererRef.current?.reload()}
-              onFocus={() => setFocused(value => !value)} onBrowse={() => changeView('browse')} />
-            <ArtworkRenderer key={currentId} ref={rendererRef} scriptName={currentArtwork.file}
-              artworkTitle={currentArtwork.title} onReadyChange={setReady} onShortcut={onShortcut} />
-            <footer className="preview-footer">
-              <span role="status">{status || (ready ? 'Interactive preview' : 'Loading artwork…')}</span>
-              <details className="shortcut-help"><summary>Shortcuts</summary>
-                <div><p><kbd>←</kbd> <kbd>→</kbd> Switch work</p><p><kbd>R</kbd> Regenerate</p>
-                  <p><kbd>S</kbd> Save PNG</p><p><kbd>/</kbd> Search</p><p><kbd>0–9</kbd> Jump to p0–p9</p><p><kbd>Esc</kbd> Back</p></div>
-              </details>
-            </footer>
+              onToggleBrowser={() => setFocused(value => !value)} onBrowse={() => changeView('browse')} />
+            <div className="canvas-stage">
+              <ArtworkRenderer key={currentId} ref={rendererRef} scriptName={currentArtwork.file}
+                artworkTitle={currentArtwork.title} onReadyChange={setReady} onShortcut={onShortcut} onViewportChange={setViewport} />
+              <ViewportControls viewport={viewport} ready={ready} onZoomIn={() => rendererRef.current?.zoomIn()}
+                onZoomOut={() => rendererRef.current?.zoomOut()} onFit={() => rendererRef.current?.fitView()}
+                onModeChange={mode => rendererRef.current?.setInteractionMode(mode)} />
+              <span className={`canvas-status ${status ? 'has-message' : ''}`} role="status">{status}</span>
+            </div>
           </section>
         </main>
       )}
