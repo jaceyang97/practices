@@ -1,54 +1,43 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import { getArtworkById, getAllArtworkIds } from '../artworks-manifest'
 
-/**
- * Hook for managing artwork navigation state and actions
- * @param {number[]} blockedIds - Array of artwork IDs to exclude from navigation
- * @returns Navigation state and methods
- */
-export function useArtworkNavigation(blockedIds = []) {
-  const allIds = useMemo(() => {
-    return getAllArtworkIds().filter(id => !blockedIds.includes(id))
-  }, [blockedIds])
-
-  const latestId = useMemo(() => Math.max(...allIds), [allIds])
-
-  const [currentId, setCurrentId] = useState(latestId)
-  const currentArtwork = getArtworkById(currentId)
-
-  const navigateToArtwork = useCallback((id) => {
-    if (allIds.includes(id)) {
-      setCurrentId(id)
-    }
-  }, [allIds])
-
-  const navigateNext = useCallback(() => {
-    const currentIndex = allIds.indexOf(currentId)
-    if (currentIndex === -1) {
-      setCurrentId(allIds[0])
-      return
-    }
-    const nextIndex = (currentIndex + 1) % allIds.length
-    setCurrentId(allIds[nextIndex])
-  }, [currentId, allIds])
-
-  const navigatePrev = useCallback(() => {
-    const currentIndex = allIds.indexOf(currentId)
-    if (currentIndex === -1) {
-      setCurrentId(allIds[allIds.length - 1])
-      return
-    }
-    const prevIndex = (currentIndex - 1 + allIds.length) % allIds.length
-    setCurrentId(allIds[prevIndex])
-  }, [currentId, allIds])
-
-  return {
-    currentId,
-    currentArtwork,
-    allIds,
-    navigateToArtwork,
-    navigateNext,
-    navigatePrev
-  }
+function readSelectedId(allIds) {
+  const parameter = new URLSearchParams(window.location.search).get('artwork')
+  let saved
+  try { saved = localStorage.getItem('workshop-artwork') } catch { /* Storage can be unavailable. */ }
+  const id = Number((parameter || saved || '').replace(/^p/, ''))
+  return (parameter || saved) && allIds.includes(id) ? id : Math.max(...allIds)
 }
 
+export function useArtworkNavigation(blockedIds = [], navigationIds) {
+  const allIds = useMemo(() => getAllArtworkIds().filter(id => !blockedIds.includes(id)), [blockedIds])
+  const [currentId, setCurrentId] = useState(() => readSelectedId(allIds))
+  const currentArtwork = getArtworkById(currentId)
+  const orderedIds = navigationIds || allIds
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    url.searchParams.set('artwork', String(currentId))
+    window.history.replaceState(null, '', url)
+    try { localStorage.setItem('workshop-artwork', String(currentId)) } catch { /* Selection still lives in the URL. */ }
+  }, [currentId])
+  useEffect(() => {
+    const onPopState = () => setCurrentId(readSelectedId(allIds))
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [allIds])
+  const navigateToArtwork = useCallback(id => {
+    if (allIds.includes(id)) setCurrentId(id)
+  }, [allIds])
+  const navigateNext = useCallback(() => {
+    if (!orderedIds.length) return
+    setCurrentId(id => orderedIds[(orderedIds.indexOf(id) + 1) % orderedIds.length])
+  }, [orderedIds])
+  const navigatePrev = useCallback(() => {
+    if (!orderedIds.length) return
+    setCurrentId(id => {
+      const index = orderedIds.indexOf(id)
+      return orderedIds[index < 0 ? orderedIds.length - 1 : (index - 1 + orderedIds.length) % orderedIds.length]
+    })
+  }, [orderedIds])
+  return { currentId, currentArtwork, allIds, navigateToArtwork, navigateNext, navigatePrev }
+}

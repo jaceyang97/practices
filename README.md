@@ -224,8 +224,11 @@ npm install
 npm run dev          # http://localhost:3000
 ```
 
-A React + Vite gallery loads each sketch in an isolated iframe (p5.js from CDN).
-Use the arrow keys or the control panel to move between pieces; press **S** to save the current frame as a PNG.
+The local **Workshop** opens with a four-column thumbnail grid (two columns on small screens), following the personal site's Gallery typography and fine grid seams. Search by title, artist, or sketch ID such as `p86`; filter by artist or change the sort order.
+
+Click a work to open its live preview, with the thumbnail browser beside it. **← / →** switch within the current results, **R** regenerates, **S** saves a PNG at the canvas's original resolution, **/** focuses search, and **Esc** returns to browsing. **0–9** still jump to p0–p9. Shortcuts leave form inputs alone and also work after clicking the artwork.
+
+**Focus** expands the preview; **Reset** reloads the initial sketch. Artwork-specific controls remain available. Selection and filters stay in the URL across refreshes, and Workshop remembers the last selected work. Each sketch runs in an isolated iframe, with p5.js loaded from CDN.
 
 </details>
 

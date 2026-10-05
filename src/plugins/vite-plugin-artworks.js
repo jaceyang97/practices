@@ -21,7 +21,13 @@ export function artworksManifestPlugin() {
         .map(file => {
           const id = parseInt(file.match(/^p(\d+)\.js$/)[1])
           const title = catalog[file] ? artworkTitle(catalog[file], catalog) : file
-          return { id, file, title }
+          const entry = catalog[file] || {}
+          return {
+            id, file, title,
+            name: entry.tributeTo ? title.slice(`Tribute to ${entry.tributeTo}: `.length) : title,
+            artist: entry.tributeTo || '', year: entry.year || '',
+            kind: entry.kind || '', source: entry.source || ''
+          }
         })
         .sort((a, b) => a.id - b.id)
 
@@ -99,4 +105,3 @@ export const getArtworkCount = () => {
     }
   }
 }
-
