@@ -6,11 +6,11 @@
 
 **An ongoing archive of generative art — drawn with code.**
 
-<sub>80 standalone sketches in p5.js and three.js.</sub>
+<sub>86 standalone sketches in p5.js and three.js.</sub>
 
 <br>
 
-![pieces](https://img.shields.io/badge/sketches-80-1f6feb?style=flat-square)
+![pieces](https://img.shields.io/badge/sketches-86-1f6feb?style=flat-square)
 ![p5.js](https://img.shields.io/badge/p5.js-ED225D?style=flat-square&logo=p5dotjs&logoColor=white)
 ![three.js](https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 ![license](https://img.shields.io/badge/license-MIT-3fb950?style=flat-square)
@@ -159,6 +159,16 @@ Recreations and source-based studies use **Tribute to Artist: Work**. Tutorial, 
   <tr>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p79.js" title="Tribute to Vera Molnár: Ascension"><img src="assets/gallery/p79.webp" width="260" alt="Tribute to Vera Molnár: Ascension"></a><br><a href="artworks/p79.js" title="Tribute to Vera Molnár: Ascension"><b>Tribute to Vera Molnár: Ascension</b></a><br><sub>p79 · after Vera Molnár, 1984</sub></td>
     <td align="center" valign="top" width="33.33%"><a href="artworks/p80.js" title="Tribute to Agnes Martin: Summer"><img src="assets/gallery/p80.webp" width="260" alt="Tribute to Agnes Martin: Summer"></a><br><a href="artworks/p80.js" title="Tribute to Agnes Martin: Summer"><b>Tribute to Agnes Martin: Summer</b></a><br><sub>p80 · after Agnes Martin, 1964</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p81.js" title="Tribute to Agnes Martin: The Lamp"><img src="assets/gallery/p81.webp" width="260" alt="Tribute to Agnes Martin: The Lamp"></a><br><a href="artworks/p81.js" title="Tribute to Agnes Martin: The Lamp"><b>Tribute to Agnes Martin: The Lamp</b></a><br><sub>p81 · after Agnes Martin, 1959</sub></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p82.js" title="Tribute to Agnes Martin: Untitled"><img src="assets/gallery/p82.webp" width="260" alt="Tribute to Agnes Martin: Untitled"></a><br><a href="artworks/p82.js" title="Tribute to Agnes Martin: Untitled"><b>Tribute to Agnes Martin: Untitled</b></a><br><sub>p82 · after Agnes Martin, 1960</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p83.js" title="Tribute to Agnes Martin: The Islands"><img src="assets/gallery/p83.webp" width="260" alt="Tribute to Agnes Martin: The Islands"></a><br><a href="artworks/p83.js" title="Tribute to Agnes Martin: The Islands"><b>Tribute to Agnes Martin: The Islands</b></a><br><sub>p83 · after Agnes Martin, 1961</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p84.js" title="Tribute to Agnes Martin: Starlight"><img src="assets/gallery/p84.webp" width="260" alt="Tribute to Agnes Martin: Starlight"></a><br><a href="artworks/p84.js" title="Tribute to Agnes Martin: Starlight"><b>Tribute to Agnes Martin: Starlight</b></a><br><sub>p84 · after Agnes Martin, 1963</sub></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p85.js" title="Tribute to Agnes Martin: With My Back to the World"><img src="assets/gallery/p85.webp" width="260" alt="Tribute to Agnes Martin: With My Back to the World"></a><br><a href="artworks/p85.js" title="Tribute to Agnes Martin: With My Back to the World"><b>Tribute to Agnes Martin: With My Back to the World</b></a><br><sub>p85 · after Agnes Martin, 1997</sub></td>
+    <td align="center" valign="top" width="33.33%"><a href="artworks/p86.js" title="Tribute to Agnes Martin: Untitled #6"><img src="assets/gallery/p86.webp" width="260" alt="Tribute to Agnes Martin: Untitled #6"></a><br><a href="artworks/p86.js" title="Tribute to Agnes Martin: Untitled #6"><b>Tribute to Agnes Martin: Untitled #6</b></a><br><sub>p86 · after Agnes Martin, 2003</sub></td>
   </tr>
 </table>
 
@@ -193,6 +203,13 @@ The archive includes recreations, tutorial studies, and style tributes. The orig
 - **Tribute to Vera Molnár: Ascension** — after Vera Molnár, 1984 &nbsp;`p79`
 - **Tribute to Agnes Martin: Summer** — after Agnes Martin, 1964 &nbsp;`p80` · [study notes](artworks/p80-study.md)
 
+- **Tribute to Agnes Martin: The Lamp** — after Agnes Martin, 1959 &nbsp;`p81` · [study notes](artworks/p81-study.md)
+- **Tribute to Agnes Martin: Untitled** — after Agnes Martin, 1960 &nbsp;`p82` · [study notes](artworks/p82-study.md)
+- **Tribute to Agnes Martin: The Islands** — after Agnes Martin, 1961 &nbsp;`p83` · [study notes](artworks/p83-study.md)
+- **Tribute to Agnes Martin: Starlight** — after Agnes Martin, 1963 &nbsp;`p84` · [study notes](artworks/p84-study.md)
+- **Tribute to Agnes Martin: With My Back to the World** — after Agnes Martin, 1997 &nbsp;`p85` · [study notes](artworks/p85-study.md)
+- **Tribute to Agnes Martin: Untitled #6** — after Agnes Martin, 2003 &nbsp;`p86` · [study notes](artworks/p86-study.md)
+
 The early sketches (`p0`–`p30`) follow exercises from Tim Holman's *Speedrunning through p5.js* talk.
 
 </details>
@@ -217,7 +234,7 @@ Use the arrow keys or the control panel to move between pieces; press **S** to s
 
 <br>
 
-- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p80.js`).
+- Sketches live in [`artworks/`](artworks/) as vanilla p5.js / three.js scripts (`p0.js` … `p86.js`).
 - A small Vite plugin scans that folder and auto-generates the gallery manifest — adding a file is all it takes.
 - Titles and source credits live in [`artworks/catalog.json`](artworks/catalog.json). The gallery reads them automatically; run `npm run titles:sync` after editing the catalog to synchronize README labels and standalone sketch title comments.
 - The thumbnails above are rendered headlessly straight from the live sketches (see [`scripts/capture_gallery.py`](scripts/capture_gallery.py)).

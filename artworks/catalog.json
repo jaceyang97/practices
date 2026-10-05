@@ -453,5 +453,47 @@
     "tributeTo": "Agnes Martin",
     "kind": "artwork-study",
     "source": "https://www-images.lacma.org/s3fs-public/Agnes-Martin-exhibition-advisory-6.6.16_0.pdf"
+  },
+  "p81.js": {
+    "name": "The Lamp",
+    "tributeTo": "Agnes Martin",
+    "kind": "artwork-study",
+    "year": "1959",
+    "source": "https://www.christies.com/en/lot/lot-6438935"
+  },
+  "p82.js": {
+    "name": "Untitled",
+    "tributeTo": "Agnes Martin",
+    "kind": "artwork-study",
+    "year": "1960",
+    "source": "https://whitney.org/collection/works/2125"
+  },
+  "p83.js": {
+    "name": "The Islands",
+    "tributeTo": "Agnes Martin",
+    "kind": "artwork-study",
+    "year": "1961",
+    "source": "https://www.pacegallery.com/artists/agnes-martin/"
+  },
+  "p84.js": {
+    "name": "Starlight",
+    "tributeTo": "Agnes Martin",
+    "kind": "artwork-study",
+    "year": "1963",
+    "source": "https://www.christies.com/en/lot/lot-5147496"
+  },
+  "p85.js": {
+    "name": "With My Back to the World",
+    "tributeTo": "Agnes Martin",
+    "kind": "artwork-study",
+    "year": "1997",
+    "source": "https://artbooks.artcanada.com/agnes-martin/key-works/with-my-back-to-the-world"
+  },
+  "p86.js": {
+    "name": "Untitled #6",
+    "tributeTo": "Agnes Martin",
+    "kind": "artwork-study",
+    "year": "2003",
+    "source": "https://www.christies.com/en/lot/lot-6509419"
   }
 }
