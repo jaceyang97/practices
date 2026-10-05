@@ -1,0 +1,457 @@
+{
+  "p0.js": {
+    "name": "Shadow Square",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p1.js": {
+    "name": "Bisected Square",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p2.js": {
+    "name": "Diagonal in a Box",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p3.js": {
+    "name": "Random Diagonals",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p4.js": {
+    "name": "Diagonal Tiles",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p5.js": {
+    "name": "Tiling Lines",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p6.js": {
+    "name": "Displaced Lines",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p7.js": {
+    "name": "Jittered Dots",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p8.js": {
+    "name": "Displaced Rows",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p9.js": {
+    "name": "De Casteljau",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p10.js": {
+    "name": "Tiling Curves",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p11.js": {
+    "name": "Noise Curves",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p12.js": {
+    "name": "Unknown Pleasures",
+    "tributeTo": "Peter Saville",
+    "kind": "artwork-study",
+    "source": "https://designmuseum.org/designers/peter-saville",
+    "note": "Album sleeve designed by Peter Saville, using a pulsar plot by Harold Craft. The code technique follows the Tim Holman tutorial."
+  },
+  "p13.js": {
+    "name": "Drifting Splines",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p14.js": {
+    "name": "Noise Curtain",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p15.js": {
+    "name": "Random Tiles",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p16.js": {
+    "name": "Rotated Grid",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p17.js": {
+    "name": "Drifting Curves",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p18.js": {
+    "name": "Tile Drift",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p19.js": {
+    "name": "Triangle Fractal",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p20.js": {
+    "name": "Eye of Sauron",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p21.js": {
+    "name": "Chromatic Tiles",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p22.js": {
+    "name": "Twisted Pipes",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p23.js": {
+    "name": "Braided Pipes",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p24.js": {
+    "name": "Silky Drift",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p25.js": {
+    "name": "Fractal Circles",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p26.js": {
+    "name": "Flow Field",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p27.js": {
+    "name": "Mona Lisa",
+    "tributeTo": "Leonardo da Vinci",
+    "kind": "image-study",
+    "source": "https://collections.louvre.fr/ark:/53355/cl010062370",
+    "note": "Image sampling study using Leonardo da Vinci's Mona Lisa; code technique follows the Tim Holman tutorial.",
+    "variant": "Circle grid"
+  },
+  "p28.js": {
+    "name": "Mona Lisa",
+    "tributeTo": "Leonardo da Vinci",
+    "kind": "image-study",
+    "source": "https://collections.louvre.fr/ark:/53355/cl010062370",
+    "note": "Image sampling study using Leonardo da Vinci's Mona Lisa; code technique follows the Tim Holman tutorial.",
+    "variant": "Recursive circles"
+  },
+  "p29.js": {
+    "name": "Mona Lisa",
+    "tributeTo": "Leonardo da Vinci",
+    "kind": "image-study",
+    "source": "https://collections.louvre.fr/ark:/53355/cl010062370",
+    "note": "Image sampling study using Leonardo da Vinci's Mona Lisa; code technique follows the Tim Holman tutorial.",
+    "variant": "Lego blocks"
+  },
+  "p30.js": {
+    "name": "Audio Spectrum",
+    "tributeTo": "Tim Holman",
+    "kind": "tutorial-study",
+    "source": "https://www.youtube.com/watch?v=4Se0_w0ISYk"
+  },
+  "p31.js": {
+    "name": "Logo",
+    "tributeTo": "Jane Street",
+    "kind": "logo-study",
+    "note": "Brand credited; individual logo designer unidentified. Identification recorded in p35.js."
+  },
+  "p32.js": {
+    "name": "3D Mathematical Flowers",
+    "tributeTo": "Kazuki Umeda",
+    "kind": "tutorial-study",
+    "source": "https://github.com/Creativeguru97/YouTube_tutorial/tree/master/Play_with_geometry/3DMathFlowers"
+  },
+  "p33.js": {
+    "name": "Camellia",
+    "tributeTo": "Kazuki Umeda",
+    "kind": "tutorial-study",
+    "source": "https://github.com/Creativeguru97/YouTube_tutorial/blob/master/Play_with_geometry/3DMathDoubleFlowers/part1.5/sketch.js"
+  },
+  "p34.js": {
+    "name": "Camellia Tetrahedron",
+    "tributeTo": "Kazuki Umeda",
+    "kind": "source-based-variation",
+    "source": "https://github.com/Creativeguru97/YouTube_tutorial/blob/master/Play_with_geometry/3DMathDoubleFlowers/part1.5/sketch.js",
+    "note": "An arrangement of the tutorial's camellia model at tetrahedron vertices. The suffix is the existing study title, not a separately identified Umeda work."
+  },
+  "p35.js": {
+    "name": "Logo",
+    "tributeTo": "Calico",
+    "kind": "logo-study",
+    "source": "https://commons.wikimedia.org/wiki/File:Calico_Logo.png",
+    "note": "Brand credited; individual logo designer unidentified."
+  },
+  "p36.js": {
+    "name": "Pavilion on Fire",
+    "kind": "composition"
+  },
+  "p37.js": {
+    "name": "Dystrophin Poster",
+    "kind": "poster-display"
+  },
+  "p38.js": {
+    "name": "Six Grids, Five Folds",
+    "tributeTo": "John Walker",
+    "kind": "artwork-study"
+  },
+  "p39.js": {
+    "name": "Folding Grid",
+    "tributeTo": "John Walker",
+    "kind": "source-based-variation",
+    "note": "Folding-grid variation following p38. The suffix is the study title; the source work is Six Grids, Five Folds (2008)."
+  },
+  "p40.js": {
+    "name": "Vanish",
+    "tributeTo": "Sol LeWitt",
+    "kind": "artwork-study"
+  },
+  "p41.js": {
+    "name": "Unknown",
+    "tributeTo": "Sol LeWitt",
+    "kind": "artwork-study",
+    "note": "Sol LeWitt attribution is recorded in the sketch. Original title and wall-drawing number remain unknown. Unknown naming approved by Jace."
+  },
+  "p42.js": {
+    "name": "Wall Drawing #821",
+    "tributeTo": "Sol LeWitt",
+    "kind": "artwork-study",
+    "source": "https://www.artic.edu/artworks/186392/wall-drawing-821-a-black-square-divided-horizontally-and-vertically-into-four-equal-parts-each-with-a-different-direction-of-alternating-flat-and-glossy-bands"
+  },
+  "p43.js": {
+    "name": "Abstract Painting, Blue",
+    "tributeTo": "Ad Reinhardt",
+    "kind": "artwork-study"
+  },
+  "p44.js": {
+    "name": "Abstract Painting",
+    "tributeTo": "Ad Reinhardt",
+    "kind": "series-study",
+    "note": "Study of the black Abstract Painting series; no single canvas is identified."
+  },
+  "p45.js": {
+    "name": "Basic Shapes",
+    "tributeTo": "Anthropic",
+    "kind": "asset-study",
+    "note": "Displays the Anthropic basic-shapes SVG assets. Subsequent arrangements reuse these assets and retain their composition titles."
+  },
+  "p46.js": {
+    "name": "Seven Colors",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p47.js": {
+    "name": "Accent Block Grid",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p48.js": {
+    "name": "Shape Browser",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p49.js": {
+    "name": "2×2 Block Grid",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p50.js": {
+    "name": "Color Accent Grid",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p51.js": {
+    "name": "Shape Mosaic",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p52.js": {
+    "name": "18 Compositions",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p53.js": {
+    "name": "Six Compositions",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p54.js": {
+    "name": "Shape Collage",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p55.js": {
+    "name": "Density Gradient",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p56.js": {
+    "name": "Scale & Overlap",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p57.js": {
+    "name": "Schotter",
+    "tributeTo": "Georg Nees",
+    "kind": "source-based-variation",
+    "source": "https://onlinekatalog.kunsthalle-bremen.de/DE-MUS-027614/object/11801",
+    "note": "A Schotter variation using mixed shapes and diagonal disorder. The sketch also cites Vera Molnár as an influence."
+  },
+  "p58.js": {
+    "name": "Shape Packing",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p59.js": {
+    "name": "Recursive Subdivision",
+    "tributeTo": "Piet Mondrian",
+    "kind": "style-study",
+    "note": "A style homage to Mondrian. Recursive Subdivision is the study's title, not the title of a specific Mondrian painting."
+  },
+  "p60.js": {
+    "name": "Radial Ripples",
+    "assetCredit": "Anthropic basic shapes",
+    "kind": "composition"
+  },
+  "p61.js": {
+    "name": "Converging Grid",
+    "tributeTo": "Pixel Symphony",
+    "kind": "artwork-study",
+    "source": "https://x.com/Pixel0Symphony/status/2037172789166432692",
+    "note": "Converging Grid is the existing descriptive study title; the source post's formal title is unverified."
+  },
+  "p62.js": {
+    "name": "Digital Access Card",
+    "tributeTo": "Unknown",
+    "kind": "artwork-study",
+    "note": "Reference label is DAC / DIGITAL ACCESS CARD; original author is unknown. Unknown author naming approved by Jace."
+  },
+  "p63.js": {
+    "name": "Cathedral Glass",
+    "kind": "composition"
+  },
+  "p64.js": {
+    "name": "God-Ray Falloff",
+    "kind": "composition"
+  },
+  "p66.js": {
+    "name": "Leaded Glass Dome",
+    "kind": "composition"
+  },
+  "p67.js": {
+    "name": "3 carrés noirs, 3 rectangles gris, 5 rectangles bleus",
+    "tributeTo": "Vera Molnár",
+    "kind": "artwork-study",
+    "source": "https://ropac.net/zh/news/1613-death-of-vera-molnar-woman-of-wit-and-hungarian-born-french-and-parisian-by-adoption-she-was/"
+  },
+  "p68.js": {
+    "name": "Central Gravity",
+    "tributeTo": "Milan Dobeš",
+    "kind": "artwork-study"
+  },
+  "p69.js": {
+    "name": "Double Progression",
+    "tributeTo": "Julio Le Parc",
+    "kind": "artwork-study"
+  },
+  "p70.js": {
+    "name": "Brix",
+    "tributeTo": "Horacio García Rossi",
+    "kind": "artwork-study"
+  },
+  "p71.js": {
+    "name": "Equal and Unequal",
+    "tributeTo": "Anton Stankowski",
+    "kind": "artwork-study"
+  },
+  "p72.js": {
+    "name": "Untitled",
+    "tributeTo": "Luiz Sacilotto",
+    "kind": "artwork-study",
+    "source": "https://sacilotto.com.br/acervo/obras-completas/",
+    "note": "Artist spelling verified with the artist archive. Untitled screenprint from 1978, edition 12/30, as recorded in the supplied-reference study; catalog number unverified."
+  },
+  "p73.js": {
+    "name": "Symphonie Inachevée",
+    "tributeTo": "Victor Vasarely",
+    "kind": "artwork-study"
+  },
+  "p74.js": {
+    "name": "Multiple Painting (Series 14 No. 1)",
+    "tributeTo": "Germaine Derbecq",
+    "kind": "artwork-study"
+  },
+  "p75.js": {
+    "name": "34",
+    "tributeTo": "Marcello Morandini",
+    "kind": "artwork-study"
+  },
+  "p76.js": {
+    "name": "LAKH 22 VARZ",
+    "tributeTo": "Elena Asins",
+    "kind": "artwork-study"
+  },
+  "p77.js": {
+    "name": "Untitled (無題)",
+    "tributeTo": "Kishio Suga",
+    "kind": "artwork-study"
+  },
+  "p78.js": {
+    "name": "Composition",
+    "tributeTo": "Theo van Doesburg",
+    "kind": "artwork-study"
+  },
+  "p79.js": {
+    "name": "Ascension",
+    "tributeTo": "Vera Molnár",
+    "kind": "artwork-study"
+  },
+  "p80.js": {
+    "name": "Summer",
+    "tributeTo": "Agnes Martin",
+    "kind": "artwork-study",
+    "source": "https://www-images.lacma.org/s3fs-public/Agnes-Martin-exhibition-advisory-6.6.16_0.pdf"
+  }
+}

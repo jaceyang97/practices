@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to John Walker: Folding Grid
  * Practice 39: Folding Grid
  * A 26×26 grid with graphite pencil-like lines.
  * Fold is implemented by reflecting pixels across a fold line.

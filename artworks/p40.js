@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Sol LeWitt: Vanish
  * Practice 40: Vanish
  * A replication of Sol LeWitt's "Vanish" (1994)
  * A 7×5 grid of framed rectangular panels with black rectangles that progressively shrink.

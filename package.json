@@ -4,6 +4,7 @@
   "description": "Interactive gallery of p5.js generative art sketches",
   "type": "module",
   "scripts": {
+    "titles:sync": "node scripts/sync-artwork-titles.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

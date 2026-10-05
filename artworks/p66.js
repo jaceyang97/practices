@@ -1,4 +1,5 @@
 /**
+ * Title: Leaded Glass Dome
  * Practice 66 — Cathedral Unit-Distance Glass
  *
  * p64 (Cathedral Glass, god-ray volumetric light) × p65 (Unit-Distance Field).

@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Ad Reinhardt: Abstract Painting, Blue
  * Practice 43: Replication of Ad Reinhardt's "Abstract Painting, Blue" (1953)
  * 
  * Ad Reinhardt (1913-1967) was known for his monochromatic paintings featuring

@@ -1,4 +1,5 @@
 /**
+ * Title: Shape Browser
  * Practice 48: Shape Category Display
  * 
  * Displays shapes organized by category terms.

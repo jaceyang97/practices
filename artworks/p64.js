@@ -1,4 +1,5 @@
 /**
+ * Title: God-Ray Falloff
  * Practice 64 — God-Ray Weight Function
  *
  * Radial-blur god-ray post-process applied to the Cathedral Glass pane.

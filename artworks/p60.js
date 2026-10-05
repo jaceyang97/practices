@@ -1,4 +1,5 @@
 /**
+ * Title: Radial Ripples
  * Practice 60: Concentric Ripples
  * 
  * Shapes radiate outward from center points in expanding rings,

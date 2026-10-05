@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Agnes Martin: Summer
  * Practice 80 — Summer, after Agnes Martin (1964).
  * Watercolour, ink and gouache on paper; 9 1/4 × 9 1/4 in.
  * Collection Patricia L Lewy Gidwitz (LACMA's 2016 exhibition checklist).
@@ -40,8 +41,8 @@ function setup() {
   (document.querySelector('main') || document.body).appendChild(sheet);
   summerCanvas.elt.setAttribute('role', 'img');
   summerCanvas.elt.tabIndex = 0;
-  summerCanvas.elt.setAttribute('aria-label', 'Summer, after Agnes Martin: blue watercolour, dark hand-ruled grid and small white gouache marks on ivory paper. Press R for a new surface; S to save.');
-  summerCanvas.elt.title = 'Summer · after Agnes Martin, 1964 · Click / R: new surface · S: save';
+  summerCanvas.elt.setAttribute('aria-label', 'Tribute to Agnes Martin: Summer — blue watercolour, dark hand-ruled grid and small white gouache marks on ivory paper. Press R for a new surface; S to save.');
+  summerCanvas.elt.title = 'Tribute to Agnes Martin: Summer · 1964 · Click / R: new surface · S: save';
   fitSummer();
   noLoop();
 }

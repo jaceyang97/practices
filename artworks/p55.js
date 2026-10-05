@@ -1,4 +1,5 @@
 /**
+ * Title: Density Gradient
  * Practice 55: 3x3 Grid of 10x10 Compositions with 1x1, 2x2, 3x3 Blocks
  * 
  * A 3x3 outer grid where each cell contains a 10x10 composition.

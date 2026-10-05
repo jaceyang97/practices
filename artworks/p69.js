@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Julio Le Parc: Double Progression
  * Practice 69 — Julio Le Parc, "Double Progression" (1959,
  *                                watercolor on cardboard)
  *

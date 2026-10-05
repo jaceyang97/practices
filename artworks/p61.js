@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Pixel Symphony: Converging Grid
  * Practice 61 — Converging Grid
  *
  * Replica of work by Pixel Symphony

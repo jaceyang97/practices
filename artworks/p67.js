@@ -1,6 +1,7 @@
 /**
+ * Title: Tribute to Vera Molnár: 3 carrés noirs, 3 rectangles gris, 5 rectangles bleus
  * Practice 67 — Vera Molnár, "3 carrés noirs, 3 rectangles gris,
- *                              5 rectangles bleu" (1950, oil on canvas)
+ *                              5 rectangles bleus" (1950, oil on canvas)
  *
  * A faithful recreation of Molnár's early hard-edge composition: eleven
  * flat fields — 3 black squares, 3 gray rectangles, 5 blue rectangles —

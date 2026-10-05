@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Elena Asins: LAKH 22 VARZ
  * Practice 76 — Elena Asins Rodríguez, "LAKH 22 VARZ" (1991, ink on paper)
  *
  * A faithful recreation of Asins' systematic sheet of 32 line-figures, ruled

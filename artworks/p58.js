@@ -1,4 +1,5 @@
 /**
+ * Title: Shape Packing
  * Practice 58: Shape Packing
  * 
  * Shapes fill the canvas without overlapping, creating organic density.

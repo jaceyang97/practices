@@ -1,4 +1,5 @@
 /**
+ * Title: Scale & Overlap
  * Practice 56: Scale and Overlap
  * 
  * A static composition with dramatic scale variation - shapes range from

@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Milan Dobeš: Central Gravity
  * Practice 68 — Milan Dobeš, "Central Gravity" (1965, serigraph on paper)
  *
  * A faithful recreation of Dobeš's op-art print: a 10×10 grid of circles on a

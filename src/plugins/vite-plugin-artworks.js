@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { artworkTitle, catalogPath, readArtworkCatalog } from '../../scripts/artwork-titles.mjs'
 
 /**
  * Vite plugin that auto-generates the artworks manifest
@@ -12,13 +13,15 @@ export function artworksManifestPlugin() {
   function generateManifest() {
     try {
       const files = fs.readdirSync(artworksDir)
+      const catalog = readArtworkCatalog()
       
       // Filter for p*.js files and extract IDs
       const artworks = files
         .filter(file => /^p\d+\.js$/.test(file))
         .map(file => {
           const id = parseInt(file.match(/^p(\d+)\.js$/)[1])
-          return { id, file }
+          const title = catalog[file] ? artworkTitle(catalog[file], catalog) : file
+          return { id, file, title }
         })
         .sort((a, b) => a.id - b.id)
 
@@ -32,7 +35,7 @@ export function artworksManifestPlugin() {
  */
 
 export const artworks = [
-${artworks.map(a => `  { id: ${a.id}, file: '${a.file}' }`).join(',\n')}
+${artworks.map(a => `  ${JSON.stringify(a)}`).join(',\n')}
 ];
 
 // Helper function to get artwork by id
@@ -55,6 +58,7 @@ export const getArtworkCount = () => {
       console.log(`✓ Generated artworks manifest with ${artworks.length} artworks`)
     } catch (err) {
       console.error('Failed to generate artworks manifest:', err)
+      throw err
     }
   }
 
@@ -82,6 +86,11 @@ export const getArtworkCount = () => {
       // Full reload when any artwork file is edited
       server.watcher.on('change', (file) => {
         const normalized = path.resolve(file)
+        if (normalized === catalogPath) {
+          generateManifest()
+          server.ws.send({ type: 'full-reload', path: '*' })
+          return
+        }
         if (normalized.startsWith(artworksDir) && /^p\d+\.js$/.test(path.basename(file))) {
           console.log(`♻ Reloading: ${path.basename(file)}`)
           server.ws.send({ type: 'full-reload', path: '*' })

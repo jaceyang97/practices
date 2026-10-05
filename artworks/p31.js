@@ -1,3 +1,7 @@
+/**
+ * Title: Tribute to Jane Street: Logo
+ */
+
 function setup() {
     // Create regular canvas
     createCanvas(450, 450);

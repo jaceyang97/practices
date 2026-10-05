@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Marcello Morandini: 34
  * Practice 75 — Marcello Morandini, "34" (1968, acrylic on wood)
  *
  * An 8×8 grid of square cells on a white panel. Each cell is divided into a

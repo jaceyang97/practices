@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Sol LeWitt: Unknown
  * Practice 41: Replication of Sol LeWitt wall drawing installation
  * Name: Unknown
  * Date: Unknown

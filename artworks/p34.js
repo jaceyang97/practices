@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Kazuki Umeda: Camellia Tetrahedron
  * Tetrahedron with Oriented Camellias
  * 
  * This p5.js sketch creates a 3D tetrahedron with camellia flowers at each vertex.

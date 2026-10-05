@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Kazuki Umeda: 3D Mathematical Flowers
  * 3D Mathematical Flower Generator
  * 
  * This code generates an interactive 3D flower visualization using p5.js and WebGL.

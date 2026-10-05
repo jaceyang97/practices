@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Victor Vasarely: Symphonie Inachevée
  * Practice 73 — Victor Vasarely, "Symphonie Inachevée" (Unfinished Symphony,
  *                                 1966, ink and gouache on paper)
  *

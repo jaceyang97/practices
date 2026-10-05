@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Kishio Suga: Untitled (無題)
  * Practice 77 — Kishio Suga (菅木志雄), "Untitled (無題)" (1975, ink and
  * pencil on paper)
  *

@@ -1,4 +1,5 @@
 /**
+ * Title: Color Accent Grid
  * Practice 50: Shape with 2x2 Block
  * 
  * Randomly selects a basic shape and displays it in a 3x3 grid.

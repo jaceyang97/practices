@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Anton Stankowski: Equal and Unequal
  * Practice 71 — Anton Stankowski, "Equal and Unequal" (1951, linocut on paper)
  *
  * Four horizontal bands of black bars printed from cut linoleum, stamped onto

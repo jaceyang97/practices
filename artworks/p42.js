@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Sol LeWitt: Wall Drawing #821
  * Practice 42: Replication of Sol LeWitt's Wall Drawing #821
  * 
  * "A black square divided horizontally and vertically into four equal parts,

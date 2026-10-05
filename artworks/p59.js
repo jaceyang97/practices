@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Piet Mondrian: Recursive Subdivision
  * Practice 59: Recursive Subdivision
  * 
  * Mondrian-inspired recursive splitting of the canvas.

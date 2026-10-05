@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Tim Holman: Diagonal Tiles
  * Generative Art exercise from Tim Holman's Speedrun talk, CSSConf Australia 2018
  * Reference: https://www.youtube.com/watch?v=4Se0_w0ISYk
  * Timer: 5:44

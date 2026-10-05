@@ -1,7 +1,8 @@
 /**
- * Practice 72 — Sarilotto, untitled black-and-white optical serigraph (1978)
+ * Title: Tribute to Luiz Sacilotto: Untitled
+ * Practice 72 — Sacilotto, untitled black-and-white optical serigraph (1978)
  *               serigraph (screenprint) on paper, edition 12/30
- *               (signed l.r. "Sarilotto 78"; l.l. "Serigrafia 12/30")
+ *               (signed l.r. "Sacilotto 78"; l.l. "Serigrafia 12/30")
  *
  * A faithful recreation of a hard-edged op-art screenprint: a checkerboard of
  * leaning parallelograms whose horizontal pitch is warped by TWO vertical

@@ -1,4 +1,5 @@
 /**
+ * Title: Shape Collage
  * Practice 54: 2x3 Grid of 4x4 Compositions with Variable Block Sizes
  * 
  * A 2-row by 3-column grid where each cell contains a 4x4 composition.

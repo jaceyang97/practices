@@ -1,4 +1,6 @@
-# Summer — Agnes Martin, 1964
+# Tribute to Agnes Martin: Summer
+
+Procedural study of *Summer* (1964).
 
 `p80.js` is a procedural study after the photograph supplied for this piece. The reference is not loaded by the sketch. Its wash, grid, gouache and paper texture are generated from a reproducible seed.
 

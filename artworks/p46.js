@@ -1,4 +1,5 @@
 /**
+ * Title: Seven Colors
  * Practice 46: Shape with Colors
  * 
  * Randomly selects a basic shape and displays it in different colors in a 3x3 grid.

@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Theo van Doesburg: Composition
  * Practice 78 — Theo van Doesburg, "Composition" (c. 1920s), screenprint on wove paper
  *   (a later serigraph edition — pencil-signed, numbered — of a van Doesburg
  *    Elementarist composition of nested rotated squares.)

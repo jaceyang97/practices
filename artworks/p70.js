@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Horacio García Rossi: Brix
  * Practice 70 — Horacio García Rossi, "Brix" (1959, ink on paper)
  *
  * A faithful recreation of García Rossi's early op-art study: a 13×13 grid of

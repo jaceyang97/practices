@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import ArtworkRenderer from './ArtworkRenderer'
 import { artworks } from './artworks-manifest'
 import { useArtworkNavigation, useKeyboardShortcuts, useCanvasSave } from './hooks'
@@ -15,6 +16,10 @@ function App() {
 
   const handleSave = useCanvasSave(currentArtwork)
 
+  useEffect(() => {
+    document.title = currentArtwork.title
+  }, [currentArtwork.title])
+
   useKeyboardShortcuts({
     onNext: navigateNext,
     onPrev: navigatePrev,
@@ -30,6 +35,8 @@ function App() {
           <button className="nav-btn" onClick={navigatePrev} title="Previous (←)">←</button>
           <select 
             className="artwork-select"
+            aria-label="Select artwork"
+            title={currentArtwork.title}
             value={currentId}
             onChange={(e) => navigateToArtwork(Number(e.target.value))}
           >
@@ -41,7 +48,7 @@ function App() {
                   value={artwork.id}
                   disabled={isBlocked}
                 >
-                  {artwork.file}{isBlocked ? ' ✕' : ''}
+                  {artwork.file} — {artwork.title}{isBlocked ? ' ✕' : ''}
                 </option>
               )
             })}
@@ -51,7 +58,7 @@ function App() {
         </div>
       </div>
 
-      <ArtworkRenderer scriptName={currentArtwork.file} key={currentId} />
+      <ArtworkRenderer scriptName={currentArtwork.file} artworkTitle={currentArtwork.title} key={currentId} />
     </div>
   )
 }

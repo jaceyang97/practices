@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to John Walker: Six Grids, Five Folds
  * Practice 38: Folding Grid
  * Referencing John Walker, Six Grids, Five Folds. 2008.
  * 

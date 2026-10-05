@@ -1,4 +1,5 @@
 /**
+ * Title: Cathedral Glass
  * Practice 63 — Cathedral Glass
  *
  * A square stained-glass pane lit from CLOSE by a point sun fixed at a

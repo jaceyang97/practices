@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { P5_MAIN_URL, P5_SOUND_URL } from './config/constants'
 
-function ArtworkRenderer({ scriptName }) {
+function ArtworkRenderer({ scriptName, artworkTitle }) {
   const containerRef = useRef(null)
   const iframeRef = useRef(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -47,7 +47,7 @@ function ArtworkRenderer({ scriptName }) {
     // Create a new iframe
     const iframe = document.createElement('iframe')
     iframe.className = 'artwork-iframe'
-    iframe.title = `Artwork ${scriptName}`
+    iframe.title = artworkTitle
     
     // Create HTML content that loads the p5.js script
     const htmlContent = `
@@ -98,7 +98,7 @@ function ArtworkRenderer({ scriptName }) {
       }
       iframeRef.current = null
     }
-  }, [scriptName])
+  }, [scriptName, artworkTitle])
 
   return (
     <div className="artwork-wrapper">

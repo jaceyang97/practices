@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Germaine Derbecq: Multiple Painting (Series 14 No. 1)
  * Practice 74 — Germaine Derbecq, "Multiple Painting (Series 14 No. 1)"
  *                                  (1969, acrylic on canvas)
  *

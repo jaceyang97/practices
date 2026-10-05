@@ -1,4 +1,5 @@
 /**
+ * Title: Pavilion on Fire
  * Practice 36: Photo to Dots with Fire Effect
  * 
  * Multi-scale halftone rendering with:

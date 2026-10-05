@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Ad Reinhardt: Abstract Painting
  * Practice 44: Replication of Ad Reinhardt's "Abstract Painting" (Black) series
  * 
  * This is a replication of Ad Reinhardt's iconic black paintings from the 1960s,

@@ -1,4 +1,5 @@
 /**
+ * Title: 18 Compositions
  * Practice 52: 3x6 Grid of Mini Compositions
  * 
  * A 3-row by 6-column grid where each cell contains a complete

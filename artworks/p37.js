@@ -1,4 +1,5 @@
 /**
+ * Title: Dystrophin Poster
  * Practice 37: Dystrophin Poster Display
  * 
  * Simple image loading and display of the dystrophin poster artwork.

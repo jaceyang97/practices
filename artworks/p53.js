@@ -1,4 +1,5 @@
 /**
+ * Title: Six Compositions
  * Practice 53: 2x3 Grid of Mini Compositions
  * 
  * A 2-row by 3-column grid where each cell contains a complete

@@ -1,4 +1,5 @@
 /**
+ * Title: Tribute to Vera Molnár: Ascension
  * Practice 79 — Vera Molnár, "Ascension" (1984, plotter drawing on paper)
  *
  * A band of red squares — 29 across, 12 down — laid on a lattice, sheared so the
